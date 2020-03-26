@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Highload.dir/src/main.cpp.o CMakeFiles/Highload.dir/src/server.cpp.o CMakeFiles/Highload.dir/src/epollEngine.cpp.o  -o Highload 
