@@ -87,6 +87,12 @@
 		<Unit filename="/home/kekor/Highload/include/epollEngine.h">
 			<Option target="Highload"/>
 		</Unit>
+		<Unit filename="/home/kekor/Highload/include/fastList.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/include/reader.h">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekor/Highload/include/server.h">
 			<Option target="Highload"/>
 		</Unit>
@@ -94,6 +100,9 @@
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/src/main.cpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/src/reader.cpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/src/server.cpp">

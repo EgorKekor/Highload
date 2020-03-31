@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/kekor/Highload/src/epollEngine.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/epollEngine.cpp.o"
   "/home/kekor/Highload/src/main.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/main.cpp.o"
+  "/home/kekor/Highload/src/reader.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/reader.cpp.o"
   "/home/kekor/Highload/src/server.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/server.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

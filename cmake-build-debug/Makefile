@@ -177,6 +177,33 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/reader.o: src/reader.cpp.o
+
+.PHONY : src/reader.o
+
+# target to build an object file
+src/reader.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/reader.cpp.o
+.PHONY : src/reader.cpp.o
+
+src/reader.i: src/reader.cpp.i
+
+.PHONY : src/reader.i
+
+# target to preprocess a source file
+src/reader.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/reader.cpp.i
+.PHONY : src/reader.cpp.i
+
+src/reader.s: src/reader.cpp.s
+
+.PHONY : src/reader.s
+
+# target to generate assembly for a file
+src/reader.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/reader.cpp.s
+.PHONY : src/reader.cpp.s
+
 src/server.o: src/server.cpp.o
 
 .PHONY : src/server.o
@@ -219,6 +246,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/reader.o"
+	@echo "... src/reader.i"
+	@echo "... src/reader.s"
 	@echo "... src/server.o"
 	@echo "... src/server.i"
 	@echo "... src/server.s"

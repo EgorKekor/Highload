@@ -10,4 +10,7 @@ add_executable(
         include/server.h
         include/epollEngine.h
         src/epollEngine.cpp
+        src/reader.cpp
+        include/reader.h
+        include/fastList.h
 )

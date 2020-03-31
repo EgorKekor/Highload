@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Highload.dir/src/main.cpp.o"
   "CMakeFiles/Highload.dir/src/server.cpp.o"
   "CMakeFiles/Highload.dir/src/epollEngine.cpp.o"
+  "CMakeFiles/Highload.dir/src/reader.cpp.o"
   "Highload.pdb"
   "Highload"
 )
