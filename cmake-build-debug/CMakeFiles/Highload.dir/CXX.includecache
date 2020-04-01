@@ -9,6 +9,8 @@
 /home/kekor/Highload/include/fastList.h
 cstddef
 -
+functional
+-
 
 /home/kekor/Highload/src/main.cpp
 iostream
