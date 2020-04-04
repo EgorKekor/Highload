@@ -10,17 +10,18 @@
 #include <cstring>
 #include <unistd.h>
 
-#include "../include/epollEngine.h"
 
-Server::Server(const std::string &addr, const std::uint16_t &port, const std::uint32_t &queueSize,
-               const std::string &root, size_t threadCount) : stop(false) {
+Server::Server(const std::string &addr, const std::uint16_t &port, const std::uint32_t &queueSize) : stop(false) {
 
     epollEngine = new Epoll(MAX_EPOLL_EVENT, EPOLL_TIMEOUT);
+    reader = new Reader;
 
     masterSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (masterSocket < 0) {
         throw std::runtime_error("exception socket create" + std::string(strerror(errno)));
     }
+    int reuse = 1;
+    setsockopt(masterSocket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, (const char*)&reuse, sizeof(reuse));
 
     int flags = fcntl(masterSocket, F_GETFL, 0);
     if (fcntl(masterSocket, F_SETFL, flags | O_NONBLOCK) == -1) {
@@ -42,6 +43,9 @@ Server::Server(const std::string &addr, const std::uint16_t &port, const std::ui
     }
 
     epollEngine->AddFd(masterSocket, epollEngine->Epollfd());
+    if (!reader->start()) {
+        throw std::runtime_error("Impossible start reader");
+    };
 }
 
 Server::~Server() {
@@ -60,7 +64,7 @@ void Server::Listen() {
         ssize_t fdCount = epollEngine->Wait(events);
         for (uint32_t i = 0; i < fdCount; ++i) {
             if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) || (events[i].events & EPOLLRDHUP)) {
-                std::cerr << "Socket error" << std::endl;
+                std::cerr << "Server.cpp: client socket error" << std::endl;
                 close(events[i].data.fd);
                 continue;
             } else if (events[i].data.fd == masterSocket) {
@@ -77,7 +81,9 @@ void Server::Listen() {
                     }
                 }
             } else {
-                // pushToReaderThread();
+                if (!reader->push(events[i].data.fd)) {
+                    std::cerr << "accept: impossible push socket into reader" << std::endl;
+                }
             }
         }
     }

@@ -7,6 +7,7 @@
 
 #include <cstddef>
 #include <functional>
+#include <cstring>
 
 #define MIN_SIZE    100
 
@@ -19,7 +20,7 @@ public:
     ~FastListAllocator();
 
     T* _new();
-    bool free(T *node);
+    void free(T *node);
 
 private:
     T *memory;
@@ -79,7 +80,7 @@ T* FastListAllocator<T>::_new() {
 
 
 template <class T>
-bool FastListAllocator<T>::free(T *addr) {
+void FastListAllocator<T>::free(T *addr) {
     *((T**)addr) = _head;
     _head = addr;
     _loading--;
@@ -91,19 +92,18 @@ bool FastListAllocator<T>::free(T *addr) {
 template <class T> class Node {
 public:
     Node() {};
+    T value;
     Node<T> *_next;
     Node<T> *_prev;
-    T value;
 };
-
-
 
 
 template <class T> class FastList {
 public:
-    FastList(size_t size = MIN_SIZE) : allocator(size + 2) {
+    FastList(size_t size = MIN_SIZE) : allocator(size + 2), _capasity(size) {
         _head = allocator._new();
         _tail = allocator._new();
+        _iter = _head;
 
         _head->_next = _tail;
         _head->_prev = nullptr;
@@ -116,17 +116,32 @@ public:
     bool push(T val);
     bool remove(Node<T> *node);
 
+    Node<T>* beginIter() {
+        _iter = _head->_next;
+        return _iter;
+    };
+    Node<T>* getIterator() { return _iter; };
+    Node<T>* tail() { return _tail; };
+
+    T popFront();
+
+    size_t size(){ return _size;};
+    size_t capasity(){ return _capasity;};
+
 private:
+    size_t _size = 0;
+    size_t _capasity= 0;
     FastListAllocator<Node<T>> allocator;
     Node<T> *_head = nullptr;
     Node<T> *_tail = nullptr;
+    Node<T> *_iter= nullptr;
 };
 
 
 template <class T>
 void FastList<T>::traverseAll(std::function<bool(T &)> handler) {
-    Node<T> *current = _head;
-    while(current != nullptr) {
+    Node<T> *current = _head->_next;
+    while(current != _tail) {
         if (!handler(current->value)) {
             current = current->_next;
             remove(current->_prev);
@@ -141,15 +156,18 @@ void FastList<T>::traverseAll(std::function<bool(T &)> handler) {
 
 template <class T>
 bool FastList<T>::push(T val) {
-    auto nxt = allocator._new();
-    if (!nxt) {
+    auto newNode = allocator._new();
+    if (!newNode) {
         return false;
     }
-    nxt->value = val;
-    _tail->_next = nxt;
-    _tail->_next->_prev = _tail;
-    _tail->_next->_next = nullptr;
-    _tail = _tail->_next;
+    memcpy((void*)&newNode->value, (void*)&val, sizeof(val));
+    //newNode->value = val;
+    newNode->_next = _tail;
+    newNode->_prev = _tail->_prev;
+    _tail->_prev->_next = newNode;
+    _tail->_prev = newNode;
+
+    _size++;
     return true;
 }
 
@@ -164,7 +182,16 @@ bool FastList<T>::remove(Node<T> *node) {
     node->_next->_prev = node->_prev;
 
     allocator.free(node);
+    _size--;
     return true;
+}
+
+template<class T>
+T FastList<T>::popFront() {
+    Node<T>* ret = _head->_next;
+    T val = ret->value;
+    remove(ret);
+    return val;
 }
 
 

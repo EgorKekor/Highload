@@ -6,23 +6,20 @@
 #define HIGHLOAD_SERVER_H
 
 #include <iostream>
-
+#include "../include/config.h"
 #include "../include/epollEngine.h"
+#include "../include/reader.h"
 
-#define MAX_EPOLL_EVENT 2000
 
 class Server {
 private:
-
     int masterSocket;
     bool stop;
     Epoll *epollEngine;
-
+    Reader *reader;
     bool _setNonBlock(int fd);
-
 public:
-    Server(const std::string& addr, const std::uint16_t& port, const std::uint32_t& queueSize,
-           const std::string& root, size_t threadCount);
+    Server(const std::string &addr, const std::uint16_t &port, const std::uint32_t &queueSize);
     ~Server();
 
     void Listen();

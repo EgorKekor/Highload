@@ -7,8 +7,7 @@
 
 #include <atomic>
 #include <sys/epoll.h>
-
-#define EPOLL_TIMEOUT 50
+#include "../include/config.h"
 
 class Epoll {
 private:

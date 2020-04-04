@@ -1,25 +1,10 @@
 #include <iostream>
 
-#include "../include/fastList.h"
-
-#define TYPE    int
-
-bool foo(TYPE &value) {
-    std::cout << value << " ";
-    return true;
-}
+#include "../include/server.h"
+#include <iostream>
 
 int main() {
-    auto list = new FastList<TYPE>(100);
-
-    int i = 0;
-    for (;; ++i) {
-        if (!list->push(i)) {
-            break;
-        }
-        list->traverseAll(foo);
-    }
-
-    std::cout << i << std::endl;
+    Server server(ADDRESS, PORT, MAX_EPOLL_EVENT);
+    server.Listen();
     return 0;
 }

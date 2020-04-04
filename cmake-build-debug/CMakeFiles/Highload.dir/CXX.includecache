@@ -6,15 +6,53 @@
 
 #IncludeRegexTransform: 
 
-/home/kekor/Highload/include/fastList.h
+/home/kekos/Highload/include/config.h
+
+/home/kekos/Highload/include/fastList.h
 cstddef
 -
 functional
 -
+cstring
+-
 
-/home/kekor/Highload/src/main.cpp
+/home/kekos/Highload/include/reader.h
 iostream
 -
+thread
+-
+map
+-
+condition_variable
+-
 ../include/fastList.h
-/home/kekor/Highload/include/fastList.h
+/home/kekos/Highload/include/fastList.h
+../include/stringHolder.h
+/home/kekos/Highload/include/stringHolder.h
+../include/config.h
+/home/kekos/Highload/include/config.h
+
+/home/kekos/Highload/include/stringHolder.h
+iostream
+-
+map
+-
+string
+-
+../include/fastList.h
+/home/kekos/Highload/include/fastList.h
+../include/config.h
+/home/kekos/Highload/include/config.h
+
+/home/kekos/Highload/src/reader.cpp
+../include/reader.h
+/home/kekos/Highload/include/reader.h
+iostream
+-
+sys/socket.h
+-
+unistd.h
+-
+thread
+-
 
