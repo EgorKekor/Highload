@@ -8,8 +8,11 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include "../include/fastList.h"
+#include "fastList.hpp"
 #include "../include/config.h"
+#include "../include/pointerStringStream.h"
+#include "../include/httpParser.h"
+
 
 class StringHolder {
 public:
@@ -19,6 +22,7 @@ public:
 
     void endOfData(SOCKET sock);
 private:
+    HttpParser _httpParser;
     FastList<std::string*> _reservedPool;
     std::map<SOCKET, std::string &> _messages;
 };

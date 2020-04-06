@@ -3,12 +3,10 @@
 //
 
 #include "../include/stringHolder.h"
+#include "../include/httpParser.h"
 
 
-StringHolder::StringHolder(size_t stringsAmount) : _reservedPool(stringsAmount) {
-    std::string str1("aa");
-    std::string str2;
-    str2 = str1;
+StringHolder::StringHolder(size_t stringsAmount) : _reservedPool(stringsAmount), _httpParser() {
     for (size_t i = 0; i < stringsAmount; ++i) {
         auto *reserveStr = new std::string;
         reserveStr->reserve(AVERAGE_CLIENT_MESSAGE);
@@ -38,7 +36,12 @@ bool StringHolder::append(SOCKET key, char *buf) {
 void StringHolder::endOfData(SOCKET sock) {
     auto it = _messages.find(sock);
     if (it != _messages.end()) {
+        std::string *reqStr = &it->second;
+        StringHolderReturn ret([reqStr, this](){
+            return this->_reservedPool.push(reqStr);
+        }, reqStr);
 
+        _httpParser.constructRequest(ret);
     }
 }
 

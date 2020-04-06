@@ -150,32 +150,32 @@ src/epollEngine.cpp.s:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/epollEngine.cpp.s
 .PHONY : src/epollEngine.cpp.s
 
-src/httpManager.o: src/httpManager.cpp.o
+src/httpParser.o: src/httpParser.cpp.o
 
-.PHONY : src/httpManager.o
+.PHONY : src/httpParser.o
 
 # target to build an object file
-src/httpManager.cpp.o:
-	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/httpManager.cpp.o
-.PHONY : src/httpManager.cpp.o
+src/httpParser.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/httpParser.cpp.o
+.PHONY : src/httpParser.cpp.o
 
-src/httpManager.i: src/httpManager.cpp.i
+src/httpParser.i: src/httpParser.cpp.i
 
-.PHONY : src/httpManager.i
+.PHONY : src/httpParser.i
 
 # target to preprocess a source file
-src/httpManager.cpp.i:
-	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/httpManager.cpp.i
-.PHONY : src/httpManager.cpp.i
+src/httpParser.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/httpParser.cpp.i
+.PHONY : src/httpParser.cpp.i
 
-src/httpManager.s: src/httpManager.cpp.s
+src/httpParser.s: src/httpParser.cpp.s
 
-.PHONY : src/httpManager.s
+.PHONY : src/httpParser.s
 
 # target to generate assembly for a file
-src/httpManager.cpp.s:
-	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/httpManager.cpp.s
-.PHONY : src/httpManager.cpp.s
+src/httpParser.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/httpParser.cpp.s
+.PHONY : src/httpParser.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -203,6 +203,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/pointerStringStream.o: src/pointerStringStream.cpp.o
+
+.PHONY : src/pointerStringStream.o
+
+# target to build an object file
+src/pointerStringStream.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o
+.PHONY : src/pointerStringStream.cpp.o
+
+src/pointerStringStream.i: src/pointerStringStream.cpp.i
+
+.PHONY : src/pointerStringStream.i
+
+# target to preprocess a source file
+src/pointerStringStream.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/pointerStringStream.cpp.i
+.PHONY : src/pointerStringStream.cpp.i
+
+src/pointerStringStream.s: src/pointerStringStream.cpp.s
+
+.PHONY : src/pointerStringStream.s
+
+# target to generate assembly for a file
+src/pointerStringStream.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/pointerStringStream.cpp.s
+.PHONY : src/pointerStringStream.cpp.s
 
 src/reader.o: src/reader.cpp.o
 
@@ -324,12 +351,15 @@ help:
 	@echo "... src/epollEngine.o"
 	@echo "... src/epollEngine.i"
 	@echo "... src/epollEngine.s"
-	@echo "... src/httpManager.o"
-	@echo "... src/httpManager.i"
-	@echo "... src/httpManager.s"
+	@echo "... src/httpParser.o"
+	@echo "... src/httpParser.i"
+	@echo "... src/httpParser.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/pointerStringStream.o"
+	@echo "... src/pointerStringStream.i"
+	@echo "... src/pointerStringStream.s"
 	@echo "... src/reader.o"
 	@echo "... src/reader.i"
 	@echo "... src/reader.s"

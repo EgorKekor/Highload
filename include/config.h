@@ -17,6 +17,8 @@
 // StringHolder
 #define AVERAGE_CLIENT_MESSAGE  1024
 
+// Convayor
+#define BASE_RESERVE_SIZE   1024
 
 
 #endif //HIGHLOAD_CONFIG_H

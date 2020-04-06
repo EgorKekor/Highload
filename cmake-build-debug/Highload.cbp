@@ -34,6 +34,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/local/boost_1_66_0"/>
 					<Add directory="/usr/include/c++/8"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
 					<Add directory="/usr/include/c++/8/backward"/>
@@ -57,6 +58,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/local/boost_1_66_0"/>
 					<Add directory="/usr/include/c++/8"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
 					<Add directory="/usr/include/c++/8/backward"/>
@@ -87,19 +89,31 @@
 		<Unit filename="/home/kekos/Highload/include/config.h">
 			<Option target="Highload"/>
 		</Unit>
+		<Unit filename="/home/kekos/Highload/include/conveyorPart.hpp">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekos/Highload/include/epollEngine.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/fastList.h">
+		<Unit filename="/home/kekos/Highload/include/fastList.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/httpManager.h">
+		<Unit filename="/home/kekos/Highload/include/httpParser.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/namespaces.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/pointerStringStream.h">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/reader.h">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/request.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/returns.h">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/server.h">
@@ -111,10 +125,13 @@
 		<Unit filename="/home/kekos/Highload/src/epollEngine.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/httpManager.cpp">
+		<Unit filename="/home/kekos/Highload/src/httpParser.cpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/src/main.cpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/src/pointerStringStream.cpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/src/reader.cpp">

@@ -463,3 +463,31 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_430bd/fast && /usr/bin/make -f CMakeFiles/cmTC_430bd.dir/build.make CMakeFiles/cmTC_430bd.dir/build
+make[1]: вход в каталог «/home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_430bd.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_430bd.dir/CheckIncludeFile.c.o   -c /home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_430bd
+/opt/clion-2019.3.5/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_430bd.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_430bd.dir/CheckIncludeFile.c.o  -o cmTC_430bd 
+make[1]: выход из каталога «/home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp»
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_30302/fast && /usr/bin/make -f CMakeFiles/cmTC_30302.dir/build.make CMakeFiles/cmTC_30302.dir/build
+make[1]: вход в каталог «/home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_30302.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_30302.dir/CheckFunctionExists.c.o   -c /opt/clion-2019.3.5/bin/cmake/linux/share/cmake-3.15/Modules/CheckFunctionExists.c
+Linking C executable cmTC_30302
+/opt/clion-2019.3.5/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_30302.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_30302.dir/CheckFunctionExists.c.o  -o cmTC_30302 -lpthread 
+make[1]: выход из каталога «/home/kekos/Highload/cmake-build-debug/CMakeFiles/CMakeTmp»
+
+
+

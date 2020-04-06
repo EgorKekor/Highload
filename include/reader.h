@@ -9,7 +9,7 @@
 #include <thread>
 #include <map>
 #include <condition_variable>
-#include "../include/fastList.h"
+#include "fastList.hpp"
 #include "../include/stringHolder.h"
 #include "../include/config.h"
 
@@ -31,7 +31,7 @@ private:
     std::mutex _haveDataMutex;
     bool _started;
     bool _blocked;
-    static void _readLoop(Reader &instance);
+    static void _readLoop(std::unique_ptr<Reader> instance);
 };
 
 

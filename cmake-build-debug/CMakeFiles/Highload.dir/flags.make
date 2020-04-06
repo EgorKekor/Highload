@@ -6,5 +6,5 @@ CXX_FLAGS =  -pthread -g   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -isystem /usr/local/boost_1_66_0 
 

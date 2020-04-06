@@ -6,21 +6,16 @@
 #define HIGHLOAD_REQUEST_H
 
 #include <iostream>
-
-namespace http {
-    enum class methode {
-        HEAD = 0,
-        GET
-    };
-}
+#include <boost/utility/string_ref.hpp>
 
 
 class Request {
 public:
-    Request(std::string &body);
+    Request(boost::string_ref method, boost::string_ref url, boost::string_ref protocol);
 private:
-    std::string methode;
-    std::string host;
+    std::string _method;
+    std::string _url;
+    std::string _protocol;
 };
 
 #endif //HIGHLOAD_REQUEST_H

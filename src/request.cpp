@@ -4,7 +4,9 @@
 
 #include "../include/request.h"
 
-Request::Request(std::string &body) {
+Request::Request(boost::string_ref method, boost::string_ref url, boost::string_ref protocol) :
+        _method(method),
+        _url(url),
+        _protocol(protocol){
 
-}
-
+};
