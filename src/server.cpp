@@ -11,10 +11,13 @@
 #include <unistd.h>
 
 
-Server::Server(const std::string &addr, const std::uint16_t &port, const std::uint32_t &queueSize) : stop(false) {
+Server::Server(const std::string &addr,
+        const std::uint16_t &port,
+        const std::uint32_t &queueSize,
+        std::shared_ptr<BlockQueue<CONVEYOR_0_INPUT>> output) : stop(false), output(output) {
 
     epollEngine = new Epoll(MAX_EPOLL_EVENT, EPOLL_TIMEOUT);
-    reader = new Reader;
+    //reader = new Reader;
 
     masterSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (masterSocket < 0) {
@@ -43,9 +46,6 @@ Server::Server(const std::string &addr, const std::uint16_t &port, const std::ui
     }
 
     epollEngine->AddFd(masterSocket, epollEngine->Epollfd());
-    if (!reader->start()) {
-        throw std::runtime_error("Impossible start reader");
-    };
 }
 
 Server::~Server() {
@@ -81,9 +81,7 @@ void Server::Listen() {
                     }
                 }
             } else {
-                if (!reader->push(events[i].data.fd)) {
-                    std::cerr << "accept: impossible push socket into reader" << std::endl;
-                }
+                output->push(events[i].data.fd);
             }
         }
     }

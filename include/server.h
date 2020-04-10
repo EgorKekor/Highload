@@ -8,7 +8,9 @@
 #include <iostream>
 #include "../include/config.h"
 #include "../include/epollEngine.h"
-#include "../include/reader.h"
+#include "../include/blockQueue.hpp"
+#include "../include/defines.h"
+//#include "../include/reader.h"
 
 
 class Server {
@@ -16,10 +18,14 @@ private:
     int masterSocket;
     bool stop;
     Epoll *epollEngine;
-    Reader *reader;
+    std::shared_ptr<BlockQueue<CONVEYOR_0_INPUT>> output;
     bool _setNonBlock(int fd);
 public:
-    Server(const std::string &addr, const std::uint16_t &port, const std::uint32_t &queueSize);
+    Server(
+            const std::string &addr,
+            const std::uint16_t &port,
+            const std::uint32_t &queueSize,
+            std::shared_ptr<BlockQueue<CONVEYOR_0_INPUT>> output);
     ~Server();
 
     void Listen();

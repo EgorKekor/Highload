@@ -2,36 +2,43 @@
 
 #include "../include/server.h"
 #include <iostream>
+#include <vector>
 #include <sstream>
 #include <memory>
+#include <map>
 #include <queue>
 #include "../include/conveyorPart.hpp"
+#include "../include/blockQueue.hpp"
+#include "../include/blockMap.hpp"
+#include "../include/reader.hpp"
+#include "../include/fastList.hpp"
+#include "../include/request.h"
 
 
 int main() {
-    auto q1 = std::make_shared<BlockQueue<std::string>>();
-    auto q2 = std::make_shared<BlockQueue<std::string>>();
+//    auto ptr = std::make_shared<std::string>("fff");
+//
+//    FastList<std::shared_ptr<std::string>> myList;
+//    myList.push(std::move(ptr));
+//
+//    myList.peekFront()->append("ss");
+//    myList.popFront();
+//
+//    //myList.peekFront()->append("ssss");
+//    ptr = std::move(myList.peekFront());
+//    std::cout << *ptr;
 
-    q1->push("bebebe");
-    q1->push("bababa");
 
-    ConveyorPart<BlockQueue<std::string>, BlockQueue<std::string>> conveyor(
-            q1,
-            q2,
-            [](std::unique_ptr<ConveyorPart<BlockQueue<std::string>, BlockQueue<std::string>>> conveyor) {
-                for(;;) {
-                    std::cout << conveyor->input->blockPeek() << std::endl;
-                    conveyor->input->blockPop();
-                }
-            });
 
-    sleep(2);
-    q1->push("lol");
-    sleep(2);
-    q1->push("kek");
-    sleep(2);
+    auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();
+    auto socket_charPtr = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
+    Reader<BlockQueue<CONVEYOR_0_INPUT>, BlockQueue<CONVEYOR_0_OUTPUT>> reader (
+            sockets,
+            socket_charPtr);
 
-//    Server server(ADDRESS, PORT, MAX_EPOLL_EVENT);
-//    server.Listen();
+
+
+    Server server(ADDRESS, PORT, MAX_EPOLL_EVENT, sockets);
+    server.Listen();
     exit(0);
 }

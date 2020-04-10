@@ -86,10 +86,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/kekos/Highload/include/blockMap.hpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/blockQueue.hpp">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekos/Highload/include/config.h">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/conveyorPart.hpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/defines.h">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/epollEngine.h">
@@ -101,19 +110,13 @@
 		<Unit filename="/home/kekos/Highload/include/httpParser.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/namespaces.h">
-			<Option target="Highload"/>
-		</Unit>
 		<Unit filename="/home/kekos/Highload/include/pointerStringStream.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/reader.h">
+		<Unit filename="/home/kekos/Highload/include/reader.hpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/request.h">
-			<Option target="Highload"/>
-		</Unit>
-		<Unit filename="/home/kekos/Highload/include/returns.h">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/server.h">
@@ -132,9 +135,6 @@
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/src/pointerStringStream.cpp">
-			<Option target="Highload"/>
-		</Unit>
-		<Unit filename="/home/kekos/Highload/src/reader.cpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/src/request.cpp">

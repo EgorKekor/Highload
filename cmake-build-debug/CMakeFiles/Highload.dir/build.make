@@ -96,22 +96,9 @@ CMakeFiles/Highload.dir/src/epollEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Highload.dir/src/epollEngine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kekos/Highload/src/epollEngine.cpp -o CMakeFiles/Highload.dir/src/epollEngine.cpp.s
 
-CMakeFiles/Highload.dir/src/reader.cpp.o: CMakeFiles/Highload.dir/flags.make
-CMakeFiles/Highload.dir/src/reader.cpp.o: ../src/reader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Highload.dir/src/reader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Highload.dir/src/reader.cpp.o -c /home/kekos/Highload/src/reader.cpp
-
-CMakeFiles/Highload.dir/src/reader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Highload.dir/src/reader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kekos/Highload/src/reader.cpp > CMakeFiles/Highload.dir/src/reader.cpp.i
-
-CMakeFiles/Highload.dir/src/reader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Highload.dir/src/reader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kekos/Highload/src/reader.cpp -o CMakeFiles/Highload.dir/src/reader.cpp.s
-
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: CMakeFiles/Highload.dir/flags.make
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../src/stringHolder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Highload.dir/src/stringHolder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Highload.dir/src/stringHolder.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Highload.dir/src/stringHolder.cpp.o -c /home/kekos/Highload/src/stringHolder.cpp
 
 CMakeFiles/Highload.dir/src/stringHolder.cpp.i: cmake_force
@@ -124,7 +111,7 @@ CMakeFiles/Highload.dir/src/stringHolder.cpp.s: cmake_force
 
 CMakeFiles/Highload.dir/src/request.cpp.o: CMakeFiles/Highload.dir/flags.make
 CMakeFiles/Highload.dir/src/request.cpp.o: ../src/request.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Highload.dir/src/request.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Highload.dir/src/request.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Highload.dir/src/request.cpp.o -c /home/kekos/Highload/src/request.cpp
 
 CMakeFiles/Highload.dir/src/request.cpp.i: cmake_force
@@ -137,7 +124,7 @@ CMakeFiles/Highload.dir/src/request.cpp.s: cmake_force
 
 CMakeFiles/Highload.dir/src/httpParser.cpp.o: CMakeFiles/Highload.dir/flags.make
 CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../src/httpParser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Highload.dir/src/httpParser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Highload.dir/src/httpParser.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Highload.dir/src/httpParser.cpp.o -c /home/kekos/Highload/src/httpParser.cpp
 
 CMakeFiles/Highload.dir/src/httpParser.cpp.i: cmake_force
@@ -150,7 +137,7 @@ CMakeFiles/Highload.dir/src/httpParser.cpp.s: cmake_force
 
 CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o: CMakeFiles/Highload.dir/flags.make
 CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o: ../src/pointerStringStream.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o -c /home/kekos/Highload/src/pointerStringStream.cpp
 
 CMakeFiles/Highload.dir/src/pointerStringStream.cpp.i: cmake_force
@@ -166,7 +153,6 @@ Highload_OBJECTS = \
 "CMakeFiles/Highload.dir/src/main.cpp.o" \
 "CMakeFiles/Highload.dir/src/server.cpp.o" \
 "CMakeFiles/Highload.dir/src/epollEngine.cpp.o" \
-"CMakeFiles/Highload.dir/src/reader.cpp.o" \
 "CMakeFiles/Highload.dir/src/stringHolder.cpp.o" \
 "CMakeFiles/Highload.dir/src/request.cpp.o" \
 "CMakeFiles/Highload.dir/src/httpParser.cpp.o" \
@@ -178,14 +164,13 @@ Highload_EXTERNAL_OBJECTS =
 Highload: CMakeFiles/Highload.dir/src/main.cpp.o
 Highload: CMakeFiles/Highload.dir/src/server.cpp.o
 Highload: CMakeFiles/Highload.dir/src/epollEngine.cpp.o
-Highload: CMakeFiles/Highload.dir/src/reader.cpp.o
 Highload: CMakeFiles/Highload.dir/src/stringHolder.cpp.o
 Highload: CMakeFiles/Highload.dir/src/request.cpp.o
 Highload: CMakeFiles/Highload.dir/src/httpParser.cpp.o
 Highload: CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o
 Highload: CMakeFiles/Highload.dir/build.make
 Highload: CMakeFiles/Highload.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Highload"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Highload"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Highload.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -3,38 +3,33 @@
 //
 
 #include "../include/httpParser.h"
-#include "../include/namespaces.h"
+#include "../include/defines.h"
 
 
-void HttpParser::constructRequest(StringHolderReturn &request) {
-    std::string *requestString = request.get();
-    if (requestString == nullptr) {
+std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_returner> request, SOCKET socket) {
+    if (request.get() == nullptr) {
         std::cerr << "HttpParser: request string was free" << std::endl;
-        return;
+        return std::make_unique<Request>(socket);
     }
 
-    PointerStringStream stream = _createStream(requestString);
+    PointerStringStream stream = _createStream(request->get().get());
 
     boost::string_ref method = stream.getWord();
     if (std::find(http::methods.begin(), http::methods.end(), method) == http::methods.end()) {
-        return;
+        return std::make_unique<Request>(socket);
     }
 
     boost::string_ref url = stream.getWord();
     if (url.length() == 0) {
-        return;
+        return std::make_unique<Request>(socket);
     }
 
     boost::string_ref protocol = stream.getWord();
     if (protocol.length() == 0) {
-        return;
+        return std::make_unique<Request>(socket);
     }
 
-
-
-
-
-    return;
+    return std::make_unique<Request>(std::move(request), method, url, protocol, socket);
 }
 
 PointerStringStream HttpParser::_createStream(std::string *str) {

@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/kekos/Highload/src/httpParser.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/httpParser.cpp.o"
   "/home/kekos/Highload/src/main.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/main.cpp.o"
   "/home/kekos/Highload/src/pointerStringStream.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o"
-  "/home/kekos/Highload/src/reader.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/reader.cpp.o"
   "/home/kekos/Highload/src/request.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/request.cpp.o"
   "/home/kekos/Highload/src/server.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/server.cpp.o"
   "/home/kekos/Highload/src/stringHolder.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/stringHolder.cpp.o"

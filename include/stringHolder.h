@@ -10,21 +10,26 @@
 #include <string>
 #include "fastList.hpp"
 #include "../include/config.h"
+#include "../include/defines.h"
 #include "../include/pointerStringStream.h"
 #include "../include/httpParser.h"
+#include "../include/conveyorPart.hpp"
+#include "../include/blockQueue.hpp"
 
 
 class StringHolder {
 public:
-    StringHolder(size_t stringsAmount = MAX_CONNECTIONS);
-    ~StringHolder();
-    bool append(SOCKET key, char *buf);
+    typedef CONVEYOR_0_OUTPUT reader_output;
+    typedef std::unique_ptr<std::string> fast_list_type;
+    typedef BlockQueue<CONVEYOR_0_OUTPUT> reader_output_container;
 
-    void endOfData(SOCKET sock);
+    StringHolder(std::shared_ptr<reader_output_container> output, size_t stringsAmount = STRINGS_AMOUNT);
+    bool append(SOCKET key, char *buf);
 private:
+    std::shared_ptr<reader_output_container> _output;
     HttpParser _httpParser;
-    FastList<std::string*> _reservedPool;
-    std::map<SOCKET, std::string &> _messages;
+    FastList<fast_list_type> _reservedPool;
+    std::map<SOCKET, fast_list_type> _messages;
 };
 
 #endif //HIGHLOAD_STRINGHOLDER_H

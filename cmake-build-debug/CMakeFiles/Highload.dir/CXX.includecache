@@ -6,21 +6,31 @@
 
 #IncludeRegexTransform: 
 
+/home/kekos/Highload/include/blockQueue.hpp
+iostream
+-
+deque
+-
+condition_variable
+-
+
 /home/kekos/Highload/include/config.h
 
 /home/kekos/Highload/include/conveyorPart.hpp
 iostream
 -
-queue
+functional
 -
+thread
+-
+defines.h
+/home/kekos/Highload/include/defines.h
 
-/home/kekos/Highload/include/epollEngine.h
-atomic
+/home/kekos/Highload/include/defines.h
+iostream
 -
-sys/epoll.h
+vector
 -
-../include/config.h
-/home/kekos/Highload/include/config.h
 
 /home/kekos/Highload/include/fastList.hpp
 cstddef
@@ -29,6 +39,8 @@ functional
 -
 cstring
 -
+../include/config.h
+/home/kekos/Highload/include/config.h
 
 /home/kekos/Highload/include/httpParser.h
 iostream
@@ -45,8 +57,8 @@ vector
 /home/kekos/Highload/include/request.h
 ../include/pointerStringStream.h
 /home/kekos/Highload/include/pointerStringStream.h
-../include/returns.h
-/home/kekos/Highload/include/returns.h
+../include/defines.h
+/home/kekos/Highload/include/defines.h
 
 /home/kekos/Highload/include/pointerStringStream.h
 iostream
@@ -56,45 +68,17 @@ memory
 boost/utility/string_ref.hpp
 -
 
-/home/kekos/Highload/include/reader.h
-iostream
--
-thread
--
-map
--
-condition_variable
--
-fastList.hpp
-/home/kekos/Highload/include/fastList.hpp
-../include/stringHolder.h
-/home/kekos/Highload/include/stringHolder.h
-../include/config.h
-/home/kekos/Highload/include/config.h
-
 /home/kekos/Highload/include/request.h
 iostream
 -
 boost/utility/string_ref.hpp
 -
-
-/home/kekos/Highload/include/returns.h
-iostream
+memory
 -
-functional
--
-utility
--
-
-/home/kekos/Highload/include/server.h
-iostream
--
-../include/config.h
-/home/kekos/Highload/include/config.h
-../include/epollEngine.h
-/home/kekos/Highload/include/epollEngine.h
-../include/reader.h
-/home/kekos/Highload/include/reader.h
+../include/defines.h
+/home/kekos/Highload/include/defines.h
+../include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
 
 /home/kekos/Highload/include/stringHolder.h
 iostream
@@ -107,26 +91,24 @@ fastList.hpp
 /home/kekos/Highload/include/fastList.hpp
 ../include/config.h
 /home/kekos/Highload/include/config.h
+../include/defines.h
+/home/kekos/Highload/include/defines.h
 ../include/pointerStringStream.h
 /home/kekos/Highload/include/pointerStringStream.h
 ../include/httpParser.h
 /home/kekos/Highload/include/httpParser.h
-
-/home/kekos/Highload/src/main.cpp
-iostream
--
-../include/server.h
-/home/kekos/Highload/include/server.h
-iostream
--
-sstream
--
-memory
--
-queue
--
 ../include/conveyorPart.hpp
 /home/kekos/Highload/include/conveyorPart.hpp
+../include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
+
+/home/kekos/Highload/src/stringHolder.cpp
+../include/stringHolder.h
+/home/kekos/Highload/include/stringHolder.h
+utility
+-
+../include/httpParser.h
+/home/kekos/Highload/include/httpParser.h
 
 /usr/local/boost_1_66_0/boost/config.hpp
 boost/config/user.hpp

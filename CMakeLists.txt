@@ -15,7 +15,5 @@ add_executable(
         include/server.h
         include/epollEngine.h
         src/epollEngine.cpp
-        src/reader.cpp
-        include/reader.h
         include/fastList.hpp
-        include/config.h include/stringHolder.h src/stringHolder.cpp include/request.h src/request.cpp include/httpParser.h src/httpParser.cpp include/pointerStringStream.h src/pointerStringStream.cpp include/returns.h include/namespaces.h include/conveyorPart.hpp)
+        include/config.h include/stringHolder.h src/stringHolder.cpp include/request.h src/request.cpp include/httpParser.h src/httpParser.cpp include/pointerStringStream.h src/pointerStringStream.cpp include/defines.h include/conveyorPart.hpp include/reader.hpp include/blockQueue.hpp include/blockMap.hpp)

@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Highload.dir/src/httpParser.cpp.o"
   "CMakeFiles/Highload.dir/src/main.cpp.o"
   "CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o"
-  "CMakeFiles/Highload.dir/src/reader.cpp.o"
   "CMakeFiles/Highload.dir/src/request.cpp.o"
   "CMakeFiles/Highload.dir/src/server.cpp.o"
   "CMakeFiles/Highload.dir/src/stringHolder.cpp.o"

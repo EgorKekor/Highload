@@ -12,16 +12,16 @@
 #include <vector>
 #include "../include/request.h"
 #include "../include/pointerStringStream.h"
-#include "../include/returns.h"
-
-
-class StringHolderReturn;
+#include "../include/defines.h"
 
 
 class HttpParser {
 public:
+    typedef std::unique_ptr<std::string> fast_list_type;
+    typedef FastListReturner<fast_list_type> req_str_returner;
+
     HttpParser() = default;
-    void constructRequest(StringHolderReturn &request);
+    std::unique_ptr<Request> constructRequest(std::unique_ptr<req_str_returner> request, SOCKET socket);
 private:
     PointerStringStream _createStream(std::string *str);
 };
