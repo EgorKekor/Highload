@@ -89,6 +89,7 @@ CMakeFiles/Highload.dir/src/main.cpp.o: ../include/defines.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/epollEngine.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/fastList.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/httpParser.h
+CMakeFiles/Highload.dir/src/main.cpp.o: ../include/multiConveyorPart.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/pointerStringStream.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/reader.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/request.h

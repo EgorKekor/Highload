@@ -90,6 +90,7 @@ CMakeFiles/Highload.dir/src/main.cpp.o
  /home/kekos/Highload/include/epollEngine.h
  /home/kekos/Highload/include/fastList.hpp
  /home/kekos/Highload/include/httpParser.h
+ /home/kekos/Highload/include/multiConveyorPart.hpp
  /home/kekos/Highload/include/pointerStringStream.h
  /home/kekos/Highload/include/reader.hpp
  /home/kekos/Highload/include/request.h

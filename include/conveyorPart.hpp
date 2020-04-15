@@ -10,17 +10,17 @@
 #include <thread>
 #include "defines.h"
 
-template <class INP_CONT, class OUT_CONT>
+template <class INP_CONTAINER, class OUT_CONTAINER>
 class ConveyorPart {
 public:
     ConveyorPart(
-            std::shared_ptr<INP_CONT> input,
-            std::shared_ptr<OUT_CONT> output) :
+            std::shared_ptr<INP_CONTAINER> &input,
+            std::shared_ptr<OUT_CONTAINER> &output) :
     input(input),
     output(output) {};
 
-    std::shared_ptr<INP_CONT> input;
-    std::shared_ptr<OUT_CONT> output;
+    std::shared_ptr<INP_CONTAINER> &input;
+    std::shared_ptr<OUT_CONTAINER> &output;
 };
 
 

@@ -32,9 +32,15 @@ int main() {
 
     auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();
     auto socket_charPtr = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
+
+    std::cout << sockets.use_count() << std::endl;
+
     Reader<BlockQueue<CONVEYOR_0_INPUT>, BlockQueue<CONVEYOR_0_OUTPUT>> reader (
             sockets,
             socket_charPtr);
+
+    std::cout << sockets.use_count() << std::endl;
+
 
 
 

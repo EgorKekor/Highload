@@ -12,45 +12,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="306857ef-b196-4235-9786-c47d7cb04852" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/include/blockMap.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/blockQueue.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/reader.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/multiConveyorPart.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/cmake_clean.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/httpParser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/httpParser.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/reader.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/server.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/server.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/main.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/stringHolder.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Highload.dir/src/stringHolder.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Highload" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Highload" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Highload.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Highload.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/conveyorPart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/conveyorPart.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/fastList.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/fastList.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/httpParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/httpParser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/namespaces.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/defines.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/reader.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/request.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/request.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/returns.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/server.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/server.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/stringHolder.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/stringHolder.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/httpParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/reader.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reader.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/request.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/request.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stringHolder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/stringHolder.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +83,7 @@
       <workItem from="1585913206225" duration="31787000" />
       <workItem from="1586095051962" duration="31010000" />
       <workItem from="1586261364777" duration="59712000" />
+      <workItem from="1586960552317" duration="4302000" />
     </task>
     <servers />
   </component>
@@ -128,22 +103,22 @@
       <screen x="0" y="27" width="1440" height="873" />
     </state>
     <state x="465" y="389" width="918" height="511" key="#xdebugger.evaluate/0.27.1440.873@0.27.1440.873" timestamp="1586437034656" />
-    <state width="1394" height="151" key="GridCell.Tab.0.bottom" timestamp="1586538121240">
+    <state width="1394" height="92" key="GridCell.Tab.0.bottom" timestamp="1586965586910">
       <screen x="0" y="27" width="1440" height="873" />
     </state>
-    <state width="1394" height="151" key="GridCell.Tab.0.bottom/0.27.1440.873@0.27.1440.873" timestamp="1586538121240" />
-    <state width="1394" height="151" key="GridCell.Tab.0.center" timestamp="1586538121240">
+    <state width="1394" height="92" key="GridCell.Tab.0.bottom/0.27.1440.873@0.27.1440.873" timestamp="1586965586910" />
+    <state width="1394" height="92" key="GridCell.Tab.0.center" timestamp="1586965586910">
       <screen x="0" y="27" width="1440" height="873" />
     </state>
-    <state width="1394" height="151" key="GridCell.Tab.0.center/0.27.1440.873@0.27.1440.873" timestamp="1586538121240" />
-    <state width="1394" height="151" key="GridCell.Tab.0.left" timestamp="1586538121240">
+    <state width="1394" height="92" key="GridCell.Tab.0.center/0.27.1440.873@0.27.1440.873" timestamp="1586965586910" />
+    <state width="1394" height="92" key="GridCell.Tab.0.left" timestamp="1586965586909">
       <screen x="0" y="27" width="1440" height="873" />
     </state>
-    <state width="1394" height="151" key="GridCell.Tab.0.left/0.27.1440.873@0.27.1440.873" timestamp="1586538121240" />
-    <state width="1394" height="151" key="GridCell.Tab.0.right" timestamp="1586538121240">
+    <state width="1394" height="92" key="GridCell.Tab.0.left/0.27.1440.873@0.27.1440.873" timestamp="1586965586909" />
+    <state width="1394" height="92" key="GridCell.Tab.0.right" timestamp="1586965586910">
       <screen x="0" y="27" width="1440" height="873" />
     </state>
-    <state width="1394" height="151" key="GridCell.Tab.0.right/0.27.1440.873@0.27.1440.873" timestamp="1586538121240" />
+    <state width="1394" height="92" key="GridCell.Tab.0.right/0.27.1440.873@0.27.1440.873" timestamp="1586965586910" />
     <state width="1394" height="354" key="GridCell.Tab.1.bottom" timestamp="1586538120716">
       <screen x="0" y="27" width="1440" height="873" />
     </state>
@@ -168,10 +143,10 @@
       <screen x="0" y="27" width="1440" height="873" />
     </state>
     <state width="720" height="436" key="XDebugger.FullValuePopup/0.27.1440.873@0.27.1440.873" timestamp="1586010283147" />
-    <state x="376" y="291" key="com.intellij.ide.util.TipDialog" timestamp="1586261363035">
+    <state x="376" y="291" key="com.intellij.ide.util.TipDialog" timestamp="1586960707953">
       <screen x="0" y="27" width="1440" height="873" />
     </state>
-    <state x="376" y="291" key="com.intellij.ide.util.TipDialog/0.27.1440.873@0.27.1440.873" timestamp="1586261363035" />
+    <state x="376" y="291" key="com.intellij.ide.util.TipDialog/0.27.1440.873@0.27.1440.873" timestamp="1586960707953" />
     <state x="326" y="77" width="778" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586199789058">
       <screen x="0" y="27" width="1440" height="873" />
     </state>

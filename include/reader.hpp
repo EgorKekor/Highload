@@ -11,6 +11,7 @@
 #include <thread>
 #include "../include/config.h"
 #include "../include/conveyorPart.hpp"
+#include "../include/multiConveyorPart.hpp"
 #include "../include/fastList.hpp"
 #include "stringHolder.h"
 

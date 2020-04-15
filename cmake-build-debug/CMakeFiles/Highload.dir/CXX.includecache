@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/kekos/Highload/include/blockMap.hpp
+iostream
+-
+map
+-
+condition_variable
+-
+
 /home/kekos/Highload/include/blockQueue.hpp
 iostream
 -
@@ -31,6 +39,14 @@ iostream
 -
 vector
 -
+
+/home/kekos/Highload/include/epollEngine.h
+atomic
+-
+sys/epoll.h
+-
+../include/config.h
+/home/kekos/Highload/include/config.h
 
 /home/kekos/Highload/include/fastList.hpp
 cstddef
@@ -60,6 +76,12 @@ vector
 ../include/defines.h
 /home/kekos/Highload/include/defines.h
 
+/home/kekos/Highload/include/multiConveyorPart.hpp
+utility
+-
+../include/conveyorPart.hpp
+/home/kekos/Highload/include/conveyorPart.hpp
+
 /home/kekos/Highload/include/pointerStringStream.h
 iostream
 -
@@ -67,6 +89,26 @@ memory
 -
 boost/utility/string_ref.hpp
 -
+
+/home/kekos/Highload/include/reader.hpp
+iostream
+-
+sys/socket.h
+-
+unistd.h
+-
+thread
+-
+../include/config.h
+/home/kekos/Highload/include/config.h
+../include/conveyorPart.hpp
+/home/kekos/Highload/include/conveyorPart.hpp
+../include/multiConveyorPart.hpp
+/home/kekos/Highload/include/multiConveyorPart.hpp
+../include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
+stringHolder.h
+/home/kekos/Highload/include/stringHolder.h
 
 /home/kekos/Highload/include/request.h
 iostream
@@ -79,6 +121,18 @@ memory
 /home/kekos/Highload/include/defines.h
 ../include/fastList.hpp
 /home/kekos/Highload/include/fastList.hpp
+
+/home/kekos/Highload/include/server.h
+iostream
+-
+../include/config.h
+/home/kekos/Highload/include/config.h
+../include/epollEngine.h
+/home/kekos/Highload/include/epollEngine.h
+../include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
+../include/defines.h
+/home/kekos/Highload/include/defines.h
 
 /home/kekos/Highload/include/stringHolder.h
 iostream
@@ -102,13 +156,35 @@ fastList.hpp
 ../include/blockQueue.hpp
 /home/kekos/Highload/include/blockQueue.hpp
 
-/home/kekos/Highload/src/stringHolder.cpp
-../include/stringHolder.h
-/home/kekos/Highload/include/stringHolder.h
-utility
+/home/kekos/Highload/src/main.cpp
+iostream
 -
-../include/httpParser.h
-/home/kekos/Highload/include/httpParser.h
+../include/server.h
+/home/kekos/Highload/include/server.h
+iostream
+-
+vector
+-
+sstream
+-
+memory
+-
+map
+-
+queue
+-
+../include/conveyorPart.hpp
+/home/kekos/Highload/include/conveyorPart.hpp
+../include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
+../include/blockMap.hpp
+/home/kekos/Highload/include/blockMap.hpp
+../include/reader.hpp
+/home/kekos/Highload/include/reader.hpp
+../include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
+../include/request.h
+/home/kekos/Highload/include/request.h
 
 /usr/local/boost_1_66_0/boost/config.hpp
 boost/config/user.hpp
