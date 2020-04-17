@@ -10,26 +10,27 @@
 #include <unistd.h>
 #include <thread>
 #include "../include/config.h"
-#include "../include/conveyorPart.hpp"
-#include "../include/multiConveyorPart.hpp"
+#include "simpleConveyorPart.hpp"
+#include "spreadConveyorPart.hpp"
 #include "../include/fastList.hpp"
 #include "stringHolder.h"
 
-template <class INP_CONT, class OUT_CONT>
-class Reader : public ConveyorPart<INP_CONT, OUT_CONT> {
+template <class INP_CONTAINER, class OUT_CONTAINER>
+class Reader : public SimpleConveyorPart<INP_CONTAINER, OUT_CONTAINER> {
 public:
     typedef CONVEYOR_0_INPUT reader_input;
     typedef CONVEYOR_0_OUTPUT uptr_reader_output;
-    typedef std::unique_ptr<Reader<INP_CONT, OUT_CONT>> this_unique;
-    typedef Reader<INP_CONT, OUT_CONT> this_type;
+    typedef std::unique_ptr<Reader<INP_CONTAINER, OUT_CONTAINER>> this_unique;
+    typedef Reader<INP_CONTAINER, OUT_CONTAINER> this_type;
 
-    Reader(std::shared_ptr<INP_CONT> input,
-           std::shared_ptr<OUT_CONT> output) :
-            ConveyorPart<INP_CONT, OUT_CONT>(
-                    input, output),
-                    _stringHolder(
-                            output,
-                            STRINGS_AMOUNT) {
+    ~Reader() {
+        std::cout << "Reader destroyed" << std::endl;
+    };
+    Reader(
+            std::shared_ptr<INP_CONTAINER> &input,
+            std::shared_ptr<OUT_CONTAINER> &output) :
+            SimpleConveyorPart<INP_CONTAINER, OUT_CONTAINER>(input, output),
+            _stringHolder(*this, STRINGS_AMOUNT) {
         std::thread workerThr(_readWorker, this_unique(this));
         workerThr.detach();
     };

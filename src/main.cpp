@@ -7,39 +7,50 @@
 #include <memory>
 #include <map>
 #include <queue>
-#include "../include/conveyorPart.hpp"
+#include "../include/simpleConveyorPart.hpp"
 #include "../include/blockQueue.hpp"
 #include "../include/blockMap.hpp"
 #include "../include/reader.hpp"
+#include "../include/requestHandler.hpp"
+#include "../include/spreadConveyorPart.hpp"
 #include "../include/fastList.hpp"
 #include "../include/request.h"
 
 
 int main() {
-//    auto ptr = std::make_shared<std::string>("fff");
-//
-//    FastList<std::shared_ptr<std::string>> myList;
-//    myList.push(std::move(ptr));
-//
-//    myList.peekFront()->append("ss");
-//    myList.popFront();
-//
-//    //myList.peekFront()->append("ssss");
-//    ptr = std::move(myList.peekFront());
-//    std::cout << *ptr;
-
-
 
     auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();
-    auto socket_charPtr = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
+    auto uptr_request = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
 
-    std::cout << sockets.use_count() << std::endl;
 
     Reader<BlockQueue<CONVEYOR_0_INPUT>, BlockQueue<CONVEYOR_0_OUTPUT>> reader (
             sockets,
-            socket_charPtr);
+            uptr_request);
 
-    std::cout << sockets.use_count() << std::endl;
+
+    std::vector<std::shared_ptr<BlockQueue<CONVEYOR_100_INPUT>>> vector_queue_request;
+    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+
+
+    MoveSpreadConveyorPart<BlockQueue<CONVEYOR_0_OUTPUT>, BlockQueue<CONVEYOR_100_INPUT>> spreader1 (
+            uptr_request,
+            vector_queue_request);
+
+
+
+
+//    std::vector<std::shared_ptr<RequestHandler<BlockQueue<CONVEYOR_100_INPUT>, BlockQueue<CONVEYOR_100_OUTPUT>>>> bank;
+//
+//    std::vector<RequestHandler<BlockQueue<CONVEYOR_100_INPUT>, BlockQueue<CONVEYOR_100_OUTPUT>>> bank1;
+//    bank1.reserve(20);
+//    auto results = std::make_shared<BlockQueue<CONVEYOR_100_OUTPUT>>();
+//    for (auto queue : vector_queue_request) {
+//        bank1.emplace_back(queue, results);
+//    }
+
 
 
 

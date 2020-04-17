@@ -16,8 +16,8 @@
 #define CONVEYOR_0_INPUT  SOCKET
 #define CONVEYOR_0_OUTPUT   std::unique_ptr<Request>
 
-#define CONVEYOR_1_INPUT  CONVEYOR_0_OUTPUT
-#define CONVEYOR_1_OUTPUT   std::pair<SOCKET, std::unique_ptr<Request>>
+#define CONVEYOR_100_INPUT  CONVEYOR_0_OUTPUT
+#define CONVEYOR_100_OUTPUT   int
 
 namespace http {
     inline std::vector<std::string> methods {

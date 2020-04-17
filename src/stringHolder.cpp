@@ -3,15 +3,17 @@
 //
 
 #include "../include/stringHolder.h"
-
 #include <utility>
-#include "../include/httpParser.h"
+#include "../include/reader.hpp"
 
 
-StringHolder::StringHolder(std::shared_ptr<reader_output_container> output, size_t stringsAmount) :
+
+StringHolder::StringHolder(
+        Reader<reader_input_container, reader_output_container> &reader,
+        size_t stringsAmount) :
     _reservedPool(stringsAmount),
     _httpParser(),
-    _output(output) {
+    _reader(reader) {
     for (size_t i = 0; i < STRINGS_AMOUNT; ++i) {
         auto reserveStr = std::make_unique<std::string>("");
         reserveStr->reserve(AVERAGE_CLIENT_MESSAGE);
@@ -27,6 +29,9 @@ bool StringHolder::append(SOCKET key, char *buf) {
 
     auto it = _messages.find(key);
     if (it == _messages.end()) {
+        if (buf == nullptr) {
+            return false;
+        }
         _reservedPool.peekFront()->append(buf);
         _messages.insert(
                 std::pair<SOCKET, fast_list_type>(
@@ -41,7 +46,7 @@ bool StringHolder::append(SOCKET key, char *buf) {
         auto returner = std::make_unique<FastListReturner<fast_list_type>>(std::move(it->second), &_reservedPool);
 
         auto req = std::move(_httpParser.constructRequest(std::move(returner), it->first));
-        this->_output->push(std::move(req));
+        _reader.output->push(std::move(req));
         _messages.erase(it->first);
     }
     return true;

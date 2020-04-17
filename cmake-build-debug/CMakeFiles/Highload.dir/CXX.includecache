@@ -24,16 +24,6 @@ condition_variable
 
 /home/kekos/Highload/include/config.h
 
-/home/kekos/Highload/include/conveyorPart.hpp
-iostream
--
-functional
--
-thread
--
-defines.h
-/home/kekos/Highload/include/defines.h
-
 /home/kekos/Highload/include/defines.h
 iostream
 -
@@ -76,12 +66,6 @@ vector
 ../include/defines.h
 /home/kekos/Highload/include/defines.h
 
-/home/kekos/Highload/include/multiConveyorPart.hpp
-utility
--
-../include/conveyorPart.hpp
-/home/kekos/Highload/include/conveyorPart.hpp
-
 /home/kekos/Highload/include/pointerStringStream.h
 iostream
 -
@@ -101,10 +85,10 @@ thread
 -
 ../include/config.h
 /home/kekos/Highload/include/config.h
-../include/conveyorPart.hpp
-/home/kekos/Highload/include/conveyorPart.hpp
-../include/multiConveyorPart.hpp
-/home/kekos/Highload/include/multiConveyorPart.hpp
+simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
+spreadConveyorPart.hpp
+/home/kekos/Highload/include/spreadConveyorPart.hpp
 ../include/fastList.hpp
 /home/kekos/Highload/include/fastList.hpp
 stringHolder.h
@@ -122,6 +106,28 @@ memory
 ../include/fastList.hpp
 /home/kekos/Highload/include/fastList.hpp
 
+/home/kekos/Highload/include/requestHandler.hpp
+iostream
+-
+sys/socket.h
+-
+unistd.h
+-
+thread
+-
+vector
+-
+../include/config.h
+/home/kekos/Highload/include/config.h
+../include/defines.h
+/home/kekos/Highload/include/defines.h
+../include/request.h
+/home/kekos/Highload/include/request.h
+simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
+spreadConveyorPart.hpp
+/home/kekos/Highload/include/spreadConveyorPart.hpp
+
 /home/kekos/Highload/include/server.h
 iostream
 -
@@ -133,6 +139,20 @@ iostream
 /home/kekos/Highload/include/blockQueue.hpp
 ../include/defines.h
 /home/kekos/Highload/include/defines.h
+
+/home/kekos/Highload/include/simpleConveyorPart.hpp
+iostream
+-
+functional
+-
+thread
+-
+defines.h
+/home/kekos/Highload/include/defines.h
+
+/home/kekos/Highload/include/spreadConveyorPart.hpp
+utility
+-
 
 /home/kekos/Highload/include/stringHolder.h
 iostream
@@ -151,8 +171,8 @@ fastList.hpp
 /home/kekos/Highload/include/pointerStringStream.h
 ../include/httpParser.h
 /home/kekos/Highload/include/httpParser.h
-../include/conveyorPart.hpp
-/home/kekos/Highload/include/conveyorPart.hpp
+simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/blockQueue.hpp
 /home/kekos/Highload/include/blockQueue.hpp
 
@@ -173,18 +193,30 @@ map
 -
 queue
 -
-../include/conveyorPart.hpp
-/home/kekos/Highload/include/conveyorPart.hpp
+../include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/blockQueue.hpp
 /home/kekos/Highload/include/blockQueue.hpp
 ../include/blockMap.hpp
 /home/kekos/Highload/include/blockMap.hpp
 ../include/reader.hpp
 /home/kekos/Highload/include/reader.hpp
+../include/requestHandler.hpp
+/home/kekos/Highload/include/requestHandler.hpp
+../include/spreadConveyorPart.hpp
+/home/kekos/Highload/include/spreadConveyorPart.hpp
 ../include/fastList.hpp
 /home/kekos/Highload/include/fastList.hpp
 ../include/request.h
 /home/kekos/Highload/include/request.h
+
+/home/kekos/Highload/src/stringHolder.cpp
+../include/stringHolder.h
+/home/kekos/Highload/include/stringHolder.h
+utility
+-
+../include/reader.hpp
+/home/kekos/Highload/include/reader.hpp
 
 /usr/local/boost_1_66_0/boost/config.hpp
 boost/config/user.hpp

@@ -84,16 +84,17 @@ CMakeFiles/Highload.dir/src/httpParser.cpp.o: /usr/local/boost_1_66_0/boost/util
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/blockMap.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/blockQueue.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/config.h
-CMakeFiles/Highload.dir/src/main.cpp.o: ../include/conveyorPart.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/defines.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/epollEngine.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/fastList.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/httpParser.h
-CMakeFiles/Highload.dir/src/main.cpp.o: ../include/multiConveyorPart.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/pointerStringStream.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/reader.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/request.h
+CMakeFiles/Highload.dir/src/main.cpp.o: ../include/requestHandler.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/server.h
+CMakeFiles/Highload.dir/src/main.cpp.o: ../include/simpleConveyorPart.hpp
+CMakeFiles/Highload.dir/src/main.cpp.o: ../include/spreadConveyorPart.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/stringHolder.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/Highload.dir/src/main.cpp.o: /usr/local/boost_1_66_0/boost/config.hpp
@@ -319,12 +320,14 @@ CMakeFiles/Highload.dir/src/server.cpp.o: ../src/server.cpp
 
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/blockQueue.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/config.h
-CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/conveyorPart.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/defines.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/fastList.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/httpParser.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/pointerStringStream.h
+CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/reader.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/request.h
+CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/simpleConveyorPart.hpp
+CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/spreadConveyorPart.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/stringHolder.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../src/stringHolder.cpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: /usr/local/boost_1_66_0/boost/config.hpp

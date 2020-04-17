@@ -24,7 +24,7 @@ public:
 private:
     bool _blocked = false;
     std::deque<T> _queue;
-    std::condition_variable_any _haveData;
+    std::condition_variable _haveData;
     std::mutex _haveDataMutex;
 };
 
@@ -54,10 +54,11 @@ template<class T>
 T &BlockQueue<T>::blockPeek() {
     if (_queue.size() == 0) {
         _blocked = true;
-        _haveDataMutex.lock();
-        _haveData.wait(_haveDataMutex);
+        std::unique_lock<std::mutex> lock(_haveDataMutex);
+        //_haveDataMutex.lock();
+        _haveData.wait(lock);
         _blocked = false;
-        _haveDataMutex.unlock();
+        //_haveDataMutex.unlock();
     }
     return _queue.front();
 }
@@ -74,10 +75,11 @@ template<class T>
 void BlockQueue<T>::blockPop() {
     if (_queue.size() == 0) {
         _blocked = true;
-        _haveDataMutex.lock();
-        _haveData.wait(_haveDataMutex);
+        std::unique_lock<std::mutex> lock(_haveDataMutex);
+        //_haveDataMutex.lock();
+        _haveData.wait(lock);
         _blocked = false;
-        _haveDataMutex.unlock();
+        //_haveDataMutex.unlock();
     }
     _queue.pop_front();
 }

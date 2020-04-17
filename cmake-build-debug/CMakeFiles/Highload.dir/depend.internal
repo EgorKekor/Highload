@@ -85,16 +85,17 @@ CMakeFiles/Highload.dir/src/main.cpp.o
  /home/kekos/Highload/include/blockMap.hpp
  /home/kekos/Highload/include/blockQueue.hpp
  /home/kekos/Highload/include/config.h
- /home/kekos/Highload/include/conveyorPart.hpp
  /home/kekos/Highload/include/defines.h
  /home/kekos/Highload/include/epollEngine.h
  /home/kekos/Highload/include/fastList.hpp
  /home/kekos/Highload/include/httpParser.h
- /home/kekos/Highload/include/multiConveyorPart.hpp
  /home/kekos/Highload/include/pointerStringStream.h
  /home/kekos/Highload/include/reader.hpp
  /home/kekos/Highload/include/request.h
+ /home/kekos/Highload/include/requestHandler.hpp
  /home/kekos/Highload/include/server.h
+ /home/kekos/Highload/include/simpleConveyorPart.hpp
+ /home/kekos/Highload/include/spreadConveyorPart.hpp
  /home/kekos/Highload/include/stringHolder.h
  /home/kekos/Highload/src/main.cpp
  /usr/local/boost_1_66_0/boost/config.hpp
@@ -320,12 +321,14 @@ CMakeFiles/Highload.dir/src/server.cpp.o
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o
  /home/kekos/Highload/include/blockQueue.hpp
  /home/kekos/Highload/include/config.h
- /home/kekos/Highload/include/conveyorPart.hpp
  /home/kekos/Highload/include/defines.h
  /home/kekos/Highload/include/fastList.hpp
  /home/kekos/Highload/include/httpParser.h
  /home/kekos/Highload/include/pointerStringStream.h
+ /home/kekos/Highload/include/reader.hpp
  /home/kekos/Highload/include/request.h
+ /home/kekos/Highload/include/simpleConveyorPart.hpp
+ /home/kekos/Highload/include/spreadConveyorPart.hpp
  /home/kekos/Highload/include/stringHolder.h
  /home/kekos/Highload/src/stringHolder.cpp
  /usr/local/boost_1_66_0/boost/config.hpp

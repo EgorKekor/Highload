@@ -95,9 +95,6 @@
 		<Unit filename="/home/kekos/Highload/include/config.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/conveyorPart.hpp">
-			<Option target="Highload"/>
-		</Unit>
 		<Unit filename="/home/kekos/Highload/include/defines.h">
 			<Option target="Highload"/>
 		</Unit>
@@ -110,9 +107,6 @@
 		<Unit filename="/home/kekos/Highload/include/httpParser.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/multiConveyorPart.hpp">
-			<Option target="Highload"/>
-		</Unit>
 		<Unit filename="/home/kekos/Highload/include/pointerStringStream.h">
 			<Option target="Highload"/>
 		</Unit>
@@ -122,7 +116,16 @@
 		<Unit filename="/home/kekos/Highload/include/request.h">
 			<Option target="Highload"/>
 		</Unit>
+		<Unit filename="/home/kekos/Highload/include/requestHandler.hpp">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekos/Highload/include/server.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/simpleConveyorPart.hpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekos/Highload/include/spreadConveyorPart.hpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekos/Highload/include/stringHolder.h">
