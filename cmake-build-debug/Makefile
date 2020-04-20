@@ -48,10 +48,10 @@ RM = /opt/clion-2019.3.5/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kekos/Highload
+CMAKE_SOURCE_DIR = /home/kekor/Highload
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kekos/Highload/cmake-build-debug
+CMAKE_BINARY_DIR = /home/kekor/Highload/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kekos/Highload/cmake-build-debug/CMakeFiles /home/kekos/Highload/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kekor/Highload/cmake-build-debug/CMakeFiles /home/kekor/Highload/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kekos/Highload/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kekor/Highload/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,49 @@ Highload: cmake_check_build_system
 Highload/fast:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/build
 .PHONY : Highload/fast
+
+#=============================================================================
+# Target rules for targets named test_cache
+
+# Build rule for target.
+test_cache: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_cache
+.PHONY : test_cache
+
+# fast build rule for target.
+test_cache/fast:
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/build
+.PHONY : test_cache/fast
+
+src/cache.o: src/cache.cpp.o
+
+.PHONY : src/cache.o
+
+# target to build an object file
+src/cache.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/cache.cpp.o
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/src/cache.cpp.o
+.PHONY : src/cache.cpp.o
+
+src/cache.i: src/cache.cpp.i
+
+.PHONY : src/cache.i
+
+# target to preprocess a source file
+src/cache.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/cache.cpp.i
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/src/cache.cpp.i
+.PHONY : src/cache.cpp.i
+
+src/cache.s: src/cache.cpp.s
+
+.PHONY : src/cache.s
+
+# target to generate assembly for a file
+src/cache.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/cache.cpp.s
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/src/cache.cpp.s
+.PHONY : src/cache.cpp.s
 
 src/epollEngine.o: src/epollEngine.cpp.o
 
@@ -312,6 +355,33 @@ src/stringHolder.cpp.s:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/stringHolder.cpp.s
 .PHONY : src/stringHolder.cpp.s
 
+tests/cache/cache_test.o: tests/cache/cache_test.cpp.o
+
+.PHONY : tests/cache/cache_test.o
+
+# target to build an object file
+tests/cache/cache_test.cpp.o:
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o
+.PHONY : tests/cache/cache_test.cpp.o
+
+tests/cache/cache_test.i: tests/cache/cache_test.cpp.i
+
+.PHONY : tests/cache/cache_test.i
+
+# target to preprocess a source file
+tests/cache/cache_test.cpp.i:
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.i
+.PHONY : tests/cache/cache_test.cpp.i
+
+tests/cache/cache_test.s: tests/cache/cache_test.cpp.s
+
+.PHONY : tests/cache/cache_test.s
+
+# target to generate assembly for a file
+tests/cache/cache_test.cpp.s:
+	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.s
+.PHONY : tests/cache/cache_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -321,6 +391,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Highload"
 	@echo "... edit_cache"
+	@echo "... test_cache"
+	@echo "... src/cache.o"
+	@echo "... src/cache.i"
+	@echo "... src/cache.s"
 	@echo "... src/epollEngine.o"
 	@echo "... src/epollEngine.i"
 	@echo "... src/epollEngine.s"
@@ -342,6 +416,9 @@ help:
 	@echo "... src/stringHolder.o"
 	@echo "... src/stringHolder.i"
 	@echo "... src/stringHolder.s"
+	@echo "... tests/cache/cache_test.o"
+	@echo "... tests/cache/cache_test.i"
+	@echo "... tests/cache/cache_test.s"
 .PHONY : help
 
 

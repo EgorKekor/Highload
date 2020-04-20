@@ -5,6 +5,9 @@
 #ifndef HIGHLOAD_CONFIG_H
 #define HIGHLOAD_CONFIG_H
 
+#define MB  1048576
+#define GB  1073741824
+
 #define MAX_EPOLL_EVENT 2000
 #define EPOLL_TIMEOUT -1
 #define MAX_CONNECTIONS 10000
@@ -22,6 +25,10 @@
 
 // Convayor
 #define BASE_RESERVE_SIZE   1024
+
+// Cache
+#define MAX_CACHE_SIZE  MB
+#define RATE_INTERVAL  std::chrono::seconds{1}
 
 
 #endif //HIGHLOAD_CONFIG_H

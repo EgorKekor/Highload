@@ -46,7 +46,6 @@ void Reader<INP_CONT, OUT_CONT>::_readWorker(this_unique thisPart) {
         reader_input clientSocket = thisPart->input->blockPeek();
 
         for (;;) {
-            //std::cout << "=============" << std::endl;
             ssize_t nbytes = recv(clientSocket, buf, sizeof(buf), 0);
 
             if (nbytes == -1) {

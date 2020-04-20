@@ -17,7 +17,8 @@
 #define CONVEYOR_0_OUTPUT   std::unique_ptr<Request>
 
 #define CONVEYOR_100_INPUT  CONVEYOR_0_OUTPUT
-#define CONVEYOR_100_OUTPUT   int
+#define CONVEYOR_100_OUTPUT   bool
+
 
 namespace http {
     inline std::vector<std::string> methods {

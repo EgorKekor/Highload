@@ -7,6 +7,7 @@
 #include <memory>
 #include <map>
 #include <queue>
+#include <fcntl.h>
 #include "../include/simpleConveyorPart.hpp"
 #include "../include/blockQueue.hpp"
 #include "../include/blockMap.hpp"
@@ -15,29 +16,39 @@
 #include "../include/spreadConveyorPart.hpp"
 #include "../include/fastList.hpp"
 #include "../include/request.h"
+#include "../include/cache.h"
 
 
 int main() {
 
-    auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();
-    auto uptr_request = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
+//    int fd = open("../tests/cache/test.dat", O_CREAT);
+//    close(fd);
+
+    //int fd = open("test.dat", O_RDONLY);
+
+//    Cache cache;
+//    cache.get("a");
 
 
-    Reader<BlockQueue<CONVEYOR_0_INPUT>, BlockQueue<CONVEYOR_0_OUTPUT>> reader (
-            sockets,
-            uptr_request);
-
-
-    std::vector<std::shared_ptr<BlockQueue<CONVEYOR_100_INPUT>>> vector_queue_request;
-    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
-    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
-    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
-    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
-
-
-    MoveSpreadConveyorPart<BlockQueue<CONVEYOR_0_OUTPUT>, BlockQueue<CONVEYOR_100_INPUT>> spreader1 (
-            uptr_request,
-            vector_queue_request);
+//    auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();
+//    auto uptr_request = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
+//
+//
+//    Reader<BlockQueue<CONVEYOR_0_INPUT>, BlockQueue<CONVEYOR_0_OUTPUT>> reader (
+//            sockets,
+//            uptr_request);
+//
+//
+//    std::vector<std::shared_ptr<BlockQueue<CONVEYOR_100_INPUT>>> vector_queue_request;
+//    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+//    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+//    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+//    vector_queue_request.push_back(std::make_shared<BlockQueue<CONVEYOR_100_INPUT>>());
+//
+//
+//    MoveSpreadConveyorPart<BlockQueue<CONVEYOR_0_OUTPUT>, BlockQueue<CONVEYOR_100_INPUT>> spreader1 (
+//            uptr_request,
+//            vector_queue_request);
 
 
 
@@ -53,9 +64,7 @@ int main() {
 
 
 
-
-
-    Server server(ADDRESS, PORT, MAX_EPOLL_EVENT, sockets);
-    server.Listen();
+//    Server server(ADDRESS, PORT, MAX_EPOLL_EVENT, sockets);
+//    server.Listen();
     exit(0);
 }

@@ -8,33 +8,32 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/kekos/Highload/cmake-build-debug"/>
+				<Option working_dir="/home/kekor/Highload/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/kekos/Highload/cmake-build-debug"/>
+				<Option working_dir="/home/kekor/Highload/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Highload">
-				<Option output="/home/kekos/Highload/cmake-build-debug/Highload" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/kekos/Highload/cmake-build-debug"/>
+				<Option output="/home/kekor/Highload/cmake-build-debug/Highload" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kekor/Highload/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/boost_1_66_0"/>
 					<Add directory="/usr/include/c++/8"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
 					<Add directory="/usr/include/c++/8/backward"/>
@@ -45,20 +44,19 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 Highload"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 Highload"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Highload/fast">
-				<Option output="/home/kekos/Highload/cmake-build-debug/Highload" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/kekos/Highload/cmake-build-debug"/>
+				<Option output="/home/kekor/Highload/cmake-build-debug/Highload" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kekor/Highload/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/boost_1_66_0"/>
 					<Add directory="/usr/include/c++/8"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
 					<Add directory="/usr/include/c++/8/backward"/>
@@ -69,90 +67,96 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 Highload/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 Highload/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/kekos/Highload/cmake-build-debug"/>
+				<Option working_dir="/home/kekor/Highload/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/kekos/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kekor/Highload/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/kekos/Highload/include/blockMap.hpp">
+		<Unit filename="/home/kekor/Highload/include/blockMap.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/blockQueue.hpp">
+		<Unit filename="/home/kekor/Highload/include/blockQueue.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/config.h">
+		<Unit filename="/home/kekor/Highload/include/cache.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/defines.h">
+		<Unit filename="/home/kekor/Highload/include/config.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/epollEngine.h">
+		<Unit filename="/home/kekor/Highload/include/defines.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/fastList.hpp">
+		<Unit filename="/home/kekor/Highload/include/epollEngine.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/httpParser.h">
+		<Unit filename="/home/kekor/Highload/include/fastList.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/pointerStringStream.h">
+		<Unit filename="/home/kekor/Highload/include/httpParser.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/reader.hpp">
+		<Unit filename="/home/kekor/Highload/include/pointerStringStream.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/request.h">
+		<Unit filename="/home/kekor/Highload/include/reader.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/requestHandler.hpp">
+		<Unit filename="/home/kekor/Highload/include/request.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/server.h">
+		<Unit filename="/home/kekor/Highload/include/requestHandler.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/simpleConveyorPart.hpp">
+		<Unit filename="/home/kekor/Highload/include/server.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/spreadConveyorPart.hpp">
+		<Unit filename="/home/kekor/Highload/include/simpleConveyorPart.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/include/stringHolder.h">
+		<Unit filename="/home/kekor/Highload/include/spreadConveyorPart.hpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/epollEngine.cpp">
+		<Unit filename="/home/kekor/Highload/include/stringHolder.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/httpParser.cpp">
+		<Unit filename="/home/kekor/Highload/src/cache.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/main.cpp">
+		<Unit filename="/home/kekor/Highload/src/epollEngine.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/pointerStringStream.cpp">
+		<Unit filename="/home/kekor/Highload/src/httpParser.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/request.cpp">
+		<Unit filename="/home/kekor/Highload/src/main.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/server.cpp">
+		<Unit filename="/home/kekor/Highload/src/pointerStringStream.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/src/stringHolder.cpp">
+		<Unit filename="/home/kekor/Highload/src/request.cpp">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekos/Highload/CMakeLists.txt">
+		<Unit filename="/home/kekor/Highload/src/server.cpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/src/stringHolder.cpp">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

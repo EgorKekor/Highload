@@ -52,4 +52,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Highload.dir/DependInfo.cmake"
+  "CMakeFiles/test_cache.dir/DependInfo.cmake"
   )

@@ -30,7 +30,7 @@ public:
     StringHolder(
             Reader<reader_input_container, reader_output_container> &reader,
             size_t stringsAmount = STRINGS_AMOUNT);
-    bool append(SOCKET key, char *buf);
+    bool append(SOCKET key, char *buf); // TO_DO: Добавить проверку окончания и таймер на удаление
 private:
     Reader<reader_input_container, reader_output_container> &_reader;
     HttpParser _httpParser;
