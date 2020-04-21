@@ -6,6 +6,8 @@
 #include <fstream>
 #include <sstream>
 #include <cassert>
+#include <unistd.h>
+#include <thread>
 #include "../../include/cache.h"
 
 #define FILES_AMOUNT    10
@@ -27,25 +29,86 @@ void createFiles() {
     }
 }
 
-int main() {
+std::string getName(int i) {
+    std::stringstream name;
+    name << baseDir << "file" << i;
+    return name.str();
+}
+
+std::shared_ptr<std::string> getData(std::string name, int i) {
+    std::ifstream fin(name);
+    auto data = std::make_shared<std::string>("");
+    fin >> *data;
+    return data;
+}
+
+void test1() {
     createFiles();
 
     Cache cache1(SIZE);
     assert(*cache1.get("a") == "");
 
-    std::string name = baseDir + "file0";
-    std::ifstream fin(name);
-    auto data = std::make_shared<std::string>("");
-    fin >> *data;
+    auto name = getName(0);
+    auto data = getData(name, 0);
     assert(cache1.put(name, data));
     assert(cache1.get(name) == data);
     assert(*cache1.get(name) == *data);
 
-    std::string name2 = baseDir + "file1";
-    std::ifstream fin2(name2);
-    auto data2 = std::make_shared<std::string>("");
-    fin2 >> *data;
-    assert(cache1.put(name2, data2));
+    auto name1 = getName(1);
+    auto data1 = getData(name1, 1);
+    assert(!cache1.put(name1, data1));
+
+    std::this_thread::sleep_for(RATE_INTERVAL);
+
+    assert(cache1.put(name1, data1));
+
+    std::this_thread::sleep_for(RATE_INTERVAL);
+
+    assert(cache1.put(name, data));
+
+    std::this_thread::sleep_for(RATE_INTERVAL);
+
+    assert(!cache1.put(name1, data1));
+}
+
+void test2() {
+    Cache cache(SIZE * FILES_AMOUNT / 2);
+
+    for (int i = 0; i < FILES_AMOUNT / 2; ++i) {
+        auto name = getName(i);
+        auto data = getData(name, i);
+        assert(cache.put(name, data));
+
+        for (int j = 0; j < i + 1; ++j) {
+            cache.get(name);
+        }
+    }
+
+
+    std::this_thread::sleep_for(RATE_INTERVAL);
+
+    for (int i = FILES_AMOUNT / 2; i < FILES_AMOUNT; ++i) {
+        auto name = getName(i);
+        auto data = getData(name, i);
+        assert(cache.put(name, data));
+    }
+
+    for (int i = 0; i < FILES_AMOUNT / 2; ++i) {
+        auto name = getName(i);
+        auto data = getData(name, i);
+        assert(!cache.put(name, data));
+    }
+    std::this_thread::sleep_for(RATE_INTERVAL);
+    for (int i = FILES_AMOUNT / 2 - 1; i >= 0; --i) {
+        auto name = getName(i);
+        auto data = getData(name, i);
+        assert(cache.put(name, data));
+    }
+}
+
+int main() {
+    test1();
+    test2();
 }
 
 
