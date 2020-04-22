@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kekor/Highload/tests/async_io_speed_experiments/experiment.cpp
+string
+-
+sstream
+-
+sys/types.h
+-
+aio.h
+-
+signal.h
+-
+unistd.h
+-
+fcntl.h
+-
+vector
+-
+iostream
+-
+cstring
+-
+bits/sigaction.h
+-
+cassert
+-
+thread
+-
+

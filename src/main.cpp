@@ -7,7 +7,7 @@
 #include <memory>
 #include <map>
 #include <queue>
-#include <fcntl.h>
+#include <sstream>
 #include "../include/simpleConveyorPart.hpp"
 #include "../include/blockQueue.hpp"
 #include "../include/blockMap.hpp"
@@ -17,17 +17,11 @@
 #include "../include/fastList.hpp"
 #include "../include/request.h"
 #include "../include/cache.h"
+#include "../include/epollEngine.h"
+
 
 
 int main() {
-
-//    int fd = open("../tests/cache/test.dat", O_CREAT);
-//    close(fd);
-
-    //int fd = open("test.dat", O_RDONLY);
-
-//    Cache cache;
-//    cache.get("a");
 
 
 //    auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();

@@ -29,6 +29,8 @@ memory
 -
 chrono
 -
+vector
+-
 ../include/config.h
 /home/kekor/Highload/include/config.h
 
@@ -203,6 +205,8 @@ map
 -
 queue
 -
+sstream
+-
 fcntl.h
 -
 ../include/simpleConveyorPart.hpp
@@ -223,4 +227,10 @@ fcntl.h
 /home/kekor/Highload/include/request.h
 ../include/cache.h
 /home/kekor/Highload/include/cache.h
+../include/epollEngine.h
+/home/kekor/Highload/include/epollEngine.h
+sys/types.h
+-
+aio.h
+-
 

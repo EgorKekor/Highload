@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.13)
 project(Highload)
+project(Experiment)
 project(Cache)
+project(Test_strace)
 
 set(CMAKE_CXX_STANDARD 17)
 set(GCC_COVERAGE_COMPILE_FLAGS "-pthread")
+
+set(CMAKE_CXX_STANDARD_LIBRARIES -lrt)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 
 find_package(Boost 1.6.0 REQUIRED COMPONENTS system)
@@ -40,3 +44,11 @@ add_executable(
         tests/cache/cache_test.cpp
         include/cache.h
         src/cache.cpp)
+
+add_executable(
+        test_strace
+        tests/strace_experiments/test.cpp)
+
+add_executable(
+        Experiment
+        tests/async_io_speed_experiments/experiment.cpp)

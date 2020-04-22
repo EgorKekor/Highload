@@ -111,6 +111,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Experiment
+
+# Build rule for target.
+Experiment: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Experiment
+.PHONY : Experiment
+
+# fast build rule for target.
+Experiment/fast:
+	$(MAKE) -f CMakeFiles/Experiment.dir/build.make CMakeFiles/Experiment.dir/build
+.PHONY : Experiment/fast
+
+#=============================================================================
+# Target rules for targets named test_strace
+
+# Build rule for target.
+test_strace: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_strace
+.PHONY : test_strace
+
+# fast build rule for target.
+test_strace/fast:
+	$(MAKE) -f CMakeFiles/test_strace.dir/build.make CMakeFiles/test_strace.dir/build
+.PHONY : test_strace/fast
+
+#=============================================================================
 # Target rules for targets named Highload
 
 # Build rule for target.
@@ -355,6 +381,33 @@ src/stringHolder.cpp.s:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/stringHolder.cpp.s
 .PHONY : src/stringHolder.cpp.s
 
+tests/async_io_speed_experiments/experiment.o: tests/async_io_speed_experiments/experiment.cpp.o
+
+.PHONY : tests/async_io_speed_experiments/experiment.o
+
+# target to build an object file
+tests/async_io_speed_experiments/experiment.cpp.o:
+	$(MAKE) -f CMakeFiles/Experiment.dir/build.make CMakeFiles/Experiment.dir/tests/async_io_speed_experiments/experiment.cpp.o
+.PHONY : tests/async_io_speed_experiments/experiment.cpp.o
+
+tests/async_io_speed_experiments/experiment.i: tests/async_io_speed_experiments/experiment.cpp.i
+
+.PHONY : tests/async_io_speed_experiments/experiment.i
+
+# target to preprocess a source file
+tests/async_io_speed_experiments/experiment.cpp.i:
+	$(MAKE) -f CMakeFiles/Experiment.dir/build.make CMakeFiles/Experiment.dir/tests/async_io_speed_experiments/experiment.cpp.i
+.PHONY : tests/async_io_speed_experiments/experiment.cpp.i
+
+tests/async_io_speed_experiments/experiment.s: tests/async_io_speed_experiments/experiment.cpp.s
+
+.PHONY : tests/async_io_speed_experiments/experiment.s
+
+# target to generate assembly for a file
+tests/async_io_speed_experiments/experiment.cpp.s:
+	$(MAKE) -f CMakeFiles/Experiment.dir/build.make CMakeFiles/Experiment.dir/tests/async_io_speed_experiments/experiment.cpp.s
+.PHONY : tests/async_io_speed_experiments/experiment.cpp.s
+
 tests/cache/cache_test.o: tests/cache/cache_test.cpp.o
 
 .PHONY : tests/cache/cache_test.o
@@ -382,6 +435,33 @@ tests/cache/cache_test.cpp.s:
 	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.s
 .PHONY : tests/cache/cache_test.cpp.s
 
+tests/strace_experiments/test.o: tests/strace_experiments/test.cpp.o
+
+.PHONY : tests/strace_experiments/test.o
+
+# target to build an object file
+tests/strace_experiments/test.cpp.o:
+	$(MAKE) -f CMakeFiles/test_strace.dir/build.make CMakeFiles/test_strace.dir/tests/strace_experiments/test.cpp.o
+.PHONY : tests/strace_experiments/test.cpp.o
+
+tests/strace_experiments/test.i: tests/strace_experiments/test.cpp.i
+
+.PHONY : tests/strace_experiments/test.i
+
+# target to preprocess a source file
+tests/strace_experiments/test.cpp.i:
+	$(MAKE) -f CMakeFiles/test_strace.dir/build.make CMakeFiles/test_strace.dir/tests/strace_experiments/test.cpp.i
+.PHONY : tests/strace_experiments/test.cpp.i
+
+tests/strace_experiments/test.s: tests/strace_experiments/test.cpp.s
+
+.PHONY : tests/strace_experiments/test.s
+
+# target to generate assembly for a file
+tests/strace_experiments/test.cpp.s:
+	$(MAKE) -f CMakeFiles/test_strace.dir/build.make CMakeFiles/test_strace.dir/tests/strace_experiments/test.cpp.s
+.PHONY : tests/strace_experiments/test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -389,6 +469,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... Experiment"
+	@echo "... test_strace"
 	@echo "... Highload"
 	@echo "... edit_cache"
 	@echo "... test_cache"
@@ -416,9 +498,15 @@ help:
 	@echo "... src/stringHolder.o"
 	@echo "... src/stringHolder.i"
 	@echo "... src/stringHolder.s"
+	@echo "... tests/async_io_speed_experiments/experiment.o"
+	@echo "... tests/async_io_speed_experiments/experiment.i"
+	@echo "... tests/async_io_speed_experiments/experiment.s"
 	@echo "... tests/cache/cache_test.o"
 	@echo "... tests/cache/cache_test.i"
 	@echo "... tests/cache/cache_test.s"
+	@echo "... tests/strace_experiments/test.o"
+	@echo "... tests/strace_experiments/test.i"
+	@echo "... tests/strace_experiments/test.s"
 .PHONY : help
 
 

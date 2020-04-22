@@ -168,7 +168,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Cache
+CMAKE_PROJECT_NAME:STATIC=Test_strace
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -236,6 +236,12 @@ Cache_BINARY_DIR:STATIC=/home/kekor/Highload/cmake-build-debug
 Cache_SOURCE_DIR:STATIC=/home/kekor/Highload
 
 //Value Computed by CMake
+Experiment_BINARY_DIR:STATIC=/home/kekor/Highload/cmake-build-debug
+
+//Value Computed by CMake
+Experiment_SOURCE_DIR:STATIC=/home/kekor/Highload
+
+//Value Computed by CMake
 Highload2_BINARY_DIR:STATIC=/home/kekor/Highload/cmake-build-debug
 
 //Value Computed by CMake
@@ -252,6 +258,12 @@ ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
+
+//Value Computed by CMake
+Test_strace_BINARY_DIR:STATIC=/home/kekor/Highload/cmake-build-debug
+
+//Value Computed by CMake
+Test_strace_SOURCE_DIR:STATIC=/home/kekor/Highload
 
 
 ########################
