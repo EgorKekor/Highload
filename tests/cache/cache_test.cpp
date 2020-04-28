@@ -10,8 +10,8 @@
 #include <thread>
 #include "../../include/cache.h"
 
-#define FILES_AMOUNT    10
-#define SIZE    64
+#define FILES_AMOUNT    100
+#define SIZE    512
 
 std::string baseDir = "../tests/cache/files/";
 
@@ -107,8 +107,9 @@ void test2() {
 }
 
 int main() {
-    test1();
-    test2();
+    createFiles();
+//    test1();
+//    test2();
 }
 
 

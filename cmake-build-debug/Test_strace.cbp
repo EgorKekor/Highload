@@ -222,6 +222,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/kekor/Highload/include/asyncReader.h">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekor/Highload/include/blockMap.hpp">
 			<Option target="Highload"/>
 		</Unit>
@@ -256,7 +259,10 @@
 		<Unit filename="/home/kekor/Highload/include/request.h">
 			<Option target="Highload"/>
 		</Unit>
-		<Unit filename="/home/kekor/Highload/include/requestHandler.hpp">
+		<Unit filename="/home/kekor/Highload/include/response.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/include/responseMaker.hpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/include/server.h">
@@ -269,6 +275,9 @@
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/include/stringHolder.h">
+			<Option target="Highload"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/src/asyncReader.cpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/src/cache.cpp">
@@ -290,6 +299,9 @@
 		<Unit filename="/home/kekor/Highload/src/request.cpp">
 			<Option target="Highload"/>
 		</Unit>
+		<Unit filename="/home/kekor/Highload/src/response.cpp">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekor/Highload/src/server.cpp">
 			<Option target="Highload"/>
 		</Unit>
@@ -297,6 +309,9 @@
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/tests/async_io_speed_experiments/experiment.cpp">
+			<Option target="Experiment"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/tests/async_io_speed_experiments/syscalls.h">
 			<Option target="Experiment"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/tests/cache/cache_test.cpp">

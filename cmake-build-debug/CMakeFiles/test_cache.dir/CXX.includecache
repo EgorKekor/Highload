@@ -20,13 +20,19 @@ vector
 
 /home/kekor/Highload/include/config.h
 
-/home/kekor/Highload/src/cache.cpp
-vector
--
-climits
--
+/home/kekor/Highload/tests/cache/cache_test.cpp
 iostream
 -
-../include/cache.h
+fstream
+-
+sstream
+-
+cassert
+-
+unistd.h
+-
+thread
+-
+../../include/cache.h
 /home/kekor/Highload/include/cache.h
 

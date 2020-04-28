@@ -8,6 +8,7 @@
 #include <iostream>
 #include <boost/utility/string_ref.hpp>
 #include <memory>
+#include <sys/stat.h>
 #include "../include/defines.h"
 #include "../include/fastList.hpp"
 
@@ -17,18 +18,24 @@ public:
     typedef std::unique_ptr<std::string> fast_list_type;
     typedef FastListReturner<fast_list_type> req_str_returner;
 
-    Request(SOCKET socket);
-    Request(std::unique_ptr<req_str_returner> requestStringReturner,
-            boost::string_ref method,
-            boost::string_ref url,
-            boost::string_ref protocol,
-            SOCKET socket);
+    Request(SOCKET socket, bool corrupt = false);
+    void saveData(std::unique_ptr<req_str_returner>&& sorce);
+    bool isValid() { return (!memoryCorrupted || validRequest); };
+    friend std::ostream& operator<<(std::ostream& os, const Request& req);
+
+
+    const bool memoryCorrupted = false;
+    SOCKET socket;
+    boost::string_ref method;
+    boost::string_ref url;
+    boost::string_ref protocol;
+
+    bool validRequest = false;
+    bool fileExist = false;
+    struct stat fileDescription = {};
+    std::string filename;
 private:
-    std::unique_ptr<req_str_returner> _requestString;
-    std::string _method;
-    std::string _url;
-    std::string _protocol;
-    SOCKET _socket;
+    std::unique_ptr<req_str_returner> _requestString; // Строка будет возвращена в stringHolder
 };
 
 #endif //HIGHLOAD_REQUEST_H

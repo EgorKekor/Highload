@@ -15,14 +15,6 @@ class SimpleConveyorPart {
 public:
     typedef SimpleConveyorPart<INP_CONTAINER, OUT_CONTAINER> this_type;
 
-    SimpleConveyorPart(const this_type &rh) : input(rh.input), output(rh.output) {
-        std::cout << "COPY111!" << std::endl;
-    };
-
-    SimpleConveyorPart(this_type &&rh) : input(rh.input), output(rh.output) {
-        std::cout << "MOVE111!" << std::endl;
-    };
-
     SimpleConveyorPart(
             std::shared_ptr<INP_CONTAINER> &input,
             std::shared_ptr<OUT_CONTAINER> &output) :

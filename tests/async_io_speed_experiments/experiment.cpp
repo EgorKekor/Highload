@@ -6,8 +6,11 @@
 #include <sstream>
 #include <sys/types.h>
 #include <aio.h>
+#include <linux/aio_abi.h>
 #include <signal.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <vector>
 #include <iostream>
@@ -15,12 +18,24 @@
 #include <bits/sigaction.h>
 #include <cassert>
 #include <thread>
+#include <sys/stat.h>
+#include "syscalls.h"
 
 
-#define FILES_AMOUNT    10
+#define FILES_AMOUNT    100
 #define SIZE_TO_READ    64
+#define ITERATIONS    10
+
+#define EVENTS_AMOUNT   1024
+
+int fileSize(int fd) {
+    struct stat stat_buf;
+    int rc = fstat(fd, &stat_buf);
+    return rc == 0 ? stat_buf.st_size : -1;
+}
 
 std::string base = "../tests/cache/files/file";
+std::string baseScript = "./tests/cache/files/file";
 
 struct Value {
     int fd;
@@ -36,69 +51,6 @@ void handler(int signal, siginfo_t *info, void *ptr) {
     return;
 }
 
-void thread_handler(union sigval val) {
-    std::cout << "Thread_handler!" << std::endl;
-    return;
-}
-
-void test_signals_with_list() {
-    struct sigaction sig_struct{};
-    memset(&sig_struct, 0, sizeof(struct sigaction));
-
-    sig_struct.sa_flags |= SA_SIGINFO;
-    sig_struct.sa_sigaction = handler;
-
-    sigaction(SIGUSR1, &sig_struct, NULL);
-
-    std::vector<int> files(10, 0);
-    char num = '0';
-    for (int i = 0; i < files.size(); ++i) {
-        files[i] = open((base + num++).c_str(), O_RDONLY);
-        assert(files[i] > 0);
-    }
-
-
-
-    int file = files[0];
-    char *buffer = new char[SIZE_TO_READ];
-
-
-    sigevent aio_sigevent{};
-    memset(&aio_sigevent, 0, sizeof(sigevent));
-    aio_sigevent.sigev_notify = SIGEV_SIGNAL;
-    aio_sigevent.sigev_signo = SIGUSR1;
-    aio_sigevent.sigev_value.sival_int = file;
-
-    aiocb cb{};
-    memset(&cb, 0, sizeof(aiocb));
-    cb.aio_nbytes = SIZE_TO_READ;
-    cb.aio_fildes = file;
-    cb.aio_offset = 0;
-    cb.aio_buf = buffer;
-    cb.aio_sigevent = aio_sigevent;
-
-
-
-    if (aio_read(&cb) == -1) {
-        std::cout << "Unable to create request!" << std::endl;
-        close(file);
-    }
-
-    while (aio_error(&cb) == EINPROGRESS) {
-        std::cout << "Working..." << std::endl;
-    }
-
-    int numBytes = aio_return(&cb);
-    std::cout << buffer << std::endl;
-
-    if (numBytes != -1)
-        std::cout << "Success!" << std::endl;
-    else
-        std::cout << "Error!" << std::endl;
-
-    delete[] buffer;
-    close(file);
-}
 
 void test_signals() {
     struct sigaction sig_struct{};
@@ -112,10 +64,10 @@ void test_signals() {
     sig_struct.sa_mask = set;
     sigaction(SIGRTMIN, &sig_struct, NULL);
 
-    std::vector<int> files(10, 0);
-    char num = '0';
+    std::vector<int> files(FILES_AMOUNT, 0);
+    int num = 0;
     for (int i = 0; i < files.size(); ++i) {
-        files[i] = open((base + num++).c_str(), O_RDONLY);
+        files[i] = open((base + std::to_string(num++)).c_str(), O_RDONLY | O_DIRECT);
         assert(files[i] > 0);
     }
 
@@ -147,72 +99,121 @@ void test_signals() {
     }
 
     for(;;);
+}   // GNU - create thread for each file.
 
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    std::cout << "aaaaaaaaaaaaa" << std::endl;
+void test_linux_api() {
+    std::vector<int> fd(FILES_AMOUNT, 0);
+    int num = 0;
+    for (int i = 0; i < FILES_AMOUNT; ++i) {
+        fd[i] = open((base + std::to_string(num++)).c_str(), O_RDONLY | O_DIRECT);
+        if (num > 99) {
+            num = 0;
+        }
+        assert(fd[i] > 0);
+    }
 
 
-//    if (numBytes != -1)
-//        std::cout << "Success!" << std::endl;
-//    else
-//        std::cout << "Error!" << std::endl;
-//
-//    delete[] buffer;
-//    close(file);
+    struct iocb **list_of_iocb = new struct iocb*[FILES_AMOUNT];
+    struct iocb **list_of_iocb2 = new struct iocb*[FILES_AMOUNT];
+    struct iocb cb[FILES_AMOUNT];
+    memset(cb, 0, FILES_AMOUNT * sizeof(iocb));
+
+    for (int i = 0; i < FILES_AMOUNT; ++i) {
+        size_t size = fileSize(fd[i]);
+        char *buf = new char[size];
+
+        cb[i].aio_data = static_cast<__u64>(fd[i]);
+        cb[i].aio_lio_opcode = IOCB_CMD_PREAD;
+        cb[i].aio_fildes = static_cast<__u32>(fd[i]);
+        cb[i].aio_buf = reinterpret_cast<__u64>(buf);
+        cb[i].aio_nbytes = size;
+
+        list_of_iocb[i] = &cb[i];
+        list_of_iocb2[i] = &cb[i];
+    }
+
+    aio_context_t ctx = 0;
+    auto err = io_setup(FILES_AMOUNT, &ctx);
+    if (err < 0) {
+        PFATAL("io_setup()");
+    }
+
+    err = io_submit(ctx, FILES_AMOUNT, list_of_iocb);
+    if (err < 0) {
+        PFATAL("io_submit()");
+    }
+
+
+
+    struct io_event *events = new struct io_event[FILES_AMOUNT];
+
+    size_t counter = 0;
+
+    while(counter < FILES_AMOUNT * 2) {
+        auto amount = io_getevents(ctx, 1, 1, events, NULL);
+        if (amount < 0) {
+            PFATAL("io_getevents()");
+        }
+
+        counter += amount;
+        if (counter == 1) {
+            err = io_submit(ctx, FILES_AMOUNT, list_of_iocb2);
+            if (err < 0) {
+                PFATAL("io_submit()");
+            }
+        }
+        std::cout << counter << std::endl;
+    }
+
+
+    //io_destroy(ctx);
+
+    for (int i = 0; i < FILES_AMOUNT; ++i) {
+        close(fd[i]);
+    }
 }
 
-
-void test_threads() {
-    int file = open("../tests/cache/files/file1", O_RDONLY);
-    char *buffer = new char[SIZE_TO_READ];
-
-
-    sigevent aio_sigevent{};
-    memset(&aio_sigevent, 0, sizeof(sigevent));
-    aio_sigevent.sigev_notify = SIGEV_THREAD;
-    aio_sigevent.sigev_notify_function = thread_handler;
-    aio_sigevent.sigev_value.sival_ptr = (void*)buffer;
-
-    aiocb cb{};
-    memset(&cb, 0, sizeof(aiocb));
-    cb.aio_nbytes = SIZE_TO_READ;
-    cb.aio_fildes = file;
-    cb.aio_offset = 0;
-    cb.aio_buf = buffer;
-    cb.aio_sigevent = aio_sigevent;
-
-
-
-    if (aio_read(&cb) == -1) {
-        std::cout << "Unable to create request!" << std::endl;
-        close(file);
+void test_sync_read() {
+    std::vector<int> fd(FILES_AMOUNT, 0);
+    int num = 0;
+    for (int i = 0; i < FILES_AMOUNT; ++i) {
+        fd[i] = open((base + std::to_string(num++)).c_str(), O_RDONLY | O_DIRECT );
+        if (num > 99) {
+            num = 0;
+        }
+        assert(fd[i] > 0);
     }
 
-    while (aio_error(&cb) == EINPROGRESS) {
-        std::cout << "Working..." << std::endl;
+    for (int i = 0; i < FILES_AMOUNT; ++i) {
+        size_t size = fileSize(fd[i]);
+        char *buf = new char[size];
+        read(fd[i], buf, size);
     }
 
-    int numBytes = aio_return(&cb);
-    std::cout << buffer << std::endl;
-
-    if (numBytes != -1)
-        std::cout << "Success!" << std::endl;
-    else
-        std::cout << "Error!" << std::endl;
-
-    delete[] buffer;
-    close(file);
+    for (int i = 0; i < FILES_AMOUNT; ++i) {
+        close(fd[i]);
+    }
 }
 
 
 
 int main() {
-    test_signals();
-    std::thread workerThr(test_signals);
-    workerThr.detach();
-    std::this_thread::sleep_for(std::chrono::seconds(20));
-    std::cout << "aaaaaaaaaaaaa" << std::endl;
-//    std::cout << "END" << std::endl;
-//    test_threads();
+    int nanosecondsCounter = 0;
+
+    auto start = std::chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+    for (int i = 0; i < ITERATIONS; ++i) {
+        start = std::chrono::steady_clock::now();
+        test_linux_api();
+        end = std::chrono::steady_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        nanosecondsCounter += elapsed.count();
+    }
+
+    double average = (double)nanosecondsCounter / ITERATIONS;
+    std::cout << "Average time: " << average << std::endl;
+
     return (0);
 }

@@ -226,8 +226,10 @@ public:
             return;
         }
         if (_isRvalue) {
-            _fastList->push(std::move(_value));
             std::cout << "rvalue returned" << std::endl;
+            std::cout << "size before: " << _fastList->size() << std::endl;
+            _fastList->push(std::move(_value));
+            std::cout << "size after: " << _fastList->size() << std::endl;
         }
     };
 private:

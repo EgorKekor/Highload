@@ -35,9 +35,14 @@ add_executable(
         include/blockQueue.hpp
         include/blockMap.hpp
         include/spreadConveyorPart.hpp
-        include/requestHandler.hpp
+        include/responseMaker.hpp
         include/cache.h
-        src/cache.cpp)
+        src/cache.cpp
+        src/response.cpp
+        include/response.h
+        include/asyncReader.h
+        src/asyncReader.cpp
+)
 
 add_executable(
         test_cache
@@ -51,4 +56,7 @@ add_executable(
 
 add_executable(
         Experiment
-        tests/async_io_speed_experiments/experiment.cpp)
+        tests/async_io_speed_experiments/experiment.cpp
+        tests/async_io_speed_experiments/syscalls.h
+
+)

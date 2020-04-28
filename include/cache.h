@@ -23,6 +23,7 @@ public:
     typedef std::map<std::string, CacheRecord>::iterator map_iterator;
     typedef std::map<std::string, size_t>::iterator deleted_map_iterator;
     Cache(size_t sz = MAX_CACHE_SIZE);
+
     std::shared_ptr<std::string> get(std::string fileName);
     bool put(std::string fileName, std::shared_ptr<std::string> sPtr);
 private:

@@ -4,21 +4,32 @@
 
 #include "../include/request.h"
 
-Request::Request(std::unique_ptr<req_str_returner> requestString,
-        boost::string_ref method,
-        boost::string_ref url,
-        boost::string_ref protocol,
-        SOCKET socket) :
-            _requestString(std::move(requestString)),
-            _method(method),
-            _url(url),
-            _protocol(protocol),
-            _socket(socket){}
 
-Request::Request(SOCKET socket) :
+Request::Request(SOCKET socket, bool corrupt) :
         _requestString(std::make_unique<req_str_returner>(nullptr)),
-        _method("BAD"),
-        _url("BAD"),
-        _protocol("BAD"),
-        _socket(socket)
-{};
+        memoryCorrupted(corrupt),
+        socket(socket) {
+
+}
+
+void Request::saveData(std::unique_ptr<req_str_returner> &&source) {
+    _requestString = std::move(source);
+}
+
+std::ostream &operator<<(std::ostream &os, const Request& req) {
+    if (req.memoryCorrupted) {
+        os << "Memory corrupted!" << std::endl;
+        return os;
+    }
+    if (req.validRequest) {
+        os << "Request invalid!" << std::endl;
+    }
+
+    os << "Socket:" << req.socket << std::endl;
+    os << "Method:" << req.method << std::endl;
+    os << "Url:" << req.url << std::endl;
+    os << "Protocol:" << req.protocol << std::endl;
+    os << "Filename" << req.filename << std::endl;
+    return os;
+}
+

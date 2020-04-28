@@ -16,8 +16,8 @@
 #define CONVEYOR_0_INPUT  SOCKET
 #define CONVEYOR_0_OUTPUT   std::unique_ptr<Request>
 
-#define CONVEYOR_100_INPUT  CONVEYOR_0_OUTPUT
-#define CONVEYOR_100_OUTPUT   bool
+#define CONVEYOR_10_INPUT  CONVEYOR_0_OUTPUT
+#define CONVEYOR_10_OUTPUT   std::unique_ptr<Response>
 
 
 namespace http {

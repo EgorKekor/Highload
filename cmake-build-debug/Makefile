@@ -162,6 +162,33 @@ test_cache/fast:
 	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/build
 .PHONY : test_cache/fast
 
+src/asyncReader.o: src/asyncReader.cpp.o
+
+.PHONY : src/asyncReader.o
+
+# target to build an object file
+src/asyncReader.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/asyncReader.cpp.o
+.PHONY : src/asyncReader.cpp.o
+
+src/asyncReader.i: src/asyncReader.cpp.i
+
+.PHONY : src/asyncReader.i
+
+# target to preprocess a source file
+src/asyncReader.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/asyncReader.cpp.i
+.PHONY : src/asyncReader.cpp.i
+
+src/asyncReader.s: src/asyncReader.cpp.s
+
+.PHONY : src/asyncReader.s
+
+# target to generate assembly for a file
+src/asyncReader.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/asyncReader.cpp.s
+.PHONY : src/asyncReader.cpp.s
+
 src/cache.o: src/cache.cpp.o
 
 .PHONY : src/cache.o
@@ -327,6 +354,33 @@ src/request.cpp.s:
 	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/request.cpp.s
 .PHONY : src/request.cpp.s
 
+src/response.o: src/response.cpp.o
+
+.PHONY : src/response.o
+
+# target to build an object file
+src/response.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/response.cpp.o
+.PHONY : src/response.cpp.o
+
+src/response.i: src/response.cpp.i
+
+.PHONY : src/response.i
+
+# target to preprocess a source file
+src/response.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/response.cpp.i
+.PHONY : src/response.cpp.i
+
+src/response.s: src/response.cpp.s
+
+.PHONY : src/response.s
+
+# target to generate assembly for a file
+src/response.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/response.cpp.s
+.PHONY : src/response.cpp.s
+
 src/server.o: src/server.cpp.o
 
 .PHONY : src/server.o
@@ -474,6 +528,9 @@ help:
 	@echo "... Highload"
 	@echo "... edit_cache"
 	@echo "... test_cache"
+	@echo "... src/asyncReader.o"
+	@echo "... src/asyncReader.i"
+	@echo "... src/asyncReader.s"
 	@echo "... src/cache.o"
 	@echo "... src/cache.i"
 	@echo "... src/cache.s"
@@ -492,6 +549,9 @@ help:
 	@echo "... src/request.o"
 	@echo "... src/request.i"
 	@echo "... src/request.s"
+	@echo "... src/response.o"
+	@echo "... src/response.i"
+	@echo "... src/response.s"
 	@echo "... src/server.o"
 	@echo "... src/server.i"
 	@echo "... src/server.s"

@@ -41,8 +41,9 @@ bool StringHolder::append(SOCKET key, char *buf) {
         _reservedPool.popFront();
     } else if (buf != nullptr) {
         it->second->append(buf);
-        std::cout << *_messages.at(key);
+        //std::cout << *_messages.at(key);
     } else {
+        std::cout << *_messages.at(key);
         auto returner = std::make_unique<FastListReturner<fast_list_type>>(std::move(it->second), &_reservedPool);
 
         auto req = std::move(_httpParser.constructRequest(std::move(returner), it->first));

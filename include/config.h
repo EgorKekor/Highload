@@ -30,5 +30,8 @@
 #define MAX_CACHE_SIZE  MB
 #define RATE_INTERVAL  std::chrono::seconds{1}
 
+// HttpParser
+#define BASE_DIR    ""
+
 
 #endif //HIGHLOAD_CONFIG_H
