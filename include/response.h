@@ -12,43 +12,50 @@
 
 class Body {
 public:
-    Body(char* body, size_t length);
+    ~Body() {
+        if (_body) {
+            free(_body);
+        }
+    };
+    Body(char *body, size_t length, size_t size);
 
     Body(Body const &b) = delete;
     Body(Body &b) = delete;
 
     Body(Body const &&other) = delete;
 
-    Body(Body &&other);
-    Body &operator=(Body&& other);
+    Body(Body &&other) = delete;
+    Body &operator=(Body&& other) = delete;
 
-    void reset(char* body, size_t length);
-    void resetSize(size_t newSize);
-    unique_ptr_free<char> getBody();
-    char* getBodyPtr();
-    size_t getSize();
+    void reset(char *body, size_t length, size_t size);
+
+    const char * getAdress() const;
+    size_t length();
+    size_t size();
 private:
     size_t _bodySize = 0;
-    unique_ptr_free<char> _body;
+    size_t _bodyLength = 0;
+    char* _body;
 };
 
 class Response {
 public:
-    Response(Request &request, std::string &&headers, Body body);
+    Response(Request &request, std::string &&headers, std::shared_ptr<Body> &body);
     Response(Request &request, std::string &&headers);
     size_t fileSize() { return _fileDescription.st_size; };
 
-    void putBody(Body &&body);
+    void putBody(std::shared_ptr<Body> &body);
+    void putBody(std::shared_ptr<Body> &&body);
     size_t getFileSize();
     std::string& getHeaders();
-    Body& getBody();
+    std::shared_ptr<Body>& getBody();
 
     SOCKET socket;
     std::string filename;
 private:
     struct stat _fileDescription = {};
     std::string _headers;
-    Body _body;
+    std::shared_ptr<Body> _bodyPtr;
 };
 
 #endif //TEST_STRACE_RESPONSE_H

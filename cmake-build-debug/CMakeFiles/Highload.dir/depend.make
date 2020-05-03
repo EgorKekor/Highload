@@ -13,6 +13,10 @@ CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../src/asyncReader.cpp
 
 CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/cache.h
 CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/config.h
+CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/defines.h
+CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/fastList.hpp
+CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/request.h
+CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/response.h
 CMakeFiles/Highload.dir/src/cache.cpp.o: ../src/cache.cpp
 
 CMakeFiles/Highload.dir/src/config.cpp.o: ../include/config.h

@@ -29,7 +29,7 @@
 #define BASE_RESERVE_SIZE   1024
 
 // Cache
-#define MAX_CACHE_SIZE  MB
+#define MAX_CACHE_SIZE  512
 #define RATE_INTERVAL  std::chrono::seconds{1}
 
 

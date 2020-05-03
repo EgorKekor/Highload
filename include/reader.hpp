@@ -50,7 +50,7 @@ void Reader<INP_CONT, OUT_CONT>::_readWorker(this_unique thisPart) {
             if (nbytes == -1) {
                 thisPart->_stringHolder.append(clientSocket, nullptr);
                 if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                    std::cout << "[" << clientSocket << "]:" << "EWOULDBLOCK" << std::endl;
+//                    std::cout << "[" << clientSocket << "]:" << "EWOULDBLOCK" << std::endl;
                     break;
                 } else {
                     std::cerr << "[" << clientSocket << "]:" << "Read error" << std::endl;

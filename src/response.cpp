@@ -4,9 +4,11 @@
 
 #include "../include/response.h"
 
-Response::Response(Request &request, std::string &&headers, Body body) :
+#include <utility>
+
+Response::Response(Request &request, std::string &&headers, std::shared_ptr<Body> &body) :
     _headers(std::move(headers)),
-    _body(std::move(body)),
+    _bodyPtr(body),
     socket(request.socket),
     filename(request.filename),
     _fileDescription(request.fileDescription) {}
@@ -16,59 +18,65 @@ Response::Response(Request &request, std::string &&headers) :
     socket(request.socket),
     filename(request.filename),
     _fileDescription(request.fileDescription),
-    _body(nullptr, 0)
+    _bodyPtr(std::make_shared<Body>(nullptr, 0, 0))
 {}
 
-Body& Response::getBody() {
-    return _body;
+std::shared_ptr<Body>& Response::getBody() {
+    return _bodyPtr;
 }
 
 std::string &Response::getHeaders() {
     return _headers;
 }
 
-void Response::putBody(Body &&body) {
-    _body = std::move(body);
+void Response::putBody(std::shared_ptr<Body> &body) {
+    _bodyPtr = body;
+}
+
+void Response::putBody(std::shared_ptr<Body> &&body) {
+    _bodyPtr = std::move(body);
 }
 
 
+// =================================================
 
-size_t Response::getFileSize() {
-    return 0;
+Body::Body(char *body, size_t length, size_t size) :
+    _body(body),
+    _bodySize(size),
+    _bodyLength(length){}
+
+const char* Body::getAdress() const {
+    return _body;
 }
 
-Body::Body(char *body, size_t length) :
-    _body(make_unique_free<char>(body)),
-    _bodySize(length) {}
-
-unique_ptr_free<char> Body::getBody() {
-    return std::move(_body);
+size_t Body::length() {
+    return _bodyLength;
 }
 
-size_t Body::getSize() {
+
+//Body::Body(Body &&other) :
+//    _body(std::move(other._body)),
+//    _bodySize(other._bodySize),
+//    _bodyLength(other._bodyLength){}
+
+void Body::reset(char *body, size_t length, size_t size) {
+    if (_body) {
+        free(_body);
+    }
+    _body = body;
+    _bodyLength = length;
+    _bodySize = size;
+}
+
+//Body &Body::operator=(Body &&other) {
+//    _body = std::move(other._body);
+//    _bodySize = other._bodySize;
+//    _bodyLength = other._bodyLength;
+//    return *this;
+//}
+
+
+size_t Body::size() {
     return _bodySize;
 }
 
-
-Body::Body(Body &&other) :
-    _body(std::move(other._body)),
-    _bodySize(other._bodySize) {}
-
-void Body::reset(char* body, size_t length) {
-    _body.reset(body);
-    _bodySize = length;
-}
-
-Body &Body::operator=(Body &&other) {
-    _body = std::move(other._body);
-    _bodySize = other._bodySize;
-    return *this;
-}
-
-char* Body::getBodyPtr() {
-    return _body.get();
-}
-
-void Body::resetSize(size_t newSize) {
-    _bodySize = newSize;
-}

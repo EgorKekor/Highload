@@ -32,6 +32,7 @@ namespace http {
 
 inline void my_free(void* p) {
     free(p);
+    //std::cout << "a" << std::endl;
 }
 
 template<class T>

@@ -35,7 +35,7 @@ public:
 
     std::unique_ptr<Request> constructRequest(std::unique_ptr<req_str_returner> requestData, SOCKET socket);
 
-    int fillResponse(std::string &headers, Body &body, std::unique_ptr<Request> &req);
+    int fillResponse(std::string &headers, std::shared_ptr<Body> &body, std::unique_ptr<Request> &req);
 
 
 private:

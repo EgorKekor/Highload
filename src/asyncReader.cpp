@@ -11,8 +11,16 @@ extern Config* config;
 char* testBuf = nullptr;
 
 void AsyncReader::push(std::unique_ptr<Response> response, AsyncReader::callback_type callback) {
-    auto elem = std::make_unique<pair_type>(std::move(response), std::move(callback));
-    _readQueue.push(std::move(elem));
+    auto bodyPtr = _cache.get(response->filename);
+    if (bodyPtr->getAdress() == nullptr) {
+        std::cout << "Response from disk" << std::endl;
+        auto elem = std::make_unique<pair_type>(std::move(response), std::move(callback));
+        _readQueue.push(std::move(elem));
+    } else {
+        std::cout << "Response from cache" << std::endl;
+        response->putBody(bodyPtr);
+        callback(std::move(response));
+    }
 }
 
 
@@ -52,7 +60,6 @@ void AsyncReader::_asyncReader(AsyncReader *thisObject) {
     struct io_event *events = new struct io_event[1];
     for(;;) {
         auto amount = io_getevents(thisObject->ctx, 1, 1, events, nullptr);
-        std::cout << "read done" << std::endl;
         if (amount < 0) {
             std::cerr << "AsyncRead: io_getevents error" << std::endl;
             continue;
@@ -60,6 +67,7 @@ void AsyncReader::_asyncReader(AsyncReader *thisObject) {
 
         auto *readPackResult = reinterpret_cast<ReadPack::ReadPackResult*>(events[0].data);
         auto *readPack = readPackResult->object;
+        bool res = thisObject->_cache.put(readPack->getFilename(readPackResult->position), readPack->getBody(readPackResult->position));
         readPack->complite(readPackResult->position, &events[0]);
         if (readPack->isEnded()) {
             delete readPack;
@@ -97,6 +105,7 @@ bool ReadPack::add(AsyncReader::uptr_pair_type ptr) {
 
     size_t align = config->getAlign();
     size_t allocSize = align + size / align;
+    size_t length = size;
     size = allocSize;
 
     char* buf = static_cast<char*>(aligned_alloc(align, allocSize));
@@ -104,12 +113,13 @@ bool ReadPack::add(AsyncReader::uptr_pair_type ptr) {
         std::cerr << "Ooops!" << std::endl;
         return false;
     }
-    _holders.emplace_back(std::move(ptr), Body(buf, size));
+    ptr->first->putBody(std::move(std::make_shared<Body>(buf, length, size)));
+    _holders.emplace_back(std::move(ptr));
 
     _iocbs[_size].aio_data = reinterpret_cast<__u64>(&_returns[_size]); // Index of _returns
     _iocbs[_size].aio_lio_opcode = IOCB_CMD_PREAD;
     _iocbs[_size].aio_fildes = static_cast<__u32>(fd);
-    _iocbs[_size].aio_buf = reinterpret_cast<__u64>(_holders.back().second.getBodyPtr());
+    _iocbs[_size].aio_buf = reinterpret_cast<__u64>(_holders.back()->first->getBody()->getAdress());
     _iocbs[_size].aio_nbytes = size;
 
     _iocb_list[_size] = &_iocbs[_size];
@@ -129,10 +139,17 @@ bool ReadPack::complite(size_t index, struct io_event *event) {
     }
     _complites++;
 
-    _holders[index].second.resetSize(event->res);
 
-    AsyncReader::callback_type callback(std::move( _holders[index].first->second));
-    callback(std::move(_holders[index].first->first), std::move(_holders[index].second));
+    AsyncReader::callback_type callback(std::move( _holders[index]->second));
+    callback(std::move(_holders[index]->first));
     return true;
+}
+
+std::shared_ptr<Body> &ReadPack::getBody(int index) {
+    return _holders[index]->first->getBody();
+}
+
+std::string &ReadPack::getFilename(int index) {
+    return _holders[index]->first->filename;
 }
 

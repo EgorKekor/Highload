@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/home/kekor/Highload/include/cache.h
+map
+-
+memory
+-
+chrono
+-
+vector
+-
+../include/config.h
+/home/kekor/Highload/include/config.h
+../include/response.h
+/home/kekor/Highload/include/response.h
+
 /home/kekor/Highload/include/config.h
 string
 -
@@ -27,34 +41,6 @@ cstring
 -
 ../include/config.h
 /home/kekor/Highload/include/config.h
-
-/home/kekor/Highload/include/httpParser.h
-iostream
--
-memory
--
-boost/utility/string_ref.hpp
--
-sstream
--
-vector
--
-../include/request.h
-/home/kekor/Highload/include/request.h
-../include/pointerStringStream.h
-/home/kekor/Highload/include/pointerStringStream.h
-../include/defines.h
-/home/kekor/Highload/include/defines.h
-../include/response.h
-/home/kekor/Highload/include/response.h
-
-/home/kekor/Highload/include/pointerStringStream.h
-iostream
--
-memory
--
-boost/utility/string_ref.hpp
--
 
 /home/kekor/Highload/include/request.h
 iostream
@@ -80,17 +66,13 @@ sys/stat.h
 request.h
 /home/kekor/Highload/include/request.h
 
-/home/kekor/Highload/src/httpParser.cpp
-chrono
+/home/kekor/Highload/src/cache.cpp
+vector
 -
-sys/stat.h
+climits
 -
-fcntl.h
+iostream
 -
-string.h
--
-../include/httpParser.h
-/home/kekor/Highload/include/httpParser.h
-../include/defines.h
-/home/kekor/Highload/include/defines.h
+../include/cache.h
+/home/kekor/Highload/include/cache.h
 

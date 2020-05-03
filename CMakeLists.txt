@@ -45,7 +45,6 @@ add_executable(
         include/response.h
         include/asyncReader.h
         include/writer.hpp
-        include/alignAllocator.hpp
         src/asyncReader.cpp
 )
 

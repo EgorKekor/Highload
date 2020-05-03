@@ -45,8 +45,8 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_readWorker(Writer::this_unique thisP
         ssize_t nbytes = send(response->socket, header.c_str(), header.length(), 0);
         std::cout << nbytes << "Header Отправлено" << std::endl;
 
-        Body &body = response->getBody();
-        nbytes = send(response->socket, body.getBodyPtr(), body.getSize(), 0);
+        std::shared_ptr<Body>& body = response->getBody();
+        nbytes = send(response->socket, body->getAdress(), body->length(), 0);
         std::cout << nbytes << "Body Отправлено" << std::endl;
 
         thisPart->input->blockPop();

@@ -9,11 +9,11 @@
 #include <sys/syscall.h>
 
 
-#include "../include/cache.h"
 #include "../include/response.h"
 #include "../include/blockQueue.hpp"
 #include "../include/fastList.hpp"
 #include "../include/defines.h"
+#include "../include/cache.h"
 
 #ifndef TEST_STRACE_AYNCREADER_H
 #define TEST_STRACE_AYNCREADER_H
@@ -40,7 +40,7 @@ inline static int io_getevents(aio_context_t ctx, long min_nr, long max_nr,
 
 class AsyncReader {
 public:
-    typedef std::function<void(std::unique_ptr<Response> response, Body &&body)> callback_type;
+    typedef std::function<void(std::unique_ptr<Response> response)> callback_type;
     typedef std::pair<std::unique_ptr<Response>, callback_type> pair_type;
     typedef std::unique_ptr<pair_type> uptr_pair_type;
 
@@ -61,8 +61,6 @@ private:
 
 class ReadPack {
 public:
-    typedef std::pair<typename AsyncReader::uptr_pair_type, Body> uptr_pair__charP_type;
-
     typedef struct ret {
         ReadPack* object;
         size_t position;
@@ -70,6 +68,10 @@ public:
 
     ReadPack();
     ~ReadPack();
+
+    std::shared_ptr<Body>& getBody(int index);
+    std::string& getFilename(int index);
+
     bool add(AsyncReader::uptr_pair_type ptr);
     bool complite(size_t index, struct io_event *event);
     bool submit(aio_context_t *ctx);
@@ -80,7 +82,7 @@ private:
     size_t _capacity = 0;
     struct iocb* _iocb_list[MAX_FILES_BLOCK];
     struct iocb _iocbs[MAX_FILES_BLOCK];
-    std::vector<uptr_pair__charP_type> _holders;
+    std::vector<AsyncReader::uptr_pair_type> _holders;
 
     struct ret _returns[MAX_FILES_BLOCK];
 };

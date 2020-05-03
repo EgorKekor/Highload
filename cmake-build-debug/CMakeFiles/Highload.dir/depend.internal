@@ -14,6 +14,10 @@ CMakeFiles/Highload.dir/src/asyncReader.cpp.o
 CMakeFiles/Highload.dir/src/cache.cpp.o
  /home/kekor/Highload/include/cache.h
  /home/kekor/Highload/include/config.h
+ /home/kekor/Highload/include/defines.h
+ /home/kekor/Highload/include/fastList.hpp
+ /home/kekor/Highload/include/request.h
+ /home/kekor/Highload/include/response.h
  /home/kekor/Highload/src/cache.cpp
 CMakeFiles/Highload.dir/src/config.cpp.o
  /home/kekor/Highload/include/config.h

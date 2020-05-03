@@ -8,7 +8,7 @@
 #include <cassert>
 #include <unistd.h>
 #include <thread>
-#include "../../include/cache.h"
+//#include "../../include/cache.h"
 
 #define FILES_AMOUNT    100
 #define SIZE    44

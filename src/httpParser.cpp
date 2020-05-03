@@ -53,7 +53,7 @@ PointerStringStream HttpParser::_createStream(std::string *str) {
     return PointerStringStream(str);
 }
 
-int HttpParser::fillResponse(std::string &headers, Body &body, std::unique_ptr<Request> &req) {
+int HttpParser::fillResponse(std::string &headers, std::shared_ptr<Body> &body, std::unique_ptr<Request> &req) {
     int ret = result::error;
 
     switch (req->method[0]) {
@@ -70,7 +70,7 @@ int HttpParser::fillResponse(std::string &headers, Body &body, std::unique_ptr<R
                 length = strlen(suitableBody);
                 char* bodyBuffer = (char*)malloc(length * sizeof(char));
                 memcpy(bodyBuffer, suitableBody, length * sizeof(char));
-                body.reset(bodyBuffer, length);
+                body->reset(bodyBuffer, length, length);
 
                 _appendHeader(headers, length, typeDescription, req->protocol, code);
                 ret = result::body_finished;
@@ -95,7 +95,7 @@ int HttpParser::fillResponse(std::string &headers, Body &body, std::unique_ptr<R
                 length = strlen(suitableBody);
                 char* bodyBuffer = (char*)malloc(length * sizeof(char));
                 memcpy(bodyBuffer, suitableBody, length);
-                body.reset(bodyBuffer, length);
+                body->reset(bodyBuffer, length, length);
 
                 _appendHeader(headers, length, typeDescription, req->protocol, code);
                 ret = result::body_finished;

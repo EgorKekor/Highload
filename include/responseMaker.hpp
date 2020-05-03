@@ -44,10 +44,9 @@ template<class INP_CONTAINER, class OUT_CONTAINER>
 void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::this_unique thisPart) {
     for(;;) {
         auto request = std::move(thisPart->input->blockPeek());
-        std::cout << *request << std::endl;
 
         std::string headers;
-        Body body(nullptr, 0);
+        auto body = std::make_shared<Body>(nullptr, 0, 0);
         int result = thisPart->_httpParser.fillResponse(headers, body, request);
 
         if (result == HttpParser::result::error) {
@@ -55,7 +54,7 @@ void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::thi
             continue;
         } else if (result == HttpParser::result::body_finished) {
             std::cout << "body_finished" << std::endl;
-            auto response = std::make_unique<Response>(*request , std::move(headers), std::move(body));
+            auto response = std::make_unique<Response>(*request , std::move(headers), body);
             thisPart->output->push(std::move(response));
         } else if (result == HttpParser::result::body_need_not) {
             std::cout << "body_need_not" << std::endl;
@@ -66,10 +65,8 @@ void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::thi
             auto response = std::make_unique<Response>(*request , std::move(headers));
             thisPart->_asyncReader.push(
                     std::move(response),
-                    [& thisPart](std::unique_ptr<Response> response, Body &&body) {
-                        response->putBody(std::move(body));
+                    [& thisPart](std::unique_ptr<Response> response) {
                         thisPart->output->push(std::move(response));
-                        std::cout << "Head response pushed" << std::endl;
                     }
             );
         }

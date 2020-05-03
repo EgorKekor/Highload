@@ -13,17 +13,14 @@
 #include "../include/blockMap.hpp"
 #include "../include/reader.hpp"
 #include "../include/responseMaker.hpp"
+#include "../include/response.h"
 #include "../include/writer.hpp"
 #include <boost/filesystem.hpp>
 #include <sys/ioctl.h>
 
-void free_wrap(void* p) {
-    free(p);
-}
+
 
 Config *config = nullptr;
-
-
 
 
 int main(int argc, char *argv[]) {
