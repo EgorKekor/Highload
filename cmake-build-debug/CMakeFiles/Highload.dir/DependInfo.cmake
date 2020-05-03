@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/kekor/Highload/src/asyncReader.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/asyncReader.cpp.o"
   "/home/kekor/Highload/src/cache.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/cache.cpp.o"
+  "/home/kekor/Highload/src/config.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/config.cpp.o"
   "/home/kekor/Highload/src/epollEngine.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/epollEngine.cpp.o"
   "/home/kekor/Highload/src/httpParser.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/httpParser.cpp.o"
   "/home/kekor/Highload/src/main.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Highload.dir/src/main.cpp.o"

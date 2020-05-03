@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Highload.dir/src/asyncReader.cpp.o"
   "CMakeFiles/Highload.dir/src/cache.cpp.o"
+  "CMakeFiles/Highload.dir/src/config.cpp.o"
   "CMakeFiles/Highload.dir/src/epollEngine.cpp.o"
   "CMakeFiles/Highload.dir/src/httpParser.cpp.o"
   "CMakeFiles/Highload.dir/src/main.cpp.o"

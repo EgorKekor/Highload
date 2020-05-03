@@ -5,6 +5,8 @@
 #ifndef HIGHLOAD_CONFIG_H
 #define HIGHLOAD_CONFIG_H
 
+#include <string>
+
 #define MB  1048576
 #define GB  1073741824
 
@@ -30,8 +32,23 @@
 #define MAX_CACHE_SIZE  MB
 #define RATE_INTERVAL  std::chrono::seconds{1}
 
-// HttpParser
-#define BASE_DIR    ""
+
+// AsyncReader
+#define IOCB_SIZE   128
+#define MAX_FILES_BLOCK   8
+
+#define ROOT_DIR    "/home/kekor/Highload/root/"
+
+
+class Config {
+public:
+    Config();
+
+    const size_t getAlign();
+    const std::string& rootDir();
+private:
+    const std::string _rootDir;
+};
 
 
 #endif //HIGHLOAD_CONFIG_H

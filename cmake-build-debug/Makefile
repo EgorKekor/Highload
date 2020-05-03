@@ -219,6 +219,33 @@ src/cache.cpp.s:
 	$(MAKE) -f CMakeFiles/test_cache.dir/build.make CMakeFiles/test_cache.dir/src/cache.cpp.s
 .PHONY : src/cache.cpp.s
 
+src/config.o: src/config.cpp.o
+
+.PHONY : src/config.o
+
+# target to build an object file
+src/config.cpp.o:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/config.cpp.o
+.PHONY : src/config.cpp.o
+
+src/config.i: src/config.cpp.i
+
+.PHONY : src/config.i
+
+# target to preprocess a source file
+src/config.cpp.i:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/config.cpp.i
+.PHONY : src/config.cpp.i
+
+src/config.s: src/config.cpp.s
+
+.PHONY : src/config.s
+
+# target to generate assembly for a file
+src/config.cpp.s:
+	$(MAKE) -f CMakeFiles/Highload.dir/build.make CMakeFiles/Highload.dir/src/config.cpp.s
+.PHONY : src/config.cpp.s
+
 src/epollEngine.o: src/epollEngine.cpp.o
 
 .PHONY : src/epollEngine.o
@@ -534,6 +561,9 @@ help:
 	@echo "... src/cache.o"
 	@echo "... src/cache.i"
 	@echo "... src/cache.s"
+	@echo "... src/config.o"
+	@echo "... src/config.i"
+	@echo "... src/config.s"
 	@echo "... src/epollEngine.o"
 	@echo "... src/epollEngine.i"
 	@echo "... src/epollEngine.s"

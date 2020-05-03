@@ -7,7 +7,8 @@ project(Test_strace)
 set(CMAKE_CXX_STANDARD 17)
 set(GCC_COVERAGE_COMPILE_FLAGS "-pthread")
 
-set(CMAKE_CXX_STANDARD_LIBRARIES -lrt)
+set(CMAKE_CXX_STANDARD_LIBRARIES "-lrt -lboost_filesystem -lboost_system")
+#set(CMAKE_CXX_STANDARD_LIBRARIES -lboost_filesystem)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 
 find_package(Boost 1.6.0 REQUIRED COMPONENTS system)
@@ -21,7 +22,9 @@ add_executable(
         include/epollEngine.h
         src/epollEngine.cpp
         include/fastList.hpp
-        include/config.h include/stringHolder.h
+        include/config.h
+        src/config.cpp
+        include/stringHolder.h
         src/stringHolder.cpp
         include/request.h
         src/request.cpp
@@ -41,6 +44,8 @@ add_executable(
         src/response.cpp
         include/response.h
         include/asyncReader.h
+        include/writer.hpp
+        include/alignAllocator.hpp
         src/asyncReader.cpp
 )
 

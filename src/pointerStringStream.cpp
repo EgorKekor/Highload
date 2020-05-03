@@ -25,12 +25,14 @@ boost::string_ref PointerStringStream::getWord() {
     while (_head < _str->length()) {
         char c = (*_str)[_head++];
         if (c == ' ' || c == '\r' || c == '\n') {
+            boost::string_ref ret(&(*_str)[begin], _head - begin - 1);
             _eat();
-            return boost::string_ref(&(*_str)[begin], _head - begin - 1);
+            return ret;
         }
     }
+    boost::string_ref ret(&(*_str)[begin], _head - begin - 1);
     _eat();
-    return boost::string_ref(&(*_str)[begin], _head - begin - 1);
+    return ret;
 }
 
 boost::string_ref PointerStringStream::getLine() {

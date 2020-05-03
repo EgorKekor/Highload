@@ -1,1 +1,1 @@
-/usr/bin/c++   -pthread -g   CMakeFiles/test_strace.dir/tests/strace_experiments/test.cpp.o  -o test_strace -lrt 
+/usr/bin/c++   -pthread -g   CMakeFiles/test_strace.dir/tests/strace_experiments/test.cpp.o  -o test_strace -lrt -lboost_filesystem -lboost_system 

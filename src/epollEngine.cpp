@@ -30,3 +30,11 @@ int Epoll::Epollfd() {
 
 Epoll::~Epoll() {}
 
+int Epoll::AddFd(int clientfd, int epollfd, int mask) {
+    epoll_event ev {};
+    ev.events =  EPOLLERR | EPOLLHUP | EPOLLET | EPOLLRDHUP;
+    ev.data.fd = clientfd;
+    epoll_ctl(epollfd, EPOLL_CTL_ADD, clientfd, &ev);
+    return clientfd;
+}
+

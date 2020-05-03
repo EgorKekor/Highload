@@ -1,4 +1,3 @@
-#include <iostream>
 
 #include "../include/server.h"
 #include <iostream>
@@ -8,20 +7,31 @@
 #include <map>
 #include <queue>
 #include <sstream>
+#include <fcntl.h>
 #include "../include/simpleConveyorPart.hpp"
 #include "../include/blockQueue.hpp"
 #include "../include/blockMap.hpp"
 #include "../include/reader.hpp"
 #include "../include/responseMaker.hpp"
-#include "../include/response.h"
+#include "../include/writer.hpp"
+#include <boost/filesystem.hpp>
+#include <sys/ioctl.h>
 
-
-std::string &&getStr() {
-    std::string a("any");
-    return std::move(a);
+void free_wrap(void* p) {
+    free(p);
 }
 
-int main() {
+Config *config = nullptr;
+
+
+
+
+int main(int argc, char *argv[]) {
+    config = new Config();
+    boost::filesystem::create_directories(config->rootDir());
+
+    //int fd = open((config->rootDir() + "file1.txt").c_str(), O_RDONLY);
+    std::cout << config->rootDir() + "file1.txt" << std::endl;
 
     auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();
     auto uptr_request = std::make_shared<BlockQueue<CONVEYOR_0_OUTPUT>>();
@@ -31,13 +41,15 @@ int main() {
             sockets,
             uptr_request);
 
-
     auto responces = std::make_shared<BlockQueue<CONVEYOR_10_OUTPUT>>();
     ResponseMaker<BlockQueue<CONVEYOR_10_INPUT>, BlockQueue<CONVEYOR_10_OUTPUT>> maker (
             uptr_request,
             responces);
 
-
+    auto results = std::make_shared<BlockQueue<CONVEYOR_20_OUTPUT>>();
+    Writer<BlockQueue<CONVEYOR_20_INPUT>, BlockQueue<CONVEYOR_20_OUTPUT>> writer (
+            responces,
+            results);
 
 
     Server server(ADDRESS, PORT, MAX_EPOLL_EVENT, sockets);

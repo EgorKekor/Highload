@@ -13,8 +13,8 @@
 #include "../include/request.h"
 #include "../include/pointerStringStream.h"
 #include "../include/defines.h"
+#include "../include/response.h"
 
-#define HTTP "http://"
 
 // All string_ref refering to request._requestString
 class HttpParser {
@@ -22,14 +22,20 @@ public:
     typedef std::unique_ptr<std::string> fast_list_type;
     typedef FastListReturner<fast_list_type> req_str_returner;
 
+    enum result {
+        error = 0,
+        body_finished,
+        body_need_not,
+        need_async_read
+    };
+
     HttpParser(
             std::string rootDir = "/",
             std::string indexFile = "index.html");
 
     std::unique_ptr<Request> constructRequest(std::unique_ptr<req_str_returner> requestData, SOCKET socket);
 
-    std::string& putHeaders(std::string &headers, std::unique_ptr<Request> &req);
-    std::unique_ptr<std::stringstream>& putBody(std::unique_ptr<std::stringstream>&, std::unique_ptr<Request> &req);
+    int fillResponse(std::string &headers, Body &body, std::unique_ptr<Request> &req);
 
 
 private:

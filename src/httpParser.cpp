@@ -4,9 +4,12 @@
 
 #include <chrono>
 #include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
 #include "../include/httpParser.h"
 #include "../include/defines.h"
 
+extern Config* config;
 
 std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_returner> requestData, SOCKET socket) {
     if (requestData.get() == nullptr) {
@@ -14,6 +17,7 @@ std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_re
         return std::make_unique<Request>(socket, true);
     }
     auto request = std::make_unique<Request>(socket, false);
+    request->validRequest = true;
 
     PointerStringStream stream = _createStream(requestData->get().get());
 
@@ -39,8 +43,8 @@ std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_re
     // End parsing fresh data
 
 
-    request->validRequest = true;
     request->filename = std::move(_getFilename(url, &request->fileDescription));
+    request->fileExist = _fileExists(request->filename);
     return std::move(request);
 }
 
@@ -49,23 +53,32 @@ PointerStringStream HttpParser::_createStream(std::string *str) {
     return PointerStringStream(str);
 }
 
-std::string&
-HttpParser::putHeaders(std::string &headers, std::unique_ptr<Request> &req) {
+int HttpParser::fillResponse(std::string &headers, Body &body, std::unique_ptr<Request> &req) {
+    int ret = result::error;
+
     switch (req->method[0]) {
         case 'H': {
             size_t length = 0;
             std::string fileType = std::move(_getFileType(req->filename));
             std::string &typeDescription = mime_map[fileType];
 
-            if (!_fileExists(req->filename)) {
-                bool dir = req->fileDescription.st_mode & S_IFDIR;
-                const auto code = (dir) ? _getCode(403) : _getCode(404);
-                length = strlen((dir) ? forbidden : notFound);
+            if (!req->fileExist) {
+                bool isDir = req->fileDescription.st_mode & S_IFDIR;
+
+                const auto code = (isDir) ? _getCode(403) : _getCode(404);
+                const char* suitableBody = (isDir) ? forbidden : notFound;
+                length = strlen(suitableBody);
+                char* bodyBuffer = (char*)malloc(length * sizeof(char));
+                memcpy(bodyBuffer, suitableBody, length * sizeof(char));
+                body.reset(bodyBuffer, length);
+
                 _appendHeader(headers, length, typeDescription, req->protocol, code);
+                ret = result::body_finished;
             } else {
                 const auto code = _getCode(200);
                 length = (size_t) req->fileDescription.st_size;
                 _appendHeader(headers, length, fileType, req->protocol, code);
+                ret = result::need_async_read;
             }
             break;
         }
@@ -74,15 +87,23 @@ HttpParser::putHeaders(std::string &headers, std::unique_ptr<Request> &req) {
             std::string fileType = std::move(_getFileType(req->filename));
             std::string &typeDescription = mime_map[fileType];
 
-            if (!_fileExists(req->filename)) {
-                bool dir = req->fileDescription.st_mode & S_IFDIR;
-                const auto code = (dir) ? _getCode(403) : _getCode(404);
-                length = strlen((dir) ? forbidden : notFound);
+            if (!req->fileExist) {
+                bool isDir = req->fileDescription.st_mode & S_IFDIR;
+
+                const auto code = (isDir) ? _getCode(403) : _getCode(404);
+                const char* suitableBody = (isDir) ? forbidden : notFound;
+                length = strlen(suitableBody);
+                char* bodyBuffer = (char*)malloc(length * sizeof(char));
+                memcpy(bodyBuffer, suitableBody, length);
+                body.reset(bodyBuffer, length);
+
                 _appendHeader(headers, length, typeDescription, req->protocol, code);
+                ret = result::body_finished;
             } else {
                 const auto code = _getCode(200);
                 length = (size_t) req->fileDescription.st_size;
                 _appendHeader(headers, length, fileType, req->protocol, code);
+                ret = result::need_async_read;
             }
             break;
         }
@@ -90,7 +111,7 @@ HttpParser::putHeaders(std::string &headers, std::unique_ptr<Request> &req) {
             break;
     }
 
-    return headers;
+    return ret;
 }
 
 const std::string& HttpParser::_getCode(int code) {
@@ -121,14 +142,14 @@ HttpParser::HttpParser(std::string rootDir, std::string indexFile) : _rootDir(ro
 }
 
 std::string HttpParser::_getFilename(boost::string_ref &url, struct stat *fileStat) {
-    // /
+    std::string pathname(config->rootDir());
     if (url.length() == 1) {
-        return std::move("/" + _indexFile);
+        pathname += _indexFile;
+        stat(pathname.c_str(), fileStat);
+        return std::move(pathname);
     }
 
-
-    // /host/xxxx
-    std::string pathname = std::string(&url[0], url.length());
+    pathname += std::string(url.substr(1));
     bool isDir = ((stat(pathname.c_str(), fileStat) == 0) && (fileStat->st_mode & S_IFDIR));
     if (isDir) {
         if (pathname.back() != '/') {
@@ -164,7 +185,7 @@ void HttpParser::_appendHeader(std::string &headers, size_t fileLength,
 
     std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
     std::time_t t = std::chrono::system_clock::to_time_t(p);
-    headers += protocol.data();
+    headers.append(protocol.data(), protocol.length());
     headers += " " + code + "\r\n"
             + "Server: Eeeeepollll \r\n"
             + "Date: " + std::ctime(&t)
@@ -172,6 +193,9 @@ void HttpParser::_appendHeader(std::string &headers, size_t fileLength,
             + "Content-Length: " + std::to_string(fileLength) + "\r\n"
             + "Content-Type: " + fileType + "\r\n" + "\r\n";
 }
+
+
+
 
 
 

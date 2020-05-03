@@ -44,26 +44,35 @@ template<class INP_CONTAINER, class OUT_CONTAINER>
 void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::this_unique thisPart) {
     for(;;) {
         auto request = std::move(thisPart->input->blockPeek());
+        std::cout << *request << std::endl;
 
         std::string headers;
+        Body body(nullptr, 0);
+        int result = thisPart->_httpParser.fillResponse(headers, body, request);
 
-        std::cout << *request << std::endl;
-        thisPart->_httpParser.putHeaders(headers, request);
-
-        std::unique_ptr<Response> response;
-        if ((request->method[0] == 'H') || (request->method[0] == 'G')) { // G only for tests
-            response = std::make_unique<Response>(std::move(headers), true);
-        } else {
-            std::string filename = request->filename;
-            response = std::make_unique<Response>(std::move(headers), std::move(filename), false);
+        if (result == HttpParser::result::error) {
+            std::cerr << "Bad request {" << std::endl << *request << "}" << std::endl;
+            continue;
+        } else if (result == HttpParser::result::body_finished) {
+            std::cout << "body_finished" << std::endl;
+            auto response = std::make_unique<Response>(*request , std::move(headers), std::move(body));
+            thisPart->output->push(std::move(response));
+        } else if (result == HttpParser::result::body_need_not) {
+            std::cout << "body_need_not" << std::endl;
+            auto response = std::make_unique<Response>(*request , std::move(headers));
+            thisPart->output->push(std::move(response));
+        } else if (result == HttpParser::result::need_async_read) {
+            std::cout << "need_async_read" << std::endl;
+            auto response = std::make_unique<Response>(*request , std::move(headers));
+            thisPart->_asyncReader.push(
+                    std::move(response),
+                    [& thisPart](std::unique_ptr<Response> response, Body &&body) {
+                        response->putBody(std::move(body));
+                        thisPart->output->push(std::move(response));
+                        std::cout << "Head response pushed" << std::endl;
+                    }
+            );
         }
-        thisPart->_asyncReader.push(
-                std::move(response),
-                [& thisPart](std::unique_ptr<Response> response) {
-                    thisPart->output->push(std::move(response));
-                    std::cout << "Head response pushed" << std::endl;
-                }
-                );
 
         thisPart->input->blockPop();
         //break;

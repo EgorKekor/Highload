@@ -222,6 +222,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/kekor/Highload/include/alignAllocator.hpp">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekor/Highload/include/asyncReader.h">
 			<Option target="Highload"/>
 		</Unit>
@@ -277,12 +280,18 @@
 		<Unit filename="/home/kekor/Highload/include/stringHolder.h">
 			<Option target="Highload"/>
 		</Unit>
+		<Unit filename="/home/kekor/Highload/include/writer.hpp">
+			<Option target="Highload"/>
+		</Unit>
 		<Unit filename="/home/kekor/Highload/src/asyncReader.cpp">
 			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/src/cache.cpp">
 			<Option target="Highload"/>
 			<Option target="test_cache"/>
+		</Unit>
+		<Unit filename="/home/kekor/Highload/src/config.cpp">
+			<Option target="Highload"/>
 		</Unit>
 		<Unit filename="/home/kekor/Highload/src/epollEngine.cpp">
 			<Option target="Highload"/>

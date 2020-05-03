@@ -5,12 +5,18 @@ CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/asyncReader.h
 CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/blockQueue.hpp
 CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/cache.h
 CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/config.h
+CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/defines.h
+CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/fastList.hpp
+CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/request.h
 CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../include/response.h
 CMakeFiles/Highload.dir/src/asyncReader.cpp.o: ../src/asyncReader.cpp
 
 CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/cache.h
 CMakeFiles/Highload.dir/src/cache.cpp.o: ../include/config.h
 CMakeFiles/Highload.dir/src/cache.cpp.o: ../src/cache.cpp
+
+CMakeFiles/Highload.dir/src/config.cpp.o: ../include/config.h
+CMakeFiles/Highload.dir/src/config.cpp.o: ../src/config.cpp
 
 CMakeFiles/Highload.dir/src/epollEngine.cpp.o: ../include/config.h
 CMakeFiles/Highload.dir/src/epollEngine.cpp.o: ../include/epollEngine.h
@@ -22,6 +28,7 @@ CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../include/fastList.hpp
 CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../include/httpParser.h
 CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../include/pointerStringStream.h
 CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../include/request.h
+CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../include/response.h
 CMakeFiles/Highload.dir/src/httpParser.cpp.o: ../src/httpParser.cpp
 
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/asyncReader.h
@@ -40,8 +47,8 @@ CMakeFiles/Highload.dir/src/main.cpp.o: ../include/response.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/responseMaker.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/server.h
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/simpleConveyorPart.hpp
-CMakeFiles/Highload.dir/src/main.cpp.o: ../include/spreadConveyorPart.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../include/stringHolder.h
+CMakeFiles/Highload.dir/src/main.cpp.o: ../include/writer.hpp
 CMakeFiles/Highload.dir/src/main.cpp.o: ../src/main.cpp
 
 CMakeFiles/Highload.dir/src/pointerStringStream.cpp.o: ../include/pointerStringStream.h
@@ -53,6 +60,10 @@ CMakeFiles/Highload.dir/src/request.cpp.o: ../include/fastList.hpp
 CMakeFiles/Highload.dir/src/request.cpp.o: ../include/request.h
 CMakeFiles/Highload.dir/src/request.cpp.o: ../src/request.cpp
 
+CMakeFiles/Highload.dir/src/response.cpp.o: ../include/config.h
+CMakeFiles/Highload.dir/src/response.cpp.o: ../include/defines.h
+CMakeFiles/Highload.dir/src/response.cpp.o: ../include/fastList.hpp
+CMakeFiles/Highload.dir/src/response.cpp.o: ../include/request.h
 CMakeFiles/Highload.dir/src/response.cpp.o: ../include/response.h
 CMakeFiles/Highload.dir/src/response.cpp.o: ../src/response.cpp
 
@@ -71,8 +82,8 @@ CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/httpParser.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/pointerStringStream.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/reader.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/request.h
+CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/response.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/simpleConveyorPart.hpp
-CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/spreadConveyorPart.hpp
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../include/stringHolder.h
 CMakeFiles/Highload.dir/src/stringHolder.cpp.o: ../src/stringHolder.cpp
 

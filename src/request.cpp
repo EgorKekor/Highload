@@ -29,7 +29,8 @@ std::ostream &operator<<(std::ostream &os, const Request& req) {
     os << "Method:" << req.method << std::endl;
     os << "Url:" << req.url << std::endl;
     os << "Protocol:" << req.protocol << std::endl;
-    os << "Filename" << req.filename << std::endl;
+    os << "Filename:" << req.filename << std::endl;
+    os << "File exist:" << req.fileExist << std::endl;
     return os;
 }
 

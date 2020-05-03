@@ -19,18 +19,18 @@ public:
     typedef FastListReturner<fast_list_type> req_str_returner;
 
     Request(SOCKET socket, bool corrupt = false);
+
     void saveData(std::unique_ptr<req_str_returner>&& sorce);
     bool isValid() { return (!memoryCorrupted || validRequest); };
     friend std::ostream& operator<<(std::ostream& os, const Request& req);
 
-
     const bool memoryCorrupted = false;
+    bool validRequest = false;
     SOCKET socket;
     boost::string_ref method;
     boost::string_ref url;
     boost::string_ref protocol;
 
-    bool validRequest = false;
     bool fileExist = false;
     struct stat fileDescription = {};
     std::string filename;

@@ -21,6 +21,7 @@ public:
     T& blockPeek();
     void pop();
     void blockPop();
+    bool isVoid() { return _queue.size() == 0; };
 private:
     bool _blocked = false;
     std::deque<T> _queue;
@@ -55,10 +56,8 @@ T &BlockQueue<T>::blockPeek() {
     if (_queue.size() == 0) {
         _blocked = true;
         std::unique_lock<std::mutex> lock(_haveDataMutex);
-        //_haveDataMutex.lock();
         _haveData.wait(lock);
         _blocked = false;
-        //_haveDataMutex.unlock();
     }
     return _queue.front();
 }
@@ -76,10 +75,8 @@ void BlockQueue<T>::blockPop() {
     if (_queue.size() == 0) {
         _blocked = true;
         std::unique_lock<std::mutex> lock(_haveDataMutex);
-        //_haveDataMutex.lock();
         _haveData.wait(lock);
         _blocked = false;
-        //_haveDataMutex.unlock();
     }
     _queue.pop_front();
 }

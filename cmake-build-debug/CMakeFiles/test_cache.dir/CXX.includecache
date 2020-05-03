@@ -19,6 +19,18 @@ vector
 /home/kekor/Highload/include/config.h
 
 /home/kekor/Highload/include/config.h
+string
+-
+
+/home/kekor/Highload/src/cache.cpp
+vector
+-
+climits
+-
+iostream
+-
+../include/cache.h
+/home/kekor/Highload/include/cache.h
 
 /home/kekor/Highload/tests/cache/cache_test.cpp
 iostream

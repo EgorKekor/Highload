@@ -11,7 +11,7 @@
 #include "../../include/cache.h"
 
 #define FILES_AMOUNT    100
-#define SIZE    512
+#define SIZE    44
 
 std::string baseDir = "../tests/cache/files/";
 
