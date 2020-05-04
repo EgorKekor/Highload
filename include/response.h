@@ -32,7 +32,12 @@ public:
     const char * getAdress() const;
     size_t length();
     size_t size();
+
+    size_t getWrited() { return _writedBytes; };
+    size_t needWrite() { return _bodyLength - _writedBytes; };
+    void setWrited(size_t wr) { _writedBytes = wr; };
 private:
+    size_t _writedBytes = 0;
     size_t _bodySize = 0;
     size_t _bodyLength = 0;
     char* _body;
@@ -50,9 +55,18 @@ public:
     std::string& getHeaders();
     std::shared_ptr<Body>& getBody();
 
+    const char * getAdress() const { return _headers.data(); };
+    size_t length() { return _headers.length(); };
+    void headersDone(bool b) { _hDone = b; };
+    void bodyDone(bool b) { _bDone = b; };
+    bool headersWriteDone() { return _hDone; };
+    bool bodyWriteDone() { return _bDone; };
+
     SOCKET socket;
     std::string filename;
 private:
+    bool _hDone = false;
+    bool _bDone = false;
     struct stat _fileDescription = {};
     std::string _headers;
     std::shared_ptr<Body> _bodyPtr;

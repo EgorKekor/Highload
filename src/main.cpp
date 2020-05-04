@@ -22,12 +22,21 @@
 
 Config *config = nullptr;
 
+class Test {
+public:
+    Test() {
+        std::cout << "Constructor called" << std::endl;
+    };
+    ~Test() {
+        std::cout << "Destructor called" << std::endl;
+    }
+};
 
 int main(int argc, char *argv[]) {
     config = new Config();
     boost::filesystem::create_directories(config->rootDir());
 
-    //int fd = open((config->rootDir() + "file1.txt").c_str(), O_RDONLY);
+
     std::cout << config->rootDir() + "file1.txt" << std::endl;
 
     auto sockets = std::make_shared<BlockQueue<CONVEYOR_0_INPUT>>();

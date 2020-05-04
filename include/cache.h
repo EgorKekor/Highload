@@ -23,11 +23,16 @@ struct CacheRecord {
     size_t require_count;
 };
 
+struct DeletedRecord {
+    double last_rate;
+    size_t require_count;
+};
+
 class Cache {
 public:
     typedef std::map<std::string, CacheRecord> map_type;
     typedef std::map<std::string, CacheRecord>::iterator map_iterator;
-    typedef std::map<std::string, double>::iterator deleted_map_iterator;
+    typedef std::map<std::string, DeletedRecord>::iterator deleted_map_iterator;
     Cache(size_t sz = MAX_CACHE_SIZE);
 
     std::shared_ptr<Body> get(std::string &fileName);
@@ -37,7 +42,7 @@ private:
 
     std::map<std::string, CacheRecord> _cache;
     std::multimap<double, map_iterator> _sortedCache;   // Частота запросов - указатель на оригинал
-    std::map<std::string, double> _deletedRecords;      // Имя файла - частота запросов
+    std::map<std::string, DeletedRecord> _deletedRecords;      // Имя файла - частота запросов
     std::vector<map_iterator> _recordForDelete;
     std::chrono::time_point<std::chrono::steady_clock> _start;
     size_t _currentSize = 0;

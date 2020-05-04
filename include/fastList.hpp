@@ -114,8 +114,12 @@ public:
     void traverseAll(std::function<bool(T &)> handler);
     bool push(T &val);
     bool push(T &&val);
-    bool remove(Node<T> *node);
+    bool remove(void *node);
 
+    void* getBack() { return _tail->_prev; };
+
+    T& peekAddress(void* addr);
+    void popAddress(void* addr);
 
     T& peekFront();
     void popFront();
@@ -181,13 +185,16 @@ bool FastList<T>::push(T &&val) {
 
 
 template <class T>
-bool FastList<T>::remove(Node<T> *node) {
+bool FastList<T>::remove(void *nd) {
+    Node<T> *node = static_cast<Node<T>*>(nd);
     if ((node == _head) || (node == _tail)) {
         return false;
     }
 
     node->_prev->_next = node->_next;
     node->_next->_prev = node->_prev;
+
+    node->value.~T();
 
     allocator.free(node);
     _size--;
@@ -197,13 +204,24 @@ bool FastList<T>::remove(Node<T> *node) {
 template<class T>
 T& FastList<T>::peekFront() {
     Node<T>* ret = _head->_next;
-    T *val = &(ret->value);
-    return *val;
+    return ret->value;
 }
 
 template<class T>
 void FastList<T>::popFront() {
     Node<T>* ret = _head->_next;
+    remove(ret);
+}
+
+template<class T>
+T &FastList<T>::peekAddress(void *addr) {
+    Node<T>* ret = static_cast<Node<T>*>(addr);
+    return ret->value;
+}
+
+template<class T>
+void FastList<T>::popAddress(void *addr) {
+    Node<T>* ret = static_cast<Node<T>*>(addr);
     remove(ret);
 }
 

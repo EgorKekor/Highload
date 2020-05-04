@@ -17,6 +17,10 @@ std::shared_ptr<Body> Cache::get(std::string &fileName) {
 
     auto itTarget = _cache.find(fileName);
     if (itTarget == _cache.end()) {
+        auto itDeleted = _deletedRecords.find(fileName);
+        if (itDeleted != _deletedRecords.end()) {
+            itDeleted->second.require_count++;
+        }
         return _fake;
     }
     _calculateRate();
@@ -105,7 +109,7 @@ bool Cache::_deletedInsert(std::string &fileName, std::shared_ptr<Body>& body, d
     size_t copySize = _currentSize;
 
     while (copySize + body->size() > _cache_size) {
-        if ((deletedRecord->second <= currentMinRate->second->second.last_rate) || (_cache.size() == _recordForDelete.size())) {
+        if ((deletedRecord->second.last_rate <= currentMinRate->second->second.last_rate) || (_cache.size() == _recordForDelete.size())) {
 //            if (deletedRecord->second <= currentMinRate->second->second.last_rate)
 //                std::cout << "No put: this record worse the worst record in cache" << std::endl;
 //            else
@@ -136,26 +140,26 @@ bool Cache::_deletedInsert(std::string &fileName, std::shared_ptr<Body>& body, d
 
 bool Cache::_insert(std::string &fileName, std::shared_ptr<Body>& body, bool isDeleted) {
     for (auto it : _recordForDelete) {
-        _deletedRecords.insert(std::pair<std::string, double>(it->first, it->second.last_rate));
+        _deletedRecords.insert(std::pair<std::string, DeletedRecord>(it->first, {it->second.last_rate, 0}));
         _sortedCache.erase(_sortedCache.begin());
         _cache.erase(it);
-        std::cout << "[Cache] Deleted:" << it->first << " With rate:" << it->second.last_rate << std::endl;
+//        std::cout << "[Cache] Deleted:" << it->first << " With rate:" << it->second.last_rate << std::endl;
     }
     _recordForDelete.clear();
 
     if (isDeleted) {
-        double oldRate = _deletedRecords.find(fileName)->second;
+        double oldRate = _deletedRecords.find(fileName)->second.last_rate;
         _deletedRecords.erase(fileName);
 
         auto newIter = _cache.emplace(std::pair<std::string, CacheRecord>(fileName, CacheRecord(body, oldRate, 1)));
         _sortedCache.emplace(std::pair<double, map_iterator>(oldRate, newIter.first));
 
-        std::cout << "[Cache] Insert from deleted:" << fileName << " With rate:" << oldRate << std::endl;
+//        std::cout << "[Cache] Insert from deleted:" << fileName << " With rate:" << oldRate << std::endl;
     } else {
         auto newIter = _cache.emplace(std::pair<std::string, CacheRecord>(fileName, CacheRecord{body, LONG_MAX - 1, 1}));
         _sortedCache.emplace(std::pair<double, map_iterator>(LONG_MAX - 1, newIter.first));
 
-        std::cout << "[Cache] Insert:" << fileName << " With rate:" << LONG_MAX - 1 << std::endl;
+//        std::cout << "[Cache] Insert:" << fileName << " With rate:" << LONG_MAX - 1 << std::endl;
     }
 
     return true;
@@ -197,6 +201,10 @@ void Cache::_calculateRate() {
             it->second.last_rate = ((double)it->second.require_count / (double)elapsed.count());         // Обновить запросы за последний промежуток в основном контейнере
             it->second.require_count = 0;
             _sortedCache.emplace(std::pair<double, map_iterator>(it->second.last_rate, it));                       // Вставить обновленную версиию
+        }
+        for (auto it = _deletedRecords.begin(); it != _deletedRecords.end(); ++it) {
+            it->second.last_rate = ((double)it->second.require_count / (double)elapsed.count());
+            it->second.require_count = 0;
         }
     }
 }

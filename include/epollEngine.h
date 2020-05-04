@@ -21,7 +21,7 @@ public:
     ~Epoll();
 
     int AddFd(int clientfd, int epollfd);
-    int AddFd(int clientfd, int epollfd, int mask);
+    int AddFd(int clientfd, int epollfd, void* ptr);
     ssize_t Wait(epoll_event* events);
     int Epollfd();
 };

@@ -27,52 +27,116 @@ public:
             _epollEngine(MAX_EPOLL_EVENT, EPOLL_TIMEOUT) {
         std::thread workerThr(_readWorker, this_unique(this));
         workerThr.detach();
-        //std::thread writerThr(_writeWorker, this_unique(this));
-        //writerThr.detach();
+        std::thread writerThr(_writeWorker, this_unique(this));
+        writerThr.detach();
     };
 private:
+    FastList<CONVEYOR_10_OUTPUT> _processList;
     Epoll _epollEngine;
     static void _readWorker(this_unique thisPart);
     static void _writeWorker(this_unique thisPart);
+
+    static bool _setNonBlock(int fd);
+    void _def(Writer::this_unique &thisPart, int socket, void *ptr);
 };
 
 template<class INP_CONTAINER, class OUT_CONTAINER>
 void Writer<INP_CONTAINER, OUT_CONTAINER>::_readWorker(Writer::this_unique thisPart) {
     for(;;) {
         auto response = std::move(thisPart->input->blockPeek());
+        int fd = response->socket;
+        int epollFd = thisPart->_epollEngine.Epollfd();
 
-        std::string &header = response->getHeaders();
-        ssize_t nbytes = send(response->socket, header.c_str(), header.length(), 0);
-        std::cout << nbytes << "Header Отправлено" << std::endl;
+        thisPart->_processList.push(std::move(response));
 
-        std::shared_ptr<Body>& body = response->getBody();
-        nbytes = send(response->socket, body->getAdress(), body->length(), 0);
-        std::cout << nbytes << "Body Отправлено" << std::endl;
+        void* respAddr = thisPart->_processList.getBack();
+        std::cout << "epoll add" << std::endl;
+
+        if (_setNonBlock((int)fd)) {
+            thisPart->_epollEngine.AddFd(fd, epollFd, respAddr);
+        } else {
+            std::cerr << "Writer.hpp: can't set non block mode" << std::endl;
+        }
+//        std::string &header = response->getHeaders();
+//        ssize_t nbytes = send(response->socket, header.c_str(), header.length(), 0);
+//        std::cout << nbytes << "Header Отправлено" << std::endl;
+//
+//        std::shared_ptr<Body>& body = response->getBody();
+//        nbytes = send(response->socket, body->getAdress(), body->length(), 0);
+//        std::cout << nbytes << "Body Отправлено" << std::endl;
 
         thisPart->input->blockPop();
-        //break;
     }
 }
 
 template<class INP_CONTAINER, class OUT_CONTAINER>
 void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique thisPart) {
     epoll_event events[MAX_EPOLL_EVENT];
+    std::cout << "Epoll begin" << std::endl;
 
     for(;;) {
         ssize_t fdCount = thisPart->_epollEngine.Wait(events);
         for (uint32_t i = 0; i < fdCount; ++i) {
+            std::unique_ptr<Response>& response = thisPart->_processList.peekAddress(events[i].data.ptr);
+            int socket = response->socket;
+
             if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) || (events[i].events & EPOLLRDHUP)) {
                 std::cerr << "Writer.hpp: client socket error" << std::endl;
-                thisPart->output->push(writer_output(events[i].data.fd, false));
-                close(events[i].data.fd);
-                continue;
-            } else {
-                for (;;) {
+                thisPart->_def(thisPart, socket, events[i].data.ptr);
+            } else if (!response->headersWriteDone()) {
+                const char* buf = response->getAdress();
+                size_t nbytes = send(socket, buf, response->length(), 0);
+                if (nbytes == -1) {
+                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                        break;
+                    } else {
+                        std::cerr << "[" << socket << "]:" << "Write header error" << std::endl;
+                        thisPart->_def(thisPart, socket, events[i].data.ptr);
+                        break;
+                    }
+                } else {
+                    response->headersDone(true);
                 }
+            } else if (!response->bodyWriteDone()) {
+                const char* buf = response->getBody()->getAdress();
+                size_t nbytes = send(socket, buf, response->getBody()->length(), 0);
+                if (nbytes == -1) {
+                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                        break;
+                    } else {
+                        std::cerr << "[" << socket << "]:" << "Write body error" << std::endl;
+                        thisPart->_def(thisPart, socket, events[i].data.ptr);
+                        break;
+                    }
+                } else {
+                    response->bodyDone(true);
+                }
+            } else {
+                std::cerr << "Writer.hpp: message success send" << std::endl;
+                thisPart->output->push(writer_output(socket, true));
+                thisPart->_processList.popAddress(events[i].data.ptr);
+                close(socket);
+                break;
             }
         }
-        break;////////////////////////////////////////////
     }
+}
+
+template<class INP_CONTAINER, class OUT_CONTAINER>
+void Writer<INP_CONTAINER, OUT_CONTAINER>::_def(Writer::this_unique &thisPart, int socket, void *ptr) {
+    thisPart->_processList.popAddress(ptr);
+    thisPart->output->push(writer_output(socket, false));
+    close(socket);
+}
+
+template<class INP_CONTAINER, class OUT_CONTAINER>
+bool Writer<INP_CONTAINER, OUT_CONTAINER>::_setNonBlock(int fd) {
+    int flags = fcntl(fd, F_GETFL, 0);
+
+    if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) == -1) {
+        return false;
+    }
+    return true;
 }
 
 #endif //TEST_STRACE_WRITER_HPP

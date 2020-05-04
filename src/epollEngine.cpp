@@ -19,6 +19,7 @@ int Epoll::AddFd(int clientfd, int epollfd) {
     return clientfd;
 }
 
+
 ssize_t Epoll::Wait(epoll_event* events) {
     return epoll_wait(epollfd, events, maxEpollEvents, timeout);
 }
@@ -30,10 +31,10 @@ int Epoll::Epollfd() {
 
 Epoll::~Epoll() {}
 
-int Epoll::AddFd(int clientfd, int epollfd, int mask) {
+int Epoll::AddFd(int clientfd, int epollfd, void* ptr) {
     epoll_event ev {};
-    ev.events =  EPOLLERR | EPOLLHUP | EPOLLET | EPOLLRDHUP;
-    ev.data.fd = clientfd;
+    ev.events =  EPOLLERR | EPOLLHUP | EPOLLRDHUP | EPOLLOUT;
+    ev.data.ptr = ptr;
     epoll_ctl(epollfd, EPOLL_CTL_ADD, clientfd, &ev);
     return clientfd;
 }
