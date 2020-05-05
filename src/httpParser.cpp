@@ -6,6 +6,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
 #include "../include/httpParser.h"
 #include "../include/defines.h"
 
@@ -31,7 +33,8 @@ std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_re
     if (url.length() == 0) {
         request->validRequest = false;
     }
-    request->url = url;
+    std::string strUrl = _urlDecode(url);
+    request->url = strUrl;
 
     boost::string_ref protocol = stream.getWord();
     if (protocol.length() == 0) {
@@ -43,7 +46,7 @@ std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_re
     // End parsing fresh data
 
 
-    request->filename = std::move(_getFilename(url, &request->fileDescription));
+    request->filename = std::move(_getFilename(request->url, &request->fileDescription));
     request->fileExist = _fileExists(request->filename);
     return std::move(request);
 }
@@ -55,59 +58,60 @@ PointerStringStream HttpParser::_createStream(std::string *str) {
 
 int HttpParser::fillResponse(std::string &headers, std::shared_ptr<Body> &body, std::unique_ptr<Request> &req) {
     int ret = result::error;
+    std::string fileType = std::move(_getFileType(req->filename));
+    std::string &typeDescription = mime_map[fileType];
+
+    if (req->fileExist && !_access(req->filename)) {
+        int code = 403;
+        size_t length = _makeBadBody(code, body);
+
+        _appendHeader(headers, length, typeDescription, req->protocol, code);
+        ret = result::body_finished;
+    }
+
+
 
     switch (req->method[0]) {
         case 'H': {
-            size_t length = 0;
-            std::string fileType = std::move(_getFileType(req->filename));
-            std::string &typeDescription = mime_map[fileType];
-
             if (!req->fileExist) {
                 bool isDir = req->fileDescription.st_mode & S_IFDIR;
 
-                const auto code = (isDir) ? _getCode(403) : _getCode(404);
-                const char* suitableBody = (isDir) ? forbidden : notFound;
-                length = strlen(suitableBody);
-                char* bodyBuffer = (char*)malloc(length * sizeof(char));
-                memcpy(bodyBuffer, suitableBody, length * sizeof(char));
-                body->reset(bodyBuffer, length, length);
+                int code = (isDir) ? 403 : 404;
+                size_t length = _makeBadBody(code, body);
 
                 _appendHeader(headers, length, typeDescription, req->protocol, code);
                 ret = result::body_finished;
             } else {
-                const auto code = _getCode(200);
-                length = (size_t) req->fileDescription.st_size;
-                _appendHeader(headers, length, fileType, req->protocol, code);
-                ret = result::need_async_read;
+                int code = 200;
+                size_t length = (size_t) req->fileDescription.st_size;
+                _appendHeader(headers, length, typeDescription, req->protocol, code);
+                ret = result::body_finished;
             }
             break;
         }
         case 'G': {
-            size_t length = 0;
-            std::string fileType = std::move(_getFileType(req->filename));
-            std::string &typeDescription = mime_map[fileType];
-
             if (!req->fileExist) {
                 bool isDir = req->fileDescription.st_mode & S_IFDIR;
 
-                const auto code = (isDir) ? _getCode(403) : _getCode(404);
-                const char* suitableBody = (isDir) ? forbidden : notFound;
-                length = strlen(suitableBody);
-                char* bodyBuffer = (char*)malloc(length * sizeof(char));
-                memcpy(bodyBuffer, suitableBody, length);
-                body->reset(bodyBuffer, length, length);
+                int code = (isDir) ? 403 : 404;
+                size_t length = _makeBadBody(code, body);
 
                 _appendHeader(headers, length, typeDescription, req->protocol, code);
                 ret = result::body_finished;
             } else {
-                const auto code = _getCode(200);
-                length = (size_t) req->fileDescription.st_size;
-                _appendHeader(headers, length, fileType, req->protocol, code);
+                int code = 200;
+                size_t length = (size_t) req->fileDescription.st_size;
+                _appendHeader(headers, length, typeDescription, req->protocol, code);
                 ret = result::need_async_read;
             }
             break;
         }
         default:
+            int code = 405;
+            size_t length = _makeBadBody(code, body);
+
+            _appendHeader(headers, length, typeDescription, req->protocol, code);
+            ret = result::body_finished;
             break;
     }
 
@@ -141,7 +145,7 @@ HttpParser::HttpParser(std::string rootDir, std::string indexFile) : _rootDir(ro
 
 }
 
-std::string HttpParser::_getFilename(boost::string_ref &url, struct stat *fileStat) {
+std::string HttpParser::_getFilename(std::string &url, struct stat *fileStat) {
     std::string pathname(config->rootDir());
     if (url.length() == 1) {
         pathname += _indexFile;
@@ -149,7 +153,9 @@ std::string HttpParser::_getFilename(boost::string_ref &url, struct stat *fileSt
         return std::move(pathname);
     }
 
-    pathname += std::string(url.substr(1));
+    size_t paramsPos = url.find_last_of('?');
+
+    pathname += url.substr(1, paramsPos - 1);
     bool isDir = ((stat(pathname.c_str(), fileStat) == 0) && (fileStat->st_mode & S_IFDIR));
     if (isDir) {
         if (pathname.back() != '/') {
@@ -181,17 +187,68 @@ std::string HttpParser::_getFileType(const std::string &path) {
 }
 
 void HttpParser::_appendHeader(std::string &headers, size_t fileLength,
-                               const std::string &fileType, const boost::string_ref &protocol, const std::string &code) {
+                               const std::string &fileType, const boost::string_ref &protocol, int code) {
 
     std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
     std::time_t t = std::chrono::system_clock::to_time_t(p);
     headers.append(protocol.data(), protocol.length());
-    headers += " " + code + "\r\n"
+    const std::string& codeText = _getCode(code);
+
+    headers += " " + codeText + "\r\n"
             + "Server: Eeeeepollll \r\n"
             + "Date: " + std::ctime(&t)
             + "Connection: close\r\n"
             + "Content-Length: " + std::to_string(fileLength) + "\r\n"
             + "Content-Type: " + fileType + "\r\n" + "\r\n";
+    return;
+}
+
+std::string HttpParser::_urlDecode(boost::string_ref &url_r) {
+    std::string url(url_r);
+    std::string result;
+    for (size_t i = 0; i < url.length(); i++) {
+        if (url[i] == '+') {
+            result += ' ';
+        } else if (url[i] == '%') {
+            int ch;
+            sscanf(url.substr(i + 1,2).c_str(), "%x", &ch);
+            result += static_cast<char>(ch);
+            i += 2;
+        } else {
+            result += url[i];
+        }
+    }
+
+    return result;
+}
+
+bool HttpParser::_access(std::string &filename) {
+    boost::filesystem::path p(filename);
+    auto canon = boost::filesystem::canonical(p);
+    return canon.string().find(config->rootDir()) != std::string::npos;
+}
+
+size_t HttpParser::_makeBadBody(int code, std::shared_ptr<Body> &body) {
+    const char* suitableBody;
+    switch (code) {
+        case 404: {
+            suitableBody = notFound;
+            break;
+        }
+        case 403: {
+            suitableBody = forbidden;
+            break;
+        }
+        default: {
+            suitableBody = notAllowed;
+            break;
+        }
+    }
+    size_t length = strlen(suitableBody);
+    char* bodyBuffer = (char*)malloc(length * sizeof(char));
+    memcpy(bodyBuffer, suitableBody, length);
+    body->reset(bodyBuffer, length, length);
+    return length;
 }
 
 

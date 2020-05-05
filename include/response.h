@@ -33,11 +33,9 @@ public:
     size_t length();
     size_t size();
 
-    size_t getWrited() { return _writedBytes; };
-    size_t needWrite() { return _bodyLength - _writedBytes; };
-    void setWrited(size_t wr) { _writedBytes = wr; };
+    size_t balance() { return length() - justWrited; };
+    size_t justWrited = 0;
 private:
-    size_t _writedBytes = 0;
     size_t _bodySize = 0;
     size_t _bodyLength = 0;
     char* _body;
@@ -61,6 +59,9 @@ public:
     void bodyDone(bool b) { _bDone = b; };
     bool headersWriteDone() { return _hDone; };
     bool bodyWriteDone() { return _bDone; };
+
+    size_t balance() { return length() - justWrited; };
+    size_t justWrited = 0;
 
     SOCKET socket;
     std::string filename;

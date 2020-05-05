@@ -104,7 +104,7 @@ bool ReadPack::add(AsyncReader::uptr_pair_type ptr) {
     }
 
     size_t align = config->getAlign();
-    size_t allocSize = align + size / align;
+    size_t allocSize = align + align * (size / align);
     size_t length = size;
     size = allocSize;
 

@@ -39,12 +39,18 @@ public:
 
 
 private:
-    std::string _getFilename(boost::string_ref &url, struct stat *fileStat);
+    std::string _getFilename(std::string &url, struct stat *fileStat);
     const std::string& _getCode(int code);
     static std::string _getFileType(const std::string &path);
 
     bool _checkUrl(boost::string_ref &url);
     bool _fileExists(const std::string &path);
+
+    bool _access(std::string& filename);
+
+    size_t _makeBadBody(int code, std::shared_ptr<Body> &body);
+
+    std::string _urlDecode(boost::string_ref &url);
 
     PointerStringStream _createStream(std::string *str);
     void _appendHeader(
@@ -52,7 +58,7 @@ private:
             size_t fileLength,
             const std::string &fileType,
             const boost::string_ref &protocol,
-            const std::string &code);
+            int code);
 
     std::string _rootDir;
     std::string _indexFile;

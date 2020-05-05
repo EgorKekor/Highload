@@ -45,27 +45,31 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_readWorker(Writer::this_unique thisP
     for(;;) {
         auto response = std::move(thisPart->input->blockPeek());
         int fd = response->socket;
+
+
+
         int epollFd = thisPart->_epollEngine.Epollfd();
 
         thisPart->_processList.push(std::move(response));
 
         void* respAddr = thisPart->_processList.getBack();
-        std::cout << "epoll add" << std::endl;
 
         if (_setNonBlock((int)fd)) {
             thisPart->_epollEngine.AddFd(fd, epollFd, respAddr);
         } else {
             std::cerr << "Writer.hpp: can't set non block mode" << std::endl;
         }
+        thisPart->input->blockPop();
+
+
+
 //        std::string &header = response->getHeaders();
 //        ssize_t nbytes = send(response->socket, header.c_str(), header.length(), 0);
-//        std::cout << nbytes << "Header Отправлено" << std::endl;
 //
 //        std::shared_ptr<Body>& body = response->getBody();
 //        nbytes = send(response->socket, body->getAdress(), body->length(), 0);
-//        std::cout << nbytes << "Body Отправлено" << std::endl;
-
-        thisPart->input->blockPop();
+//        close(fd);
+//        thisPart->input->blockPop();
     }
 }
 
@@ -85,18 +89,18 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique this
                 thisPart->_def(thisPart, socket, events[i].data.ptr);
             } else if (!response->headersWriteDone()) {
                 const char* buf = response->getAdress();
-                size_t nbytes = send(socket, buf, response->length(), 0);
-                if (nbytes == -1) {
-                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                        break;
+                    size_t nbytes = send(socket, buf, response->length(), 0);
+                    if (nbytes == -1) {
+                        if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                            break;
+                        } else {
+                            std::cerr << "[" << socket << "]:" << "Write header error" << std::endl;
+                            thisPart->_def(thisPart, socket, events[i].data.ptr);
+                            break;
+                        }
                     } else {
-                        std::cerr << "[" << socket << "]:" << "Write header error" << std::endl;
-                        thisPart->_def(thisPart, socket, events[i].data.ptr);
-                        break;
+                        response->headersDone(true);
                     }
-                } else {
-                    response->headersDone(true);
-                }
             } else if (!response->bodyWriteDone()) {
                 const char* buf = response->getBody()->getAdress();
                 size_t nbytes = send(socket, buf, response->getBody()->length(), 0);
@@ -112,7 +116,7 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique this
                     response->bodyDone(true);
                 }
             } else {
-                std::cerr << "Writer.hpp: message success send" << std::endl;
+//                std::cerr << "Writer.hpp: message success send" << std::endl;
                 thisPart->output->push(writer_output(socket, true));
                 thisPart->_processList.popAddress(events[i].data.ptr);
                 close(socket);

@@ -51,7 +51,6 @@ void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::thi
 
         if (result == HttpParser::result::error) {
             std::cerr << "Bad request {" << std::endl << *request << "}" << std::endl;
-            continue;
         } else if (result == HttpParser::result::body_finished) {
             std::cout << "body_finished" << std::endl;
             auto response = std::make_unique<Response>(*request , std::move(headers), body);

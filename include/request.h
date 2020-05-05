@@ -28,7 +28,7 @@ public:
     bool validRequest = false;
     SOCKET socket;
     boost::string_ref method;
-    boost::string_ref url;
+    std::string url;
     boost::string_ref protocol;
 
     bool fileExist = false;
