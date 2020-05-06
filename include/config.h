@@ -10,7 +10,7 @@
 #define MB  1048576
 #define GB  1073741824
 
-#define MAX_EPOLL_EVENT 2000
+#define MAX_EPOLL_EVENT 10000
 #define EPOLL_TIMEOUT -1
 #define MAX_CONNECTIONS 10000
 #define READ_BUF_SIZE   10
@@ -32,7 +32,7 @@
 #define BASE_RESERVE_SIZE   1024
 
 // Cache
-#define MAX_CACHE_SIZE  512
+#define MAX_CACHE_SIZE  100 * MB
 #define RATE_INTERVAL  std::chrono::seconds{1}
 
 

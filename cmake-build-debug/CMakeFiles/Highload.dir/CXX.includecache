@@ -43,6 +43,8 @@ deque
 -
 condition_variable
 -
+cassert
+-
 
 /home/kekor/Highload/include/cache.h
 map
@@ -84,6 +86,8 @@ cstddef
 functional
 -
 cstring
+-
+mutex
 -
 ../include/config.h
 /home/kekor/Highload/include/config.h
@@ -227,6 +231,8 @@ simpleConveyorPart.hpp
 /home/kekor/Highload/include/response.h
 ../include/epollEngine.h
 /home/kekor/Highload/include/epollEngine.h
+../include/blockMap.hpp
+/home/kekor/Highload/include/blockMap.hpp
 
 /home/kekor/Highload/src/main.cpp
 ../include/server.h

@@ -53,7 +53,7 @@ void Reader<INP_CONT, OUT_CONT>::_readWorker(this_unique thisPart) {
 //                    std::cout << "[" << clientSocket << "]:" << "EWOULDBLOCK" << std::endl;
                     break;
                 } else {
-                    std::cerr << "[" << clientSocket << "]:" << "Read error" << std::endl;
+//                    std::cerr << "[" << clientSocket << "]:" << "Read error" << std::endl;
                     break;
                 }
             } else if (nbytes == 0) {

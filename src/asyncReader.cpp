@@ -13,11 +13,11 @@ char* testBuf = nullptr;
 void AsyncReader::push(std::unique_ptr<Response> response, AsyncReader::callback_type callback) {
     auto bodyPtr = _cache.get(response->filename);
     if (bodyPtr->getAdress() == nullptr) {
-        std::cout << "Response from disk" << std::endl;
+//        std::cout << "Response from disk" << std::endl;
         auto elem = std::make_unique<pair_type>(std::move(response), std::move(callback));
         _readQueue.push(std::move(elem));
     } else {
-        std::cout << "Response from cache" << std::endl;
+//        std::cout << "Response from cache" << std::endl;
         response->putBody(bodyPtr);
         callback(std::move(response));
     }

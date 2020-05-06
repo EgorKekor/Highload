@@ -52,15 +52,15 @@ void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::thi
         if (result == HttpParser::result::error) {
             std::cerr << "Bad request {" << std::endl << *request << "}" << std::endl;
         } else if (result == HttpParser::result::body_finished) {
-            std::cout << "body_finished" << std::endl;
+            //std::cout << "body_finished" << std::endl;
             auto response = std::make_unique<Response>(*request , std::move(headers), body);
             thisPart->output->push(std::move(response));
         } else if (result == HttpParser::result::body_need_not) {
-            std::cout << "body_need_not" << std::endl;
+            //std::cout << "body_need_not" << std::endl;
             auto response = std::make_unique<Response>(*request , std::move(headers));
             thisPart->output->push(std::move(response));
         } else if (result == HttpParser::result::need_async_read) {
-            std::cout << "need_async_read" << std::endl;
+            //std::cout << "need_async_read" << std::endl;
             auto response = std::make_unique<Response>(*request , std::move(headers));
             thisPart->_asyncReader.push(
                     std::move(response),

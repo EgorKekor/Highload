@@ -27,16 +27,36 @@ public:
     T& operator[]( KEY&& key ) { return _map[std::move(key)]; };
     T& at( const KEY& key ) { return _map.at(key); };
     const T & at( const KEY& key ) const { return _map.at(key); };
-    std::pair<iterator, bool> insert( const value_type& value ) {
-        std::pair<base_iterator, bool> orig = _map.insert(value);
 
-        auto iterShared = std::make_shared<base_iterator>(orig.first);
-        return  std::pair<iterator, bool>(iterator(iterShared, _saveAss), orig.second);
+    std::pair<base_iterator, bool> insert( const value_type& value ) {
+        _operation.lock();
+        auto orig = _map.insert(value);
+        _operation.unlock();
+        return orig;
+
+
+//        auto iterShared = std::make_shared<base_iterator>(orig.first);
+//        return  std::pair<iterator, bool>(iterator(iterShared, _saveAss), orig.second);
+    };
+
+    base_iterator find(const KEY& key) {
+        _operation.lock();
+        KEY& ret = _map.find(key);
+        _operation.unlock();
+        return ret;
+    };
+
+    size_t erase( const KEY& key ) {
+        _operation.lock();
+        size_t ret = _map.erase(key);
+        _operation.unlock();
+        return ret;
     };
 
 
     iterator begin() { return iterator(std::make_shared<base_iterator>(_map.begin()), _saveAss); };
-    iterator end() { return iterator(std::make_shared<base_iterator>(_map.end()), _saveAss); };
+//    iterator end() { return iterator(std::make_shared<base_iterator>(_map.end()), _saveAss); };
+    base_iterator end() { return _map.end(); };
     const_iterator begin() const { return const_iterator(std::make_shared<base_iterator>(_map.begin()), _saveAss); };
     const_iterator end() const { return Bconst_iterator(std::make_shared<base_iterator>(_map.end()), _saveAss); };
 private:
@@ -45,6 +65,7 @@ private:
     std::map<KEY, T> _map;
     std::condition_variable_any _haveData;
     std::mutex _haveDataMutex;
+    std::mutex _operation;
 };
 
 

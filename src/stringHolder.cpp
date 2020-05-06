@@ -21,6 +21,10 @@ StringHolder::StringHolder(
     }
 }
 
+std::string _getFileType(const std::string &path) {
+    size_t pos = path.find_last_of('.');
+    return std::move((pos != std::string::npos) ? path.substr(pos + 1) : "txt");
+}
 
 bool StringHolder::append(SOCKET key, char *buf) {
     if (_reservedPool.size() == 0) {
@@ -45,6 +49,7 @@ bool StringHolder::append(SOCKET key, char *buf) {
         auto returner = std::make_unique<FastListReturner<fast_list_type>>(std::move(it->second), &_reservedPool);
 
         auto req = std::move(_httpParser.constructRequest(std::move(returner), it->first));
+
         _reader.output->push(std::move(req));
         _messages.erase(it->first);
     }

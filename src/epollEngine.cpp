@@ -39,3 +39,11 @@ int Epoll::AddFd(int clientfd, int epollfd, void* ptr) {
     return clientfd;
 }
 
+int Epoll::AddPollFd(int clientfd, int epollfd) {
+    epoll_event ev {};
+    ev.events =  EPOLLERR | EPOLLHUP | EPOLLOUT | EPOLLRDHUP;
+    ev.data.fd = clientfd;
+    epoll_ctl(epollfd, EPOLL_CTL_ADD, clientfd, &ev);
+    return clientfd;
+}
+

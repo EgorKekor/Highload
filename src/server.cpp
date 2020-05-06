@@ -64,7 +64,7 @@ void Server::Listen() {
         ssize_t fdCount = epollEngine->Wait(events);
         for (uint32_t i = 0; i < fdCount; ++i) {
             if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) || (events[i].events & EPOLLRDHUP)) {
-                std::cerr << "Server.cpp: client socket error" << std::endl;
+//                std::cerr << "Server.cpp: client socket error" << std::endl;
                 close(events[i].data.fd);
                 continue;
             } else if (events[i].data.fd == masterSocket) {
@@ -76,7 +76,8 @@ void Server::Listen() {
                         if (errno == EAGAIN || errno == EWOULDBLOCK) {
                             break;
                         } else {
-                            throw std::runtime_error("accept: " + std::string(strerror(errno)));
+                            std::cerr << "accept: " + std::string(strerror(errno)) << std::endl;
+//                            throw std::runtime_error("accept: " + std::string(strerror(errno)));
                         }
                     }
                 }
