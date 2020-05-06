@@ -89,6 +89,8 @@ cstring
 -
 mutex
 -
+iostream
+-
 ../include/config.h
 /home/kekor/Highload/include/config.h
 
@@ -233,6 +235,8 @@ simpleConveyorPart.hpp
 /home/kekor/Highload/include/epollEngine.h
 ../include/blockMap.hpp
 /home/kekor/Highload/include/blockMap.hpp
+signal.h
+-
 
 /home/kekor/Highload/src/main.cpp
 ../include/server.h

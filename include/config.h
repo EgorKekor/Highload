@@ -13,7 +13,7 @@
 #define MAX_EPOLL_EVENT 10000
 #define EPOLL_TIMEOUT -1
 #define MAX_CONNECTIONS 10000
-#define READ_BUF_SIZE   10
+#define READ_BUF_SIZE   1024
 
 // Writer
 #define WRITE_SIZE  64

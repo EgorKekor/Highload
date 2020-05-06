@@ -9,6 +9,7 @@
 #include <functional>
 #include <cstring>
 #include <mutex>
+#include <iostream>
 #include "../include/config.h"
 
 
@@ -99,8 +100,6 @@ void FastListAllocator<T>::free(T *addr) {
     addr->next_block_adress = _head;
     _head = addr;
     _loading--;
-//    if (_loading < 100)
-//        std::cout << _loading << std::endl;
 }
 
 
@@ -130,9 +129,8 @@ public:
 
     bool push(T &val);
     bool push(T &&val);
-    bool remove(void *node);
 
-    void* getBack() { return _tail->_prev; };
+    void* getBack();
 
     T& peekAddress(void* addr);
     void popAddress(void* addr);
@@ -140,7 +138,11 @@ public:
     T& peekFront();
     void popFront();
     size_t size(){ return _size;};
+    bool full() { return _size == _capasity; };
+    bool empty() { return _size == 0; };
 private:
+    bool remove(void *node);
+
     std::mutex _operation;
     size_t _size = 0;
     size_t _capasity= 0;
@@ -157,6 +159,7 @@ bool FastList<T>::push(T &val) {
     _operation.lock();
     auto newNode = allocator._new();
     if (!newNode) {
+        _operation.unlock();
         return false;
     }
     new(&newNode->value) T(val);
@@ -172,13 +175,16 @@ bool FastList<T>::push(T &val) {
 
 template <class T>
 bool FastList<T>::push(T &&val) {
-    _operation.lock();
-    auto newNode = allocator._new();
+    std::unique_lock<std::mutex> lock(_operation);
+    if (full()) {
+        return false;
+    }
 
+    auto newNode = allocator._new();
     if (!newNode) {
         return false;
     }
-    //newNode->value = std::move(val);
+
     new(&newNode->value) T(std::move(val));
     newNode->_next = _tail;
     newNode->_prev = _tail->_prev;
@@ -186,14 +192,13 @@ bool FastList<T>::push(T &&val) {
     _tail->_prev = newNode;
 
     _size++;
-    _operation.unlock();
     return true;
 }
 
 
 template <class T>
 bool FastList<T>::remove(void *nd) {
-    if (nd == NULL) {
+    if (nd == nullptr) {
         return false;
     }
     Node<T> *node = static_cast<Node<T>*>(nd);
@@ -204,45 +209,50 @@ bool FastList<T>::remove(void *nd) {
     node->_prev->_next = node->_next;
     node->_next->_prev = node->_prev;
 
-    //node->value.~T();
-
     allocator.free(node);
+
+//    node->value.~T();
+    memset(&node->value, 0, sizeof(T));
     _size--;
     return true;
 }
 
 template<class T>
 T& FastList<T>::peekFront() {
-    _operation.lock();
+    std::unique_lock<std::mutex> lock(_operation);
     Node<T>* ret = _head->_next;
-    _operation.unlock();
     return ret->value;
 }
 
 template<class T>
 void FastList<T>::popFront() {
-    _operation.lock();
+    std::unique_lock<std::mutex> lock(_operation);
     if (_head->_next != _tail) {
         Node<T> *ret = _head->_next;
         remove(ret);
     }
-    _operation.unlock();
 }
 
 template<class T>
 T &FastList<T>::peekAddress(void *addr) {
-    _operation.lock();
+    std::unique_lock<std::mutex> lock(_operation);
     Node<T>* ret = static_cast<Node<T>*>(addr);
-    _operation.unlock();
     return ret->value;
 }
 
 template<class T>
 void FastList<T>::popAddress(void *addr) {
-    _operation.lock();
-    Node<T>* ret = static_cast<Node<T>*>(addr);
-    remove(ret);
-    _operation.unlock();
+    if ((addr == _head) || (addr == _tail)) {
+        std::cout << "aaaaa" << std::endl;
+    }
+    std::unique_lock<std::mutex> lock(_operation);
+    remove(addr);
+}
+
+template<class T>
+void *FastList<T>::getBack() {
+    std::unique_lock<std::mutex> lock(_operation);
+    return _tail->_prev;
 }
 
 
@@ -264,10 +274,7 @@ public:
             return;
         }
         if (_isRvalue) {
-//            std::cout << "rvalue returned" << std::endl;
-//            std::cout << "size before: " << _fastList->size() << std::endl;
             _fastList->push(std::move(_value));
-//            std::cout << "size after: " << _fastList->size() << std::endl;
         }
     };
 private:

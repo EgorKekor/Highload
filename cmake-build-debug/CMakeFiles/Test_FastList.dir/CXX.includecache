@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kekor/Highload/include/config.h
+string
+-
+
+/home/kekor/Highload/include/fastList.hpp
+cstddef
+-
+functional
+-
+cstring
+-
+mutex
+-
+iostream
+-
+../include/config.h
+/home/kekor/Highload/include/config.h
+
+/home/kekor/Highload/tests/fastList/fastList_test.cpp
+cassert
+-
+memory
+-
+../../include/fastList.hpp
+/home/kekor/Highload/include/fastList.hpp
+

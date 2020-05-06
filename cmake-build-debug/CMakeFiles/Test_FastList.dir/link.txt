@@ -1,0 +1,1 @@
+/usr/bin/c++   -pthread -g   CMakeFiles/Test_FastList.dir/tests/fastList/fastList_test.cpp.o  -o Test_FastList -lrt -lboost_filesystem -lboost_system 

@@ -58,8 +58,7 @@ void Reader<INP_CONT, OUT_CONT>::_readWorker(this_unique thisPart) {
                 }
             } else if (nbytes == 0) {
                 thisPart->_stringHolder.append(clientSocket, nullptr);
-                close(clientSocket);
-                std::cout << "[" << clientSocket << "]:" << "closed" << std::endl;
+//                std::cout << "[" << clientSocket << "]:" << "closed" << std::endl;
                 break;
             } else {
                 if (READ_BUF_SIZE != nbytes) {

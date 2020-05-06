@@ -23,6 +23,8 @@ public:
     int AddFd(int clientfd, int epollfd);
     int AddFd(int clientfd, int epollfd, void* ptr);
 
+    void deleteFd(int fd);
+
     int AddPollFd(int clientfd, int epollfd);
     ssize_t Wait(epoll_event* events);
     int Epollfd();

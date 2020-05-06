@@ -3,6 +3,7 @@ project(Highload)
 project(Experiment)
 project(Cache)
 project(Test_strace)
+project(Test_FastList)
 
 set(CMAKE_CXX_STANDARD 17)
 set(GCC_COVERAGE_COMPILE_FLAGS "-pthread")
@@ -62,5 +63,10 @@ add_executable(
         Experiment
         tests/async_io_speed_experiments/experiment.cpp
         tests/async_io_speed_experiments/syscalls.h
+)
 
+add_executable(
+        Test_FastList
+        include/fastList.hpp
+        tests/fastList/fastList_test.cpp
 )

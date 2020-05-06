@@ -37,6 +37,20 @@ void Response::putBody(std::shared_ptr<Body> &&body) {
     _bodyPtr = std::move(body);
 }
 
+void Response::addBodySend(size_t sended) {
+    _bodySended += sended;
+    if (_bodySended >= _bodyPtr->length()) {
+        _bDone = true;
+    }
+}
+
+void Response::addHeadSend(size_t sended) {
+    _headSended += sended;
+    if (_headSended >= _headers.length()) {
+        _hDone = true;
+    }
+}
+
 
 // =================================================
 

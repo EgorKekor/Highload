@@ -55,17 +55,20 @@ public:
 
     const char * getAdress() const { return _headers.data(); };
     size_t length() { return _headers.length(); };
-    void headersDone(bool b) { _hDone = b; };
-    void bodyDone(bool b) { _bDone = b; };
     bool headersWriteDone() { return _hDone; };
     bool bodyWriteDone() { return _bDone; };
 
-    size_t balance() { return length() - justWrited; };
-    size_t justWrited = 0;
+    void addBodySend(size_t sended);
+    void addHeadSend(size_t sended);
+    size_t justBodySent() { return _bodySended; };
+    size_t justHeadSent() { return _headSended; };
 
     SOCKET socket;
     std::string filename;
 private:
+    size_t _bodySended = 0;
+    size_t _headSended = 0;
+
     bool _hDone = false;
     bool _bDone = false;
     struct stat _fileDescription = {};

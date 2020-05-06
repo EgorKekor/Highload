@@ -19,6 +19,7 @@ public:
     typedef FastListReturner<fast_list_type> req_str_returner;
 
     Request(SOCKET socket, bool corrupt = false);
+    ~Request() { _requestString->get()->resize(0); };
 
     void saveData(std::unique_ptr<req_str_returner>&& sorce);
     bool isValid() { return (!memoryCorrupted || validRequest); };

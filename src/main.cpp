@@ -20,12 +20,11 @@
 
 
 
+
 Config *config = nullptr;
 
 int main(int argc, char *argv[]) {
-    boost::filesystem::path p("/home/kekor/Highload/root/httptest/../../../../../../../../../../../../../etc/passwd");
-    auto newP = boost::filesystem::canonical(p);
-    std::string full = newP.c_str();
+
 
 
     config = new Config();

@@ -47,3 +47,10 @@ int Epoll::AddPollFd(int clientfd, int epollfd) {
     return clientfd;
 }
 
+void Epoll::deleteFd(int fd) {
+    epoll_event ev {};
+    ev.events =  EPOLLERR | EPOLLHUP | EPOLLOUT | EPOLLRDHUP;
+    ev.data.fd = fd;
+    epoll_ctl(epollfd, EPOLL_CTL_DEL, fd, &ev);
+}
+

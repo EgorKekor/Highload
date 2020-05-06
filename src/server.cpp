@@ -31,6 +31,7 @@ Server::Server(const std::string &addr,
         throw std::runtime_error("nonblocked: " + std::string(strerror(errno)));
     }
 
+
     sockaddr_in serveraddr;
     serveraddr.sin_family = AF_INET;
     inet_pton(AF_INET, addr.data(), &(serveraddr.sin_addr));
@@ -63,11 +64,17 @@ void Server::Listen() {
     while (!stop) {
         ssize_t fdCount = epollEngine->Wait(events);
         for (uint32_t i = 0; i < fdCount; ++i) {
-            if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) || (events[i].events & EPOLLRDHUP)) {
-//                std::cerr << "Server.cpp: client socket error" << std::endl;
-                close(events[i].data.fd);
-                continue;
-            } else if (events[i].data.fd == masterSocket) {
+//            if (events[i].events & EPOLLERR) {
+//                std::cout << "server.cpp: client socket EPOLLERR" << std::endl;
+////                close(events[i].data.fd);
+//            } else if (events[i].events & EPOLLHUP) {
+//                std::cout << "server.cpp: client socket EPOLLHUP" << std::endl;
+////                close(events[i].data.fd);
+//            } else if (events[i].events & EPOLLRDHUP) {
+//                std::cout << "server.cppz: client socket EPOLLRDHUP:" << events[i].data.fd << std::endl;
+////                close(events[i].data.fd);
+//            } else
+                if (events[i].data.fd == masterSocket) {
                 for (;;) {
                     ssize_t conectionFd = accept(masterSocket, (sockaddr *) &clientaddr, &clientlen);
                     if ((conectionFd >= 0) && (_setNonBlock((int) conectionFd))) {
