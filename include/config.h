@@ -10,13 +10,12 @@
 #define MB  1048576
 #define GB  1073741824
 
-#define MAX_EPOLL_EVENT 10000
+#define MAX_EPOLL_EVENT 20000
 #define EPOLL_TIMEOUT -1
-#define MAX_CONNECTIONS 10000
+#define MAX_CONNECTIONS 20000
 #define READ_BUF_SIZE   1024
+#define PROC    4
 
-// Writer
-#define WRITE_SIZE  64
 
 #define ADDRESS  "127.0.0.1"
 #define PORT  8080
@@ -40,7 +39,10 @@
 #define IOCB_SIZE   128
 #define MAX_FILES_BLOCK   8
 
-#define ROOT_DIR    "/home/kekor/Highload/root/"
+// Writer
+#define WRITER_THREADS  1
+
+#define ROOT_DIR    "/home/kekos/Highload/root/"
 
 
 class Config {

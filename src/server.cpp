@@ -13,11 +13,8 @@
 
 Server::Server(const std::string &addr,
         const std::uint16_t &port,
-        const std::uint32_t &queueSize,
-        std::shared_ptr<BlockQueue<CONVEYOR_0_INPUT>> output) : stop(false), output(output) {
+        const std::uint32_t &queueSize) : stop(false) {
 
-    epollEngine = new Epoll(MAX_EPOLL_EVENT, EPOLL_TIMEOUT);
-    //reader = new Reader;
 
     masterSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (masterSocket < 0) {
@@ -46,7 +43,6 @@ Server::Server(const std::string &addr,
         throw std::runtime_error("listen: " + std::string(strerror(errno)));
     }
 
-    epollEngine->AddFd(masterSocket, epollEngine->Epollfd());
 }
 
 Server::~Server() {
@@ -84,7 +80,6 @@ void Server::Listen() {
                             break;
                         } else {
                             std::cerr << "accept: " + std::string(strerror(errno)) << std::endl;
-//                            throw std::runtime_error("accept: " + std::string(strerror(errno)));
                         }
                     }
                 }
@@ -103,6 +98,16 @@ bool Server::_setNonBlock(int fd) {
         return false;
     }
     return true;
+}
+
+void Server::setOutput(std::shared_ptr<BlockQueue<int>> &out) {
+    output = out;
+}
+
+void Server::initEpoll() {
+    epollEngine = new Epoll(MAX_EPOLL_EVENT, EPOLL_TIMEOUT);
+    epollEngine->AddFd(masterSocket, epollEngine->Epollfd());
+
 }
 
 

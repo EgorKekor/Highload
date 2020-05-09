@@ -21,11 +21,11 @@ class Reader;
 
 class StringHolder {
 public:
-    typedef CONVEYOR_0_OUTPUT reader_output;
-    typedef CONVEYOR_0_INPUT reader_input;
+    typedef CONVEYOR_10_OUTPUT reader_output;
+    typedef CONVEYOR_10_INPUT reader_input;
     typedef std::unique_ptr<std::string> fast_list_type;
-    typedef BlockQueue<CONVEYOR_0_OUTPUT> reader_output_container;
-    typedef BlockQueue<CONVEYOR_0_INPUT> reader_input_container;
+    typedef BlockQueue<CONVEYOR_10_OUTPUT> reader_output_container;
+    typedef BlockQueue<CONVEYOR_10_INPUT> reader_input_container;
 
     StringHolder(
             Reader<reader_input_container, reader_output_container> &reader,

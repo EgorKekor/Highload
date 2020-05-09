@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/kekor/Highload/tests/fastList/fastList_test.cpp" "/home/kekor/Highload/cmake-build-debug/CMakeFiles/Test_FastList.dir/tests/fastList/fastList_test.cpp.o"
+  "/home/kekos/Highload/tests/fastList/fastList_test.cpp" "/home/kekos/Highload/cmake-build-debug/CMakeFiles/Test_FastList.dir/tests/fastList/fastList_test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

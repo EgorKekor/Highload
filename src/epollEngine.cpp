@@ -7,7 +7,7 @@
 #include "../include/epollEngine.h"
 
 Epoll::Epoll(int maxEpollEvents, int timeout) :
-        maxEpollEvents(maxEpollEvents), timeout(timeout), stop(false) {
+        maxEpollEvents(maxEpollEvents), timeout(timeout){
     epollfd = epoll_create(maxEpollEvents);
 }
 
@@ -33,23 +33,17 @@ Epoll::~Epoll() {}
 
 int Epoll::AddFd(int clientfd, int epollfd, void* ptr) {
     epoll_event ev {};
-    ev.events =  EPOLLERR | EPOLLHUP | EPOLLRDHUP | EPOLLOUT;
+    ev.events =  EPOLLERR | EPOLLHUP | EPOLLRDHUP | EPOLLOUT | EPOLLET;
     ev.data.ptr = ptr;
     epoll_ctl(epollfd, EPOLL_CTL_ADD, clientfd, &ev);
     return clientfd;
 }
 
-int Epoll::AddPollFd(int clientfd, int epollfd) {
-    epoll_event ev {};
-    ev.events =  EPOLLERR | EPOLLHUP | EPOLLOUT | EPOLLRDHUP;
-    ev.data.fd = clientfd;
-    epoll_ctl(epollfd, EPOLL_CTL_ADD, clientfd, &ev);
-    return clientfd;
-}
+
 
 void Epoll::deleteFd(int fd) {
     epoll_event ev {};
-    ev.events =  EPOLLERR | EPOLLHUP | EPOLLOUT | EPOLLRDHUP;
+    ev.events =  EPOLLERR | EPOLLHUP | EPOLLOUT | EPOLLRDHUP | EPOLLET;
     ev.data.fd = fd;
     epoll_ctl(epollfd, EPOLL_CTL_DEL, fd, &ev);
 }

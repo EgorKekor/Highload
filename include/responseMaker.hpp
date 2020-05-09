@@ -17,8 +17,8 @@
 template <class INP_CONTAINER, class OUT_CONTAINER>
 class ResponseMaker : public SimpleConveyorPart<INP_CONTAINER, OUT_CONTAINER> {
 public:
-    typedef CONVEYOR_10_INPUT this_input;
-    typedef CONVEYOR_10_OUTPUT uptr_this_output;
+    typedef CONVEYOR_20_INPUT this_input;
+    typedef CONVEYOR_20_OUTPUT uptr_this_output;
     typedef std::unique_ptr<ResponseMaker<INP_CONTAINER, OUT_CONTAINER>> this_unique;
     typedef ResponseMaker<INP_CONTAINER, OUT_CONTAINER> this_type;
 

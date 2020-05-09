@@ -15,13 +15,16 @@
 #define CONVEYOR_PART = ConveyorPart<INP_CONT, OUT_CONT>;
 
 #define CONVEYOR_0_INPUT  SOCKET
-#define CONVEYOR_0_OUTPUT   std::unique_ptr<Request>
+#define CONVEYOR_0_OUTPUT   SOCKET
 
 #define CONVEYOR_10_INPUT  CONVEYOR_0_OUTPUT
-#define CONVEYOR_10_OUTPUT   std::unique_ptr<Response>
+#define CONVEYOR_10_OUTPUT   std::unique_ptr<Request>
 
 #define CONVEYOR_20_INPUT  CONVEYOR_10_OUTPUT
-#define CONVEYOR_20_OUTPUT   std::pair<SOCKET, bool>
+#define CONVEYOR_20_OUTPUT   std::unique_ptr<Response>
+
+#define CONVEYOR_30_INPUT  CONVEYOR_20_OUTPUT
+#define CONVEYOR_30_OUTPUT   std::pair<SOCKET, bool>
 
 namespace http {
     inline std::vector<std::string> methods {

@@ -14,11 +14,12 @@ private:
     int epollfd;
     int maxEpollEvents;
     int timeout;
-    std::atomic_bool stop;
 
 public:
     Epoll(int maxEpollEvents, int timeout);
     ~Epoll();
+
+    Epoll(const Epoll&) = default;
 
     int AddFd(int clientfd, int epollfd);
     int AddFd(int clientfd, int epollfd, void* ptr);

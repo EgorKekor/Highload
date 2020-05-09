@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/kekor/Highload/include/asyncReader.h
+/home/kekos/Highload/include/asyncReader.h
 thread
 -
 functional
@@ -18,17 +18,17 @@ linux/aio_abi.h
 sys/syscall.h
 -
 ../include/response.h
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 ../include/blockQueue.hpp
-/home/kekor/Highload/include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
 ../include/fastList.hpp
-/home/kekor/Highload/include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 ../include/cache.h
-/home/kekor/Highload/include/cache.h
+/home/kekos/Highload/include/cache.h
 
-/home/kekor/Highload/include/blockMap.hpp
+/home/kekos/Highload/include/blockMap.hpp
 iostream
 -
 map
@@ -36,7 +36,7 @@ map
 condition_variable
 -
 
-/home/kekor/Highload/include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
 iostream
 -
 deque
@@ -45,8 +45,10 @@ condition_variable
 -
 cassert
 -
+thread
+-
 
-/home/kekor/Highload/include/cache.h
+/home/kekos/Highload/include/cache.h
 map
 -
 memory
@@ -56,15 +58,15 @@ chrono
 vector
 -
 ../include/config.h
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 ../include/response.h
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 string
 -
 
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 iostream
 -
 vector
@@ -72,15 +74,15 @@ vector
 memory
 -
 
-/home/kekor/Highload/include/epollEngine.h
+/home/kekos/Highload/include/epollEngine.h
 atomic
 -
 sys/epoll.h
 -
 ../include/config.h
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 
-/home/kekor/Highload/include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
 cstddef
 -
 functional
@@ -92,9 +94,9 @@ mutex
 iostream
 -
 ../include/config.h
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 
-/home/kekor/Highload/include/httpParser.h
+/home/kekos/Highload/include/httpParser.h
 iostream
 -
 memory
@@ -106,15 +108,15 @@ sstream
 vector
 -
 ../include/request.h
-/home/kekor/Highload/include/request.h
+/home/kekos/Highload/include/request.h
 ../include/pointerStringStream.h
-/home/kekor/Highload/include/pointerStringStream.h
+/home/kekos/Highload/include/pointerStringStream.h
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 ../include/response.h
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 
-/home/kekor/Highload/include/pointerStringStream.h
+/home/kekos/Highload/include/pointerStringStream.h
 iostream
 -
 memory
@@ -122,7 +124,7 @@ memory
 boost/utility/string_ref.hpp
 -
 
-/home/kekor/Highload/include/reader.hpp
+/home/kekos/Highload/include/reader.hpp
 iostream
 -
 sys/socket.h
@@ -132,15 +134,15 @@ unistd.h
 thread
 -
 ../include/config.h
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 simpleConveyorPart.hpp
-/home/kekor/Highload/include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/fastList.hpp
-/home/kekor/Highload/include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
 stringHolder.h
-/home/kekor/Highload/include/stringHolder.h
+/home/kekos/Highload/include/stringHolder.h
 
-/home/kekor/Highload/include/request.h
+/home/kekos/Highload/include/request.h
 iostream
 -
 boost/utility/string_ref.hpp
@@ -150,51 +152,57 @@ memory
 sys/stat.h
 -
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 ../include/fastList.hpp
-/home/kekor/Highload/include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
 
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 sstream
 -
 sys/stat.h
 -
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 request.h
-/home/kekor/Highload/include/request.h
+/home/kekos/Highload/include/request.h
 
-/home/kekor/Highload/include/responseMaker.hpp
+/home/kekos/Highload/include/responseMaker.hpp
 iostream
 -
 memory
 -
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 ../include/request.h
-/home/kekor/Highload/include/request.h
+/home/kekos/Highload/include/request.h
 ../include/httpParser.h
-/home/kekor/Highload/include/httpParser.h
+/home/kekos/Highload/include/httpParser.h
 ../include/response.h
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 ../include/simpleConveyorPart.hpp
-/home/kekor/Highload/include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/asyncReader.h
-/home/kekor/Highload/include/asyncReader.h
+/home/kekos/Highload/include/asyncReader.h
 
-/home/kekor/Highload/include/server.h
+/home/kekos/Highload/include/server.h
 iostream
 -
+sys/socket.h
+-
+unistd.h
+-
+thread
+-
 ../include/config.h
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 ../include/epollEngine.h
-/home/kekor/Highload/include/epollEngine.h
+/home/kekos/Highload/include/epollEngine.h
 ../include/blockQueue.hpp
-/home/kekor/Highload/include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 
-/home/kekor/Highload/include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 iostream
 -
 functional
@@ -202,9 +210,9 @@ functional
 thread
 -
 defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 
-/home/kekor/Highload/include/stringHolder.h
+/home/kekos/Highload/include/stringHolder.h
 iostream
 -
 map
@@ -212,35 +220,35 @@ map
 string
 -
 fastList.hpp
-/home/kekor/Highload/include/fastList.hpp
+/home/kekos/Highload/include/fastList.hpp
 ../include/config.h
-/home/kekor/Highload/include/config.h
+/home/kekos/Highload/include/config.h
 ../include/defines.h
-/home/kekor/Highload/include/defines.h
+/home/kekos/Highload/include/defines.h
 ../include/pointerStringStream.h
-/home/kekor/Highload/include/pointerStringStream.h
+/home/kekos/Highload/include/pointerStringStream.h
 ../include/httpParser.h
-/home/kekor/Highload/include/httpParser.h
+/home/kekos/Highload/include/httpParser.h
 simpleConveyorPart.hpp
-/home/kekor/Highload/include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/blockQueue.hpp
-/home/kekor/Highload/include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
 
-/home/kekor/Highload/include/writer.hpp
+/home/kekos/Highload/include/writer.hpp
 ../include/simpleConveyorPart.hpp
-/home/kekor/Highload/include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/response.h
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 ../include/epollEngine.h
-/home/kekor/Highload/include/epollEngine.h
+/home/kekos/Highload/include/epollEngine.h
 ../include/blockMap.hpp
-/home/kekor/Highload/include/blockMap.hpp
+/home/kekos/Highload/include/blockMap.hpp
 signal.h
 -
 
-/home/kekor/Highload/src/main.cpp
+/home/kekos/Highload/src/main.cpp
 ../include/server.h
-/home/kekor/Highload/include/server.h
+/home/kekos/Highload/include/server.h
 iostream
 -
 vector
@@ -258,21 +266,23 @@ sstream
 fcntl.h
 -
 ../include/simpleConveyorPart.hpp
-/home/kekor/Highload/include/simpleConveyorPart.hpp
+/home/kekos/Highload/include/simpleConveyorPart.hpp
 ../include/blockQueue.hpp
-/home/kekor/Highload/include/blockQueue.hpp
+/home/kekos/Highload/include/blockQueue.hpp
 ../include/blockMap.hpp
-/home/kekor/Highload/include/blockMap.hpp
+/home/kekos/Highload/include/blockMap.hpp
 ../include/reader.hpp
-/home/kekor/Highload/include/reader.hpp
+/home/kekos/Highload/include/reader.hpp
 ../include/responseMaker.hpp
-/home/kekor/Highload/include/responseMaker.hpp
+/home/kekos/Highload/include/responseMaker.hpp
 ../include/response.h
-/home/kekor/Highload/include/response.h
+/home/kekos/Highload/include/response.h
 ../include/writer.hpp
-/home/kekor/Highload/include/writer.hpp
+/home/kekos/Highload/include/writer.hpp
 boost/filesystem.hpp
 -
 sys/ioctl.h
+-
+sys/wait.h
 -
 

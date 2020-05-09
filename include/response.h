@@ -65,6 +65,10 @@ public:
 
     SOCKET socket;
     std::string filename;
+
+    size_t headBalance() { return _headers.length() - _headSended; };
+    size_t bodyBalance() { return _bodyPtr->length() - _bodySended; };
+
 private:
     size_t _bodySended = 0;
     size_t _headSended = 0;

@@ -17,8 +17,8 @@
 template <class INP_CONTAINER, class OUT_CONTAINER>
 class Reader : public SimpleConveyorPart<INP_CONTAINER, OUT_CONTAINER> {
 public:
-    typedef CONVEYOR_0_INPUT reader_input;
-    typedef CONVEYOR_0_OUTPUT uptr_reader_output;
+    typedef CONVEYOR_10_INPUT reader_input;
+    typedef CONVEYOR_10_OUTPUT uptr_reader_output;
     typedef std::unique_ptr<Reader<INP_CONTAINER, OUT_CONTAINER>> this_unique;
     typedef Reader<INP_CONTAINER, OUT_CONTAINER> this_type;
 
@@ -54,6 +54,8 @@ void Reader<INP_CONT, OUT_CONT>::_readWorker(this_unique thisPart) {
                     break;
                 } else {
 //                    std::cerr << "[" << clientSocket << "]:" << "Read error" << std::endl;
+                    shutdown(clientSocket, 2);
+                    close(clientSocket);
                     break;
                 }
             } else if (nbytes == 0) {

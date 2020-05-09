@@ -197,7 +197,7 @@ void Cache::_calculateRate() {
         _start = std::chrono::steady_clock::now();
         for (auto it = _cache.begin(); it != _cache.end(); ++it) {
             _sortedCache.erase(it->second.last_rate);                                                    // Удалить из отсортированного контейнера
-            std::cout << it->first << " REQUIRED: " << it->second.require_count << std::endl;
+            std::cout << "[" << getpid() << "]" << it->first << " REQUIRED: " << it->second.require_count << std::endl;
             it->second.last_rate = ((double)it->second.require_count / (double)elapsed.count());         // Обновить запросы за последний промежуток в основном контейнере
             it->second.require_count = 0;
             _sortedCache.emplace(std::pair<double, map_iterator>(it->second.last_rate, it));                       // Вставить обновленную версиию
