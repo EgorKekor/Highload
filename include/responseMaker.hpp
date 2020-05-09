@@ -70,8 +70,8 @@ void ResponseMaker<INP_CONTAINER, OUT_CONTAINER>::_readWorker(ResponseMaker::thi
             );
         }
 
+        thisPart->tryYield();
         thisPart->input->blockPop();
-        //break;
     }
 }
 

@@ -27,10 +27,11 @@ Config *config = nullptr;
 int main(int argc, char *argv[]) {
     Server server(ADDRESS, PORT, MAX_EPOLL_EVENT);
 
+    std::vector<pid_t> pids;
     for (int i = 0; i < PROC; ++i) {
-        pid_t pid = 0;
+        pids.push_back(0);
         int status = 0;
-        switch(pid=fork()) {
+        switch( pids[i] = fork() ) {
             case -1:
                 std::cerr << "Fork error" << std::endl;
                 exit(1);
@@ -65,6 +66,9 @@ int main(int argc, char *argv[]) {
             default:
                 if (i == PROC - 1) {
                     wait(&status);
+                    for (auto pid : pids) {
+                        kill(pid, SIGTERM);
+                    }
                 }
         }
     }

@@ -28,7 +28,7 @@
 #define STRINGS_AMOUNT  MAX_CONNECTIONS
 
 // Convayor
-#define BASE_RESERVE_SIZE   1024
+#define YIELD_SIZE_PROPORTION   10.0
 
 // Cache
 #define MAX_CACHE_SIZE  100 * MB

@@ -23,6 +23,7 @@ public:
     T& blockPeek();
     void pop();
     void blockPop();
+    size_t size() { return _queue.size(); };
     bool isVoid() { return _queue.size() == 0; };
 private:
     bool _blocked = false;

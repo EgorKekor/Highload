@@ -242,9 +242,6 @@ T &FastList<T>::peekAddress(void *addr) {
 
 template<class T>
 void FastList<T>::popAddress(void *addr) {
-    if ((addr == _head) || (addr == _tail)) {
-        std::cout << "aaaaa" << std::endl;
-    }
     std::unique_lock<std::mutex> lock(_operation);
     remove(addr);
 }

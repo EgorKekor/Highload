@@ -69,6 +69,7 @@ void Reader<INP_CONT, OUT_CONT>::_readWorker(this_unique thisPart) {
                 thisPart->_stringHolder.append(clientSocket, buf);
             }
         }
+        thisPart->tryYield();
         thisPart->input->blockPop();
 //break;
     }

@@ -57,20 +57,19 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_readWorker(Writer::this_unique thisP
     sigaction(SIGPIPE, &sig, NULL);
     for(;;) {
         auto response = std::move(thisPart->input->blockPeek());
-        thisPart->input->blockPop();
         int fd = response->socket;
 
-
         int epollFd = thisPart->_epollEngine.Epollfd();
-
         thisPart->_processList.push(std::move(response));
-
         void* respAddr = thisPart->_processList.getBack();
-
         thisPart->_epollEngine.AddFd(fd, epollFd, respAddr);
 
+        thisPart->tryYield();
+        thisPart->input->blockPop();
 
 
+// Turbo mode
+//
 //        std::string &header = response->getHeaders();
 //        ssize_t nbytes = send(response->socket, header.c_str(), header.length(), 0);
 //
@@ -85,80 +84,6 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_readWorker(Writer::this_unique thisP
 template<class INP_CONTAINER, class OUT_CONTAINER>
 void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique thisPart) {
     epoll_event events[MAX_EPOLL_EVENT];
-
-
-//    size_t maxEvents = 0;
-//    auto start = std::chrono::steady_clock::now();
-//    auto end = std::chrono::steady_clock::now();
-//    for(;;) {
-//        ssize_t fdCount = thisPart->_epollEngine.Wait(events);
-//        for (uint32_t i = 0; i < fdCount; ++i) {
-//                        if ((fdCount > maxEvents) && (fdCount > 1)) {
-//                if (i == 0) {
-//                    start = std::chrono::steady_clock::now();
-//                } else if (i == fdCount - 1) {
-//                    maxEvents = fdCount;
-//                    end = std::chrono::steady_clock::now();
-//                    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-//                    std::cout << "Epoll for " << fdCount << " operation " << "spent " << elapsed.count() << "ms" << std::endl;
-//                }
-//            }
-//
-//            std::unique_ptr<Response>& response = thisPart->_processList.peekAddress(events[i].data.ptr);
-//            if (response.get() == nullptr) {
-//                std::cout << "Miss--" << events[i].data.ptr << std::endl;
-//                continue;
-//            }
-//            int socket = response->socket;
-//
-//            if (events[i].events & EPOLLERR) {
-////                std::cerr << "Writer.hpp: client socket EPOLLERR" << std::endl;
-//                thisPart->_def(thisPart, socket, events[i].data.ptr);
-//            } else if (events[i].events & EPOLLHUP) {
-////                std::cerr << "Writer.hpp: client socket EPOLLHUP" << std::endl;
-//                thisPart->_def(thisPart, socket, events[i].data.ptr);
-//            } else if (events[i].events & EPOLLRDHUP) {
-////                std::cerr << "Writer.hpp: client socket EPOLLRDHUP" << std::endl;
-//                thisPart->_def(thisPart, socket, events[i].data.ptr);
-//            } else if (!response->headersWriteDone()) {
-//                const char* buf = response->getAdress();
-//                    size_t nbytes = send(socket, buf, response->length() - response->justHeadSent(), 0);
-//                    if (nbytes == -1) {
-//                        if (errno == EAGAIN || errno == EWOULDBLOCK) {
-//                            continue;
-//                        } else {
-//                            std::cerr << "[" << socket << "]:" << "Write header error" << std::endl;
-//                            thisPart->_def(thisPart, socket, events[i].data.ptr);
-//                            continue;
-//                        }
-//                    } else {
-//                        response->addHeadSend(nbytes);
-//                    }
-//            } else if (!response->bodyWriteDone()) {
-//                const char* buf = response->getBody()->getAdress();
-//                size_t nbytes = send(socket, buf, response->getBody()->length() - response->justBodySent(), 0);
-//                if (nbytes == -1) {
-//                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
-//                        continue;
-//                    } else {
-//                        std::cerr << "[" << socket << "]:" << "Write body error" << errno << std::endl;
-//                        thisPart->_def(thisPart, socket, events[i].data.ptr);
-//                        continue;
-//                    }
-//                } else {
-//                    response->addBodySend(nbytes);
-//                    if (response->bodyWriteDone()) {
-//                        thisPart->output->push(writer_output(socket, true));
-//                        thisPart->_processList.popAddress(events[i].data.ptr);
-//                        thisPart->_epollEngine.deleteFd(socket);
-//                        shutdown(socket, 2);
-//                        close(socket);
-//                    }
-//                    continue;
-//                }
-//            }
-//        }
-//    }
 
     size_t maxEvents = 0;
     auto start = std::chrono::steady_clock::now();
@@ -231,11 +156,11 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique this
                             continue;
                         }
                     } else {
-                        thisPart->output->push(writer_output(socket, true));
+                        //thisPart->output->push(writer_output(socket, true));
                         thisPart->_processList.popAddress(events[i].data.ptr);
                         thisPart->_epollEngine.deleteFd(socket);
                         shutdown(socket, 2);
-                        close(socket);
+                        //close(socket);
                         break;
                     }
                 }
@@ -249,10 +174,10 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique this
 template<class INP_CONTAINER, class OUT_CONTAINER>
 void Writer<INP_CONTAINER, OUT_CONTAINER>::_def(Writer::this_unique &thisPart, int socket, void *ptr) {
     thisPart->_processList.popAddress(ptr);
-    thisPart->output->push(writer_output(socket, false));
+    //thisPart->output->push(writer_output(socket, false));
     thisPart->_epollEngine.deleteFd(socket);
     shutdown(socket, 2);
-    close(socket);
+    //close(socket);
 }
 
 template<class INP_CONTAINER, class OUT_CONTAINER>
