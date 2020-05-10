@@ -11,6 +11,7 @@ Response::Response(Request &request, std::string &&headers, std::shared_ptr<Body
     _bodyPtr(body),
     socket(request.socket),
     filename(request.filename),
+    keepAlive(request.keepAlive),
     _fileDescription(request.fileDescription) {}
 
 Response::Response(Request &request, std::string &&headers) :
@@ -18,6 +19,7 @@ Response::Response(Request &request, std::string &&headers) :
     socket(request.socket),
     filename(request.filename),
     _fileDescription(request.fileDescription),
+    keepAlive(request.keepAlive),
     _bodyPtr(std::make_shared<Body>(nullptr, 0, 0))
 {}
 

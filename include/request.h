@@ -32,6 +32,8 @@ public:
     std::string url;
     boost::string_ref protocol;
 
+    bool keepAlive = false;
+
     bool fileExist = false;
     struct stat fileDescription = {};
     std::string filename;

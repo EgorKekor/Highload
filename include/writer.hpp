@@ -156,11 +156,13 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_writeWorker(Writer::this_unique this
                             continue;
                         }
                     } else {
-                        //thisPart->output->push(writer_output(socket, true));
+                        bool keep = response->keepAlive;
                         thisPart->_processList.popAddress(events[i].data.ptr);
                         thisPart->_epollEngine.deleteFd(socket);
-                        shutdown(socket, 2);
-                        //close(socket);
+                        if (!keep) {
+                            shutdown(socket, 2);
+                            close(socket);
+                        }
                         break;
                     }
                 }
@@ -177,7 +179,7 @@ void Writer<INP_CONTAINER, OUT_CONTAINER>::_def(Writer::this_unique &thisPart, i
     //thisPart->output->push(writer_output(socket, false));
     thisPart->_epollEngine.deleteFd(socket);
     shutdown(socket, 2);
-    //close(socket);
+    close(socket);
 }
 
 template<class INP_CONTAINER, class OUT_CONTAINER>

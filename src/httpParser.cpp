@@ -14,6 +14,7 @@
 extern Config* config;
 
 std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_returner> requestData, SOCKET socket) {
+//    std::cout << *(requestData->get()) << std::endl;
     if (requestData.get() == nullptr) {
         std::cerr << "HttpParser: requestData string was free" << std::endl;
         return std::make_unique<Request>(socket, true);
@@ -42,6 +43,13 @@ std::unique_ptr<Request> HttpParser::constructRequest(std::unique_ptr<req_str_re
     }
     request->protocol = protocol;
 
+    boost::string_ref connection = stream.getLine();
+    if (connection.length() == 0) {
+        request->validRequest = false;
+    } else if (connection == _keepAliveStr) {
+        request->keepAlive = true;
+    }
+
     request->saveData(std::move(requestData));
     // End parsing fresh data
 
@@ -65,7 +73,7 @@ int HttpParser::fillResponse(std::string &headers, std::shared_ptr<Body> &body, 
         int code = 403;
         size_t length = _makeBadBody(code, body);
 
-        _appendHeader(headers, length, typeDescription, req->protocol, code);
+        _appendHeader(headers, length, typeDescription, req->protocol, code, req->keepAlive);
         ret = result::body_finished;
     }
 
@@ -79,12 +87,12 @@ int HttpParser::fillResponse(std::string &headers, std::shared_ptr<Body> &body, 
                 int code = (isDir) ? 403 : 404;
                 size_t length = _makeBadBody(code, body);
 
-                _appendHeader(headers, length, typeDescription, req->protocol, code);
+                _appendHeader(headers, length, typeDescription, req->protocol, code, req->keepAlive);
                 ret = result::body_finished;
             } else {
                 int code = 200;
                 size_t length = (size_t) req->fileDescription.st_size;
-                _appendHeader(headers, length, typeDescription, req->protocol, code);
+                _appendHeader(headers, length, typeDescription, req->protocol, code, req->keepAlive);
                 ret = result::body_finished;
             }
             break;
@@ -96,12 +104,12 @@ int HttpParser::fillResponse(std::string &headers, std::shared_ptr<Body> &body, 
                 int code = (isDir) ? 403 : 404;
                 size_t length = _makeBadBody(code, body);
 
-                _appendHeader(headers, length, typeDescription, req->protocol, code);
+                _appendHeader(headers, length, typeDescription, req->protocol, code, req->keepAlive);
                 ret = result::body_finished;
             } else {
                 int code = 200;
                 size_t length = (size_t) req->fileDescription.st_size;
-                _appendHeader(headers, length, typeDescription, req->protocol, code);
+                _appendHeader(headers, length, typeDescription, req->protocol, code, req->keepAlive);
                 ret = result::need_async_read;
             }
             break;
@@ -110,7 +118,7 @@ int HttpParser::fillResponse(std::string &headers, std::shared_ptr<Body> &body, 
             int code = 405;
             size_t length = _makeBadBody(code, body);
 
-            _appendHeader(headers, length, typeDescription, req->protocol, code);
+            _appendHeader(headers, length, typeDescription, req->protocol, code, req->keepAlive);
             ret = result::body_finished;
             break;
     }
@@ -186,18 +194,19 @@ std::string HttpParser::_getFileType(const std::string &path) {
     return std::move((pos != std::string::npos) ? path.substr(pos + 1) : "txt");
 }
 
-void HttpParser::_appendHeader(std::string &headers, size_t fileLength,
-                               const std::string &fileType, const boost::string_ref &protocol, int code) {
+void HttpParser::_appendHeader(std::string &headers, size_t fileLength, const std::string &fileType,
+                               const boost::string_ref &protocol,
+                               int code, bool keepAlive) {
 
     std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
     std::time_t t = std::chrono::system_clock::to_time_t(p);
     headers.append(protocol.data(), protocol.length());
     const std::string& codeText = _getCode(code);
-
+    const std::string connection = keepAlive ? _keepAliveResp : _closeResp;
     headers += " " + codeText + "\r\n"
             + "Server: Eeeeepollll \r\n"
             + "Date: " + std::ctime(&t)
-            + "Connection: close\r\n"
+            + connection
             + "Content-Length: " + std::to_string(fileLength) + "\r\n"
             + "Content-Type: " + fileType + "\r\n" + "\r\n";
     return;

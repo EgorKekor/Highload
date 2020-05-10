@@ -66,6 +66,8 @@ public:
     SOCKET socket;
     std::string filename;
 
+    bool keepAlive = false;
+
     size_t headBalance() { return _headers.length() - _headSended; };
     size_t bodyBalance() { return _bodyPtr->length() - _bodySended; };
 

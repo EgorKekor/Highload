@@ -53,15 +53,16 @@ private:
     std::string _urlDecode(boost::string_ref &url);
 
     PointerStringStream _createStream(std::string *str);
-    void _appendHeader(
-            std::string &headers,
-            size_t fileLength,
-            const std::string &fileType,
-            const boost::string_ref &protocol,
-            int code);
+    void _appendHeader(std::string &headers, size_t fileLength, const std::string &fileType,
+                       const boost::string_ref &protocol,
+                       int code, bool keepAlive = false);
 
     std::string _rootDir;
     std::string _indexFile;
+
+    const std::string _keepAliveStr = "Connection: Keep-Alive";
+    const std::string _closeResp = "Connection: close\r\n";
+    const std::string _keepAliveResp = "Connection: Keep-Alive\r\n";
     std::unordered_map <std::string, std::string> mime_map = {
             {"txt", "text/plain"},
             {"html", "text/html"},

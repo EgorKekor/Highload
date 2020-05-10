@@ -30,7 +30,6 @@ template<class INP_CONTAINER, class OUT_CONTAINER>
 void SimpleConveyorPart<INP_CONTAINER, OUT_CONTAINER>::tryYield() {
     double prop = (double)(output->size() + 1) / (double)(input->size() + 1);
     while (prop >= YIELD_SIZE_PROPORTION) {
-//        std::cout << prop << std::endl;
         std::this_thread::yield();
         prop = (double)(output->size() + 1) / (double)(input->size() + 1);
     }
