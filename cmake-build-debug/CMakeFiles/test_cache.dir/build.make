@@ -43,10 +43,10 @@ RM = /opt/clion-2020.1.1/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kekos/Highload
+CMAKE_SOURCE_DIR = /home/kekos/aaaa/Highload
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kekos/Highload/cmake-build-debug
+CMAKE_BINARY_DIR = /home/kekos/aaaa/Highload/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test_cache.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/test_cache.dir/flags.make
 
 CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o: CMakeFiles/test_cache.dir/flags.make
 CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o: ../tests/cache/cache_test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o -c /home/kekos/Highload/tests/cache/cache_test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/aaaa/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o -c /home/kekos/aaaa/Highload/tests/cache/cache_test.cpp
 
 CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kekos/Highload/tests/cache/cache_test.cpp > CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kekos/aaaa/Highload/tests/cache/cache_test.cpp > CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.i
 
 CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kekos/Highload/tests/cache/cache_test.cpp -o CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kekos/aaaa/Highload/tests/cache/cache_test.cpp -o CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.s
 
 CMakeFiles/test_cache.dir/src/cache.cpp.o: CMakeFiles/test_cache.dir/flags.make
 CMakeFiles/test_cache.dir/src/cache.cpp.o: ../src/cache.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_cache.dir/src/cache.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_cache.dir/src/cache.cpp.o -c /home/kekos/Highload/src/cache.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kekos/aaaa/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_cache.dir/src/cache.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_cache.dir/src/cache.cpp.o -c /home/kekos/aaaa/Highload/src/cache.cpp
 
 CMakeFiles/test_cache.dir/src/cache.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_cache.dir/src/cache.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kekos/Highload/src/cache.cpp > CMakeFiles/test_cache.dir/src/cache.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kekos/aaaa/Highload/src/cache.cpp > CMakeFiles/test_cache.dir/src/cache.cpp.i
 
 CMakeFiles/test_cache.dir/src/cache.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_cache.dir/src/cache.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kekos/Highload/src/cache.cpp -o CMakeFiles/test_cache.dir/src/cache.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kekos/aaaa/Highload/src/cache.cpp -o CMakeFiles/test_cache.dir/src/cache.cpp.s
 
 # Object files for target test_cache
 test_cache_OBJECTS = \
@@ -95,7 +95,7 @@ test_cache: CMakeFiles/test_cache.dir/tests/cache/cache_test.cpp.o
 test_cache: CMakeFiles/test_cache.dir/src/cache.cpp.o
 test_cache: CMakeFiles/test_cache.dir/build.make
 test_cache: CMakeFiles/test_cache.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kekos/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test_cache"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kekos/aaaa/Highload/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test_cache"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_cache.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/test_cache.dir/clean:
 .PHONY : CMakeFiles/test_cache.dir/clean
 
 CMakeFiles/test_cache.dir/depend:
-	cd /home/kekos/Highload/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kekos/Highload /home/kekos/Highload /home/kekos/Highload/cmake-build-debug /home/kekos/Highload/cmake-build-debug /home/kekos/Highload/cmake-build-debug/CMakeFiles/test_cache.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kekos/aaaa/Highload/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kekos/aaaa/Highload /home/kekos/aaaa/Highload /home/kekos/aaaa/Highload/cmake-build-debug /home/kekos/aaaa/Highload/cmake-build-debug /home/kekos/aaaa/Highload/cmake-build-debug/CMakeFiles/test_cache.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test_cache.dir/depend
 
